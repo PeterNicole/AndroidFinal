@@ -20,7 +20,8 @@
 - Point details page (total points or break down of where points were earned)  
   - spend points button (app notification)
   - page that shows when people spend points (maybe? both sides to verify point prize was received)
-#### Fragments
+  
+### Fragments
 
 
 ### Functionality
