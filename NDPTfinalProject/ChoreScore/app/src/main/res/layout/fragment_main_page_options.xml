@@ -7,19 +7,19 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnMainLogin"
         android:text="@string/login"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnSignup"
+        android:id="@+id/btnMainSignup"
         android:text="@string/signup"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnAbout"
+        android:id="@+id/btnMainAbout"
         android:text="@string/about"/>
 
 </LinearLayout>
