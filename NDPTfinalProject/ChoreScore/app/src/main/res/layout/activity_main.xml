@@ -7,10 +7,16 @@
     android:orientation="vertical">
 
     <fragment
-        android:id="@+id/main_image"
+        android:id="@+id/main_image_fragment"
         android:name="com.example.ndpt.chorescore.main_image"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
+    <fragment
+        android:id="@+id/main_options_fragment"
+        android:name="com.example.ndpt.chorescore.main_page_options"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 </LinearLayout>

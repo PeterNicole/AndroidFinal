@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">ChoreScore</string>
 
-    <string name="hello_world">Hello world!</string>
+    <!--button text -->
+    <string name="login">Log In</string>
+    <string name="signup">Sign Up</string>
+    <string name="about">About</string>
     <string name="action_settings">Settings</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

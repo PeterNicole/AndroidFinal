@@ -1,13 +1,15 @@
 package com.example.ndpt.chorescore;
 
+import android.app.Activity;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.example.ndpt.chorescore.main_image.OnFragmentInteractionListener;
 
-public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener{
+
+public class MainActivity extends Activity
+        implements main_image.OnFragmentInteractionListener, main_page_options.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

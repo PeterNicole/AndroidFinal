@@ -3,11 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ndpt.chorescore.main_image"
-    android:tag="@string/hello_blank_fragment">
+    tools:context="com.example.ndpt.chorescore.main_image">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:id="@+id/main_image"
+        android:src="@drawable/splash_screen"
+        android:layout_gravity="center_horizontal"
+        />
 
 </FrameLayout>
