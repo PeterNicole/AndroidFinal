@@ -102,8 +102,7 @@ public class main_page_options extends Fragment {
                         activity.finish();
                     }
                     if (id == R.id.btnMainSignup) {
-                        activity.finish();
-                        activity.startActivity(new Intent(activity, SignUp.class));
+                        TransitionManager.ActivityTransition(activity, SignUp.class);
                     }
 
                 }

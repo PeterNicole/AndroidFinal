@@ -1,5 +1,6 @@
 package com.example.ndpt.chorescore;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
@@ -23,7 +24,7 @@ public class TransitionManager
      * @param currentActivity current activity
      * @param transitionActivity activity to be opened
      */
-    static public void ActivityTransition(AppCompatActivity currentActivity,  Class transitionActivity)
+    static public void ActivityTransition(Activity currentActivity,  Class transitionActivity)
     {
         ActivityTransition(currentActivity, transitionActivity, true);
     }
@@ -34,7 +35,7 @@ public class TransitionManager
      * @param transitionActivity activity to be opened
      * @param closeCurrent if true close the current activity
      */
-    static public void ActivityTransition(AppCompatActivity currentActivity, Class transitionActivity, boolean closeCurrent)
+    static public void ActivityTransition(Activity currentActivity, Class transitionActivity, boolean closeCurrent)
     {
         previousActivity = currentActivity.getClass();
         Intent intent = new Intent(currentActivity,transitionActivity);
@@ -47,7 +48,7 @@ public class TransitionManager
      * @param currentActivity current activity
      * @param closeCurrent if true close the current activity
      */
-    static public void PreviousActivity(AppCompatActivity currentActivity, boolean closeCurrent)
+    static public void PreviousActivity(Activity currentActivity, boolean closeCurrent)
     {
         Intent intent = new Intent(currentActivity,previousActivity.getClass());
         currentActivity.startActivity(intent);
