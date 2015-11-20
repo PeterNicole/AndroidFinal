@@ -8,17 +8,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class About extends Activity {
+public class Login extends Activity {
 
-    private Button btnAboutGoBack;
+    private Button btnLoginGoBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
+        setContentView(R.layout.activity_login);
         final Activity activity = this;
-        btnAboutGoBack = (Button)findViewById(R.id.btnAboutGoBack);
-        btnAboutGoBack.setOnClickListener(new View.OnClickListener() {
+        btnLoginGoBack = (Button)findViewById(R.id.btnLoginGoBack);
+        btnLoginGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TransitionManager.ActivityTransition(activity, MainActivity.class);
@@ -29,7 +29,7 @@ public class About extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_about, menu);
+        getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
     }
 
@@ -41,7 +41,7 @@ public class About extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.menuSignUp) {
+        if (id == R.id.action_settings) {
             return true;
         }
 

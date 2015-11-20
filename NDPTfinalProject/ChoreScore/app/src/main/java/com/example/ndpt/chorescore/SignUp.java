@@ -5,13 +5,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class SignUp extends Activity {
+
+    private Button btnSignUpGoBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        final Activity activity = this;
+        btnSignUpGoBack = (Button)findViewById(R.id.btnSignUpGoBack);
+        btnSignUpGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TransitionManager.ActivityTransition(activity, MainActivity.class);
+            }
+        });
     }
 
     @Override
