@@ -17,4 +17,7 @@
     <string name="first_name">First Name:</string>
     <string name="last_name">Last Name:</string>
     <string name="email">E-mail:</string>
+    <string name="password">Select Password:</string>
+    <string name="confirmPassword">Confirm Password:</string>
+    <string name="username">Select Username:</string>
 </resources>
