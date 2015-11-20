@@ -95,7 +95,7 @@ public class main_page_options extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if (id == R.id.btnMainAbout) {
-                        activity.finish();
+                        TransitionManager.ActivityTransition(activity, about.class);
                     }
 
                     if (id == R.id.btnMainLogin) {
