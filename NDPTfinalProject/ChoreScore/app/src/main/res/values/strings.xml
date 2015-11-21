@@ -16,9 +16,10 @@
     <string name="password">Select Password:</string>
     <string name="confirmPassword">Confirm Password:</string>
     <string name="username">Select Username:</string>
-    <string name="aboutContent">\nThe ChoreScore app provides a way for you and your house mates
-    to organize what chores need to be done.  \n\nChoreScore provides a points-based platform
-    that makes completing chores fun!</string>
+    <string name="aboutContent1">The ChoreScore app provides a way for you and your house mates
+        to organize what chores need to be done.  </string>
+    <string name="aboutContent2">ChoreScore provides a points-based platform
+        that makes completing chores fun!</string>
 
     <!-- Activity Titles -->
     <string name="title_activity_about">About</string>
@@ -27,4 +28,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -13,12 +13,12 @@ import android.widget.Button;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MainPageOptions.OnFragmentInteractionListener} interface
+ * {@link GoBackButton.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MainPageOptions#newInstance} factory method to
+ * Use the {@link GoBackButton#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainPageOptions extends Fragment {
+public class GoBackButton extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,9 +27,7 @@ public class MainPageOptions extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button btnSignup;
-    private Button btnLogin;
-    private Button btnAbout;
+    private Button btnAboutGoBack;
 
     private OnFragmentInteractionListener mListener;
 
@@ -39,11 +37,11 @@ public class MainPageOptions extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MainPageOptions.
+     * @return A new instance of fragment GoBackButton.
      */
     // TODO: Rename and change types and number of parameters
-    public static MainPageOptions newInstance(String param1, String param2) {
-        MainPageOptions fragment = new MainPageOptions();
+    public static GoBackButton newInstance(String param1, String param2) {
+        GoBackButton fragment = new GoBackButton();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -51,10 +49,21 @@ public class MainPageOptions extends Fragment {
         return fragment;
     }
 
-    public MainPageOptions() {
+    public GoBackButton() {
         // Required empty public constructor
     }
-
+    private void controlCreation(View v){
+        final Activity activity = getActivity();
+        btnAboutGoBack = (Button)v.findViewById(R.id.btnAboutGoBack);
+        if(activity instanceof About) {
+            btnAboutGoBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TransitionManager.ActivityTransition(activity, MainActivity.class);
+                }
+            });
+        }
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,14 +71,13 @@ public class MainPageOptions extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_main_page_options, container, false);
+        View v = inflater.inflate(R.layout.fragment_go_back_button, container, false);
         controlCreation(v);
         return v;
     }
@@ -80,34 +88,7 @@ public class MainPageOptions extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-    // helper method for initializing controls and setting listeners
-    private void controlCreation(View v){
-        final Activity activity = getActivity();
-        btnSignup = (Button)v.findViewById(R.id.btnMainSignup);
-        btnLogin = (Button)v.findViewById(R.id.btnMainLogin);
-        btnAbout = (Button)v.findViewById(R.id.btnMainAbout);
 
-        Button[] buttons = {btnAbout, btnLogin, btnSignup};
-        for (Button b : buttons) {
-            final int id = b.getId();
-            b.setOnClickListener((new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (id == R.id.btnMainAbout) {
-                        TransitionManager.ActivityTransition(activity, About.class);
-                    }
-
-                    if (id == R.id.btnMainLogin) {
-                        TransitionManager.ActivityTransition(activity, Login.class);
-                    }
-                    if (id == R.id.btnMainSignup) {
-                        TransitionManager.ActivityTransition(activity, SignUp.class);
-                    }
-
-                }
-            }));
-        }
-    }
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -117,7 +98,6 @@ public class MainPageOptions extends Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-
     }
 
     @Override

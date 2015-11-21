@@ -1,6 +1,7 @@
 package com.example.ndpt.chorescore;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,22 +9,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class Login extends Activity {
+public class Login extends Activity
+    implements LoginButtons.OnFragmentInteractionListener,
+    LoginFields.OnFragmentInteractionListener {
 
-    private Button btnLoginGoBack;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        final Activity activity = this;
-        btnLoginGoBack = (Button)findViewById(R.id.btnLoginGoBack);
-        btnLoginGoBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TransitionManager.ActivityTransition(activity, MainActivity.class);
-            }
-        });
+
     }
 
     @Override
@@ -46,5 +42,10 @@ public class Login extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
