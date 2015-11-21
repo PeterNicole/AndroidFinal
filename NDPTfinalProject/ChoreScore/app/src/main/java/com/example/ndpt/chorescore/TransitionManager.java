@@ -50,7 +50,7 @@ public class TransitionManager
      */
     static public void PreviousActivity(Activity currentActivity, boolean closeCurrent)
     {
-        Intent intent = new Intent(currentActivity,previousActivity.getClass());
+        Intent intent = new Intent(currentActivity,previousActivity);
         currentActivity.startActivity(intent);
         if(closeCurrent){currentActivity.finish();}
     }

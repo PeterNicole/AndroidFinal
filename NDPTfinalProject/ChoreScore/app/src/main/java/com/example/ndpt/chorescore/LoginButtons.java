@@ -11,12 +11,10 @@ import android.widget.Button;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link LoginButtons.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link LoginButtons#newInstance} factory method to
- * create an instance of this fragment.
+ * LoginButtons.java
+ * Created by Nicole Dahlquist on 21/11/2015.
+ *
+ * A simple {@link Fragment} subclass for displaying buttons portion of login form
  */
 public class LoginButtons extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -27,7 +25,6 @@ public class LoginButtons extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button btnLoginGoBack;
     private Button btnLoginLogin;
 
     private OnFragmentInteractionListener mListener;
@@ -56,9 +53,8 @@ public class LoginButtons extends Fragment {
 
     private void controlCreation(View v){
         final Activity activity = getActivity();
-        btnLoginGoBack = (Button)v.findViewById(R.id.btnLoginGoBack);
         btnLoginLogin = (Button)v.findViewById(R.id.btnLoginLogin);
-        Button[] buttons = {btnLoginGoBack, btnLoginLogin};
+        Button[] buttons = {btnLoginLogin};
         for (Button b : buttons) {
             final int id = b.getId();
             b.setOnClickListener((new View.OnClickListener() {
@@ -66,14 +62,11 @@ public class LoginButtons extends Fragment {
                 public void onClick(View v) {
                     if (id == R.id.btnLoginLogin) {
                         // if valid login form
-                        // TransitionManager.ActivityTransition(activity, GroupsList.class);
+                        // TransitionManager.ActivityTransition(activity, CurrentGroups.class);
                         // if invalid login form
                         // display error messages
                     }
 
-                    if (id == R.id.btnLoginGoBack) {
-                        TransitionManager.ActivityTransition(activity, MainActivity.class);
-                    }
 
                 }
             }));

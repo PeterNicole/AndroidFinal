@@ -1,30 +1,27 @@
 package com.example.ndpt.chorescore;
 
-import android.app.Activity;
-import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 /**
- * MainActivity.java
- * Created by Nicole Dahlquist on 11/11/2015.
+ * CurrentGroups.java
+ * Created by Nicole Dahlquist on 21/11/2015.
  *
- * This class provides functionality for the main activity
+ * This class provides functionality for the current groups activity
  */
-
-public class MainActivity extends Activity
-        implements MainImage.OnFragmentInteractionListener, MainPageOptions.OnFragmentInteractionListener{
+public class CurrentGroups extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_current_groups);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_current_groups, menu);
         return true;
     }
 
@@ -36,15 +33,10 @@ public class MainActivity extends Activity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.menuSignUp) {
+        if (id == R.id.action_settings) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 }

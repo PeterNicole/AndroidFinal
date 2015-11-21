@@ -10,12 +10,11 @@ import android.view.ViewGroup;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SignupSecurity.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SignupSecurity#newInstance} factory method to
- * create an instance of this fragment.
+ * SignupSecurity.java
+ * Created by Nicole Dahlquist on 21/11/2015.
+ *
+ *
+ * A simple {@link Fragment} subclass for displaying username and password portion of sign up form
  */
 public class SignupSecurity extends Fragment {
     // TODO: Rename parameter arguments, choose names that match

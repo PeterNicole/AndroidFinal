@@ -10,7 +10,7 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:name="com.example.ndpt.chorescore.SignupPersonal"
         android:id="@+id/signup_personal_fragment"
         android:layout_marginBottom="50dp"/>
@@ -18,7 +18,7 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:name="com.example.ndpt.chorescore.SignupSecurity"
         android:id="@+id/signup_security_fragment"/>
 
@@ -28,4 +28,12 @@
         android:layout_weight="1"
         android:name="com.example.ndpt.chorescore.SignupButtons"
         android:id="@+id/signup_button_fragment"/>
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/signup_go_back_button_fragment"
+        android:name="com.example.ndpt.chorescore.GoBackButton"/>
+
 </LinearLayout>

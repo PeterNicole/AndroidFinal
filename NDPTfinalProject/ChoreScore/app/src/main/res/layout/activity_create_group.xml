@@ -4,21 +4,15 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.ndpt.chorescore.Login"
+    tools:context="com.example.ndpt.chorescore.CreateGroup"
     android:orientation="vertical">
 
     <fragment style="@style/FragmentStyle"
-        android:layout_weight="5"
-        android:id="@+id/login_fields_fragment"
-        android:name="com.example.ndpt.chorescore.LoginForm"/>
+        android:id="@+id/create_group_form_fragment"
+        android:name="com.example.ndpt.chorescore.CreateGroupForm" />
 
     <fragment style="@style/FragmentStyle"
-        android:layout_weight="1"
-        android:id="@+id/login_buttons_fragment"
-        android:name="com.example.ndpt.chorescore.LoginButtons"/>
+        android:id="@+id/create_group_buttons_fragment"
+        android:name="com.example.ndpt.chorescore.CreateGroupButtons"/>
 
-    <fragment style="@style/FragmentStyle"
-        android:layout_weight="1"
-        android:id="@+id/login_go_back_button_fragment"
-        android:name="com.example.ndpt.chorescore.GoBackButton"/>
 </LinearLayout>

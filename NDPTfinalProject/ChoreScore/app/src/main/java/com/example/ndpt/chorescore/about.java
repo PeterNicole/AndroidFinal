@@ -8,6 +8,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+/**
+ * About.java
+ * Created by Nicole Dahlquist on 20/11/2015.
+ *
+ * This class provides functionality for the about activity
+ */
 
 public class About extends Activity
     implements GoBackButton.OnFragmentInteractionListener,

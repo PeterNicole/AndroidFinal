@@ -11,12 +11,10 @@ import android.widget.Button;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link GoBackButton.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link GoBackButton#newInstance} factory method to
- * create an instance of this fragment.
+ * GoBackButton.java
+ * Created by Nicole Dahlquist on 21/11/2015.
+ *
+ * A simple {@link Fragment} subclass for displaying the go back button in various activities
  */
 public class GoBackButton extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -27,7 +25,7 @@ public class GoBackButton extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button btnAboutGoBack;
+    private Button btnGoBack;
 
     private OnFragmentInteractionListener mListener;
 
@@ -54,15 +52,14 @@ public class GoBackButton extends Fragment {
     }
     private void controlCreation(View v){
         final Activity activity = getActivity();
-        btnAboutGoBack = (Button)v.findViewById(R.id.btnAboutGoBack);
-        if(activity instanceof About) {
-            btnAboutGoBack.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    TransitionManager.ActivityTransition(activity, MainActivity.class);
-                }
-            });
-        }
+        btnGoBack = (Button)v.findViewById(R.id.btnGoBack);
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TransitionManager.PreviousActivity(activity, true);
+            }
+        });
+
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {

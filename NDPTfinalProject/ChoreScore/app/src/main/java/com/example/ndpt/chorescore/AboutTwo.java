@@ -10,12 +10,10 @@ import android.view.ViewGroup;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AboutTwo.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AboutTwo#newInstance} factory method to
- * create an instance of this fragment.
+ * AboutTwo.java
+ * Created by Nicole Dahlquist on 21/11/2015.
+ *
+ * A simple {@link Fragment} subclass for displaying the second portion of about information
  */
 public class AboutTwo extends Fragment {
     // TODO: Rename parameter arguments, choose names that match

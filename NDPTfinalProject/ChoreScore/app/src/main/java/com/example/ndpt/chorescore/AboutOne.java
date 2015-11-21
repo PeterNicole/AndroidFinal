@@ -10,12 +10,10 @@ import android.view.ViewGroup;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AboutOne.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AboutOne#newInstance} factory method to
- * create an instance of this fragment.
+ * AboutOne.java
+ * Created by Nicole Dahlquist on 21/11/2015.
+ *
+ * A simple {@link Fragment} subclass for displaying the first portion of about information
  */
 public class AboutOne extends Fragment {
     // TODO: Rename parameter arguments, choose names that match

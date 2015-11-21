@@ -11,12 +11,10 @@ import android.widget.Button;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SignupButtons.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SignupButtons#newInstance} factory method to
- * create an instance of this fragment.
+ * SignupButtons.java
+ * Created by Nicole Dahlquist on 21/11/2015.
+ *
+ * A simple {@link Fragment} subclass for displaying the button portion of sign up form
  */
 public class SignupButtons extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -27,7 +25,6 @@ public class SignupButtons extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button btnSignUpGoBack;
     private Button btnSignupSignup;
 
     private OnFragmentInteractionListener mListener;
@@ -54,10 +51,9 @@ public class SignupButtons extends Fragment {
         // Required empty public constructor
     }
     private  void controlCreation(View v){
-        btnSignUpGoBack = (Button)v.findViewById(R.id.btnSignUpGoBack);
         btnSignupSignup = (Button)v.findViewById(R.id.btnSignupSignup);
         final Activity activity = getActivity();
-        Button[] buttons = {btnSignupSignup, btnSignUpGoBack};
+        Button[] buttons = {btnSignupSignup};
         for (Button b : buttons) {
             final int id = b.getId();
             b.setOnClickListener((new View.OnClickListener() {
@@ -65,13 +61,9 @@ public class SignupButtons extends Fragment {
                 public void onClick(View v) {
                     if (id == R.id.btnSignupSignup) {
                         // if valid sign up form
-                        // TransitionManager.ActivityTransition(activity, GroupsList.class);
+                        // TransitionManager.ActivityTransition(activity, CurrentGroups.class);
                         // if invalid sign up form
                         // display error messages
-                    }
-
-                    if (id == R.id.btnSignUpGoBack) {
-                        TransitionManager.ActivityTransition(activity, MainActivity.class);
                     }
 
                 }

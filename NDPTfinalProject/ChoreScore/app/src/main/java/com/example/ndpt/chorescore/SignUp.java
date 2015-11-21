@@ -9,10 +9,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * SignUp.java
+ * Created by Nicole Dahlquist on 21/11/2015.
+ *
+ * This class provides functionality for the signup activity
+ */
 public class SignUp extends Activity
     implements SignupButtons.OnFragmentInteractionListener,
         SignupPersonal.OnFragmentInteractionListener,
-        SignupSecurity.OnFragmentInteractionListener{
+        SignupSecurity.OnFragmentInteractionListener,
+        GoBackButton.OnFragmentInteractionListener{
 
 
 

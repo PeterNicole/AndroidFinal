@@ -37,6 +37,18 @@
             android:name=".Login"
             android:label="@string/title_activity_login" >
         </activity>
+        <activity
+            android:name=".CurrentGroups"
+            android:label="@string/title_activity_current_groups" >
+        </activity>
+        <activity
+            android:name=".CreateGroup"
+            android:label="@string/title_activity_create_group" >
+        </activity>
+        <activity
+            android:name=".GroupDetails"
+            android:label="@string/title_activity_group_details" >
+        </activity>
     </application>
 
 </manifest>

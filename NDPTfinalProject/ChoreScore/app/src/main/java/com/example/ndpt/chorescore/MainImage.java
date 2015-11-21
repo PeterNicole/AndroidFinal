@@ -10,13 +10,11 @@ import android.view.ViewGroup;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MainImage.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MainImage#newInstance} factory method to
- * create an instance of this fragment.
- */
+ * MainImage.java
+ * Created by Nicole Dahlquist on 11/11/2015.
+ *
+ * A simple {@link Fragment} subclass that displays the ChoreScore image
+*/
 public class MainImage extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
