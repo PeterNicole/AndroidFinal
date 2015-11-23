@@ -21,7 +21,7 @@ public class CurrentGroups extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_current_groups, menu);
+        getMenuInflater().inflate(R.menu.menu_groups, menu);
         return true;
     }
 
