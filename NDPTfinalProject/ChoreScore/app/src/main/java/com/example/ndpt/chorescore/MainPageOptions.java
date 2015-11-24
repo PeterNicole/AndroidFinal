@@ -92,14 +92,14 @@ public class MainPageOptions extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if (id == R.id.btnMainAbout) {
-                        TransitionManager.ActivityTransition(activity, About.class);
+                        TransitionManager.ActivityTransition(activity, AboutActivity.class);
                     }
 
                     if (id == R.id.btnMainLogin) {
-                        TransitionManager.ActivityTransition(activity, Login.class);
+                        TransitionManager.ActivityTransition(activity, LoginActivity.class);
                     }
                     if (id == R.id.btnMainSignup) {
-                        TransitionManager.ActivityTransition(activity, SignUp.class);
+                        TransitionManager.ActivityTransition(activity, SignUpActivity.class);
                     }
 
                 }

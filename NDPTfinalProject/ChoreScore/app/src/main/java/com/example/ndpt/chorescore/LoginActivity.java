@@ -5,34 +5,31 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 /**
- * SignUp.java
- * Created by Nicole Dahlquist on 21/11/2015.
+ * LoginActivity.java
+ * Created by Nicole Dahlquist on 20/11/2015.
  *
- * This class provides functionality for the signup activity
+ * This class provides functionality for the login activity
  */
-public class SignUp extends Activity
-    implements SignupButtons.OnFragmentInteractionListener,
-        SignupPersonal.OnFragmentInteractionListener,
-        SignupSecurity.OnFragmentInteractionListener,
-        GoBackButton.OnFragmentInteractionListener{
+public class LoginActivity extends Activity
+    implements LoginButtons.OnFragmentInteractionListener,
+    LoginForm.OnFragmentInteractionListener,
+    GoBackButton.OnFragmentInteractionListener{
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_login);
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // No menu
-       // getMenuInflater().inflate(R.menu.menu_sign_up, menu);
+        //getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
     }
 

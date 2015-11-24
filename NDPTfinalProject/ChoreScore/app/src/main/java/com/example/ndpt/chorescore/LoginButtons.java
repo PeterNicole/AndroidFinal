@@ -62,7 +62,7 @@ public class LoginButtons extends Fragment {
                 public void onClick(View v) {
                     if (id == R.id.btnLoginLogin) {
                         // if valid login form
-                        // TransitionManager.ActivityTransition(activity, CurrentGroups.class);
+                        // TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
                         // if invalid login form
                         // display error messages
                     }

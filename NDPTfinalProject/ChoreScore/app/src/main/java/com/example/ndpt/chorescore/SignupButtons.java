@@ -61,7 +61,7 @@ public class SignupButtons extends Fragment {
                 public void onClick(View v) {
                     if (id == R.id.btnSignupSignup) {
                         // if valid sign up form
-                        // TransitionManager.ActivityTransition(activity, CurrentGroups.class);
+                        // TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
                         // if invalid sign up form
                         // display error messages
                     }
