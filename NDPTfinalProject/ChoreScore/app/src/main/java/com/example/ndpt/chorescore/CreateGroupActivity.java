@@ -1,19 +1,21 @@
 package com.example.ndpt.chorescore;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-public class About extends Activity
-    implements AboutOne.OnFragmentInteractionListener,
-    AboutTwo.OnFragmentInteractionListener {
+/**
+ * CreateGroupActivity.java
+ * Created by Nicole Dahlquist on 21/11/2015.
+ *
+ * This class provides functionality for group creation
+ */
+public class CreateGroupActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
+        setContentView(R.layout.activity_create_group);
     }
 
     @Override
@@ -30,14 +32,8 @@ public class About extends Activity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         TransitionManager.MenuTransition(this, id);
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 }

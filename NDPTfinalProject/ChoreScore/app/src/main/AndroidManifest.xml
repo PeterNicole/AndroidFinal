@@ -26,27 +26,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignUp"
+            android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up" >
         </activity>
         <activity
-            android:name=".About"
+            android:name=".AboutActivity"
             android:label="@string/title_activity_about" >
         </activity>
         <activity
-            android:name=".Login"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name=".CurrentGroups"
+            android:name=".CurrentGroupsActivity"
             android:label="@string/title_activity_current_groups" >
         </activity>
         <activity
-            android:name=".CreateGroup"
+            android:name=".CreateGroupActivity"
             android:label="@string/title_activity_create_group" >
         </activity>
         <activity
-            android:name=".GroupDetails"
+            android:name=".GroupDetailsActivity"
             android:label="@string/title_activity_group_details" >
         </activity>
     </application>

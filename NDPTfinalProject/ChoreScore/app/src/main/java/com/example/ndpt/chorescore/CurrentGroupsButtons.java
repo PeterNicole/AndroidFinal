@@ -7,16 +7,17 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 
 /**
- * CreateGroupButtons.java
- * Created by Nicole Dahlquist on 21/11/2015.
- *
- * A simple {@link Fragment} subclass that displays buttons for create group activity
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link CurrentGroupsButtons.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link CurrentGroupsButtons#newInstance} factory method to
+ * create an instance of this fragment.
  */
-public class CreateGroupButtons extends Fragment {
+public class CurrentGroupsButtons extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -25,9 +26,6 @@ public class CreateGroupButtons extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button btnCreateGroupReset;
-    private Button btnCreateGroupSubmit;
-
 
     private OnFragmentInteractionListener mListener;
 
@@ -37,11 +35,11 @@ public class CreateGroupButtons extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CreateGroupButtons.
+     * @return A new instance of fragment CurrentGroupsButtons.
      */
     // TODO: Rename and change types and number of parameters
-    public static CreateGroupButtons newInstance(String param1, String param2) {
-        CreateGroupButtons fragment = new CreateGroupButtons();
+    public static CurrentGroupsButtons newInstance(String param1, String param2) {
+        CurrentGroupsButtons fragment = new CurrentGroupsButtons();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -49,32 +47,10 @@ public class CreateGroupButtons extends Fragment {
         return fragment;
     }
 
-    public CreateGroupButtons() {
+    public CurrentGroupsButtons() {
         // Required empty public constructor
     }
-    private void controlCreation(View v){
-        btnCreateGroupReset = (Button)v.findViewById(R.id.btnCreateGroupReset);
-        btnCreateGroupSubmit = (Button)v.findViewById(R.id.btnCreateGroupSubmit);
-        final Activity activity = getActivity();
-        Button[] buttons = {btnCreateGroupSubmit,btnCreateGroupReset};
-        for (Button b : buttons) {
-            final int id = b.getId();
-            b.setOnClickListener((new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (id == R.id.btnCreateGroupReset) {
-                        // clear form
-                    }
-                    if (id == R.id.btnCreateGroupSubmit) {
-                        // if valid data
-                        // TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
-                        // if invalid data
-                        // display error messages
-                    }
-                }
-            }));
-        }
-    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +64,7 @@ public class CreateGroupButtons extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_group_buttons, container, false);
+        return inflater.inflate(R.layout.fragment_current_groups_buttons, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

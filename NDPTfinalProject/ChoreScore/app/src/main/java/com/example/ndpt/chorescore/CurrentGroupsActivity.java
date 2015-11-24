@@ -1,21 +1,24 @@
 package com.example.ndpt.chorescore;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 /**
- * GroupDetails.java
+ * CurrentGroupsActivity.java
  * Created by Nicole Dahlquist on 21/11/2015.
  *
- * This class provides functionality for displaying the details of a selected group
+ * This class provides functionality for the current groups activity
  */
-public class GroupDetails extends Activity {
+public class CurrentGroupsActivity extends Activity
+    implements CurrentGroupsButtons.OnFragmentInteractionListener,
+    CurrentGroupsList.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_group_details);
+        setContentView(R.layout.activity_current_groups);
     }
 
     @Override
@@ -32,8 +35,15 @@ public class GroupDetails extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        //noinspection SimplifiableIfStatement
+
         TransitionManager.MenuTransition(this, id);
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
