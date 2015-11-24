@@ -5,34 +5,21 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-/**
- * SignUp.java
- * Created by Nicole Dahlquist on 21/11/2015.
- *
- * This class provides functionality for the signup activity
- */
-public class SignUp extends Activity
-    implements SignupButtons.OnFragmentInteractionListener,
-        SignupPersonal.OnFragmentInteractionListener,
-        SignupSecurity.OnFragmentInteractionListener,
-        GoBackButton.OnFragmentInteractionListener{
-
-
+public class About extends Activity
+    implements AboutOne.OnFragmentInteractionListener,
+    AboutTwo.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
-
+        setContentView(R.layout.activity_about);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // No menu
-       // getMenuInflater().inflate(R.menu.menu_sign_up, menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_groups, menu);
         return true;
     }
 
@@ -43,6 +30,7 @@ public class SignUp extends Activity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        //noinspection SimplifiableIfStatement
         TransitionManager.MenuTransition(this, id);
 
         return super.onOptionsItemSelected(item);

@@ -1,38 +1,27 @@
 package com.example.ndpt.chorescore;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-
 /**
- * SignUp.java
+ * GroupDetails.java
  * Created by Nicole Dahlquist on 21/11/2015.
  *
- * This class provides functionality for the signup activity
+ * This class provides functionality for displaying the details of a selected group
  */
-public class SignUp extends Activity
-    implements SignupButtons.OnFragmentInteractionListener,
-        SignupPersonal.OnFragmentInteractionListener,
-        SignupSecurity.OnFragmentInteractionListener,
-        GoBackButton.OnFragmentInteractionListener{
-
-
+public class GroupDetails extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
-
+        setContentView(R.layout.activity_group_details);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // No menu
-       // getMenuInflater().inflate(R.menu.menu_sign_up, menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_groups, menu);
         return true;
     }
 
@@ -46,10 +35,5 @@ public class SignUp extends Activity
         TransitionManager.MenuTransition(this, id);
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 }

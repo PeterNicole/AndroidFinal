@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 /**
- * Created by Nicole on 2015-11-11.
+ * SplashScreen.java
+ * Created by Nicole Dahlquist on 11/11/2015.
+ *
+ * Class for displaying the splash screen
  */
 public class SplashScreen extends Activity {
     @Override

@@ -10,14 +10,12 @@ import android.view.ViewGroup;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link main_image.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link main_image#newInstance} factory method to
- * create an instance of this fragment.
+ * SignupPersonal.java
+ * Created by Nicole Dahlquist on 21/11/2015.
+ *
+ * A simple {@link Fragment} subclass for displaying personal info portion of sign up form
  */
-public class main_image extends Fragment {
+public class SignupPersonal extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,11 +33,11 @@ public class main_image extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment main_image.
+     * @return A new instance of fragment SignupPersonal.
      */
     // TODO: Rename and change types and number of parameters
-    public static main_image newInstance(String param1, String param2) {
-        main_image fragment = new main_image();
+    public static SignupPersonal newInstance(String param1, String param2) {
+        SignupPersonal fragment = new SignupPersonal();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -47,7 +45,7 @@ public class main_image extends Fragment {
         return fragment;
     }
 
-    public main_image() {
+    public SignupPersonal() {
         // Required empty public constructor
     }
 
@@ -64,7 +62,7 @@ public class main_image extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_image, container, false);
+        return inflater.inflate(R.layout.fragment_signup_personal, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

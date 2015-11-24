@@ -2,10 +2,8 @@ package com.example.ndpt.chorescore;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * TransitionManager.java
@@ -18,7 +16,18 @@ public class TransitionManager
 {
 
     private static Class previousActivity = MainActivity.class;
+    private static HashMap<Integer,Class> menuMap;
 
+    static private void populateMenuMap()
+    {
+        //Populates the menu map with menu button ids and their associated activity class
+        menuMap = new HashMap<Integer,Class>();
+        menuMap.put(R.id.mi_groups,CurrentGroups.class);
+        menuMap.put(R.id.mi_chores,CurrentGroups.class);
+        menuMap.put(R.id.mi_points,CurrentGroups.class);
+        menuMap.put(R.id.mi_logout, CurrentGroups.class);
+
+    }
     /**
      * Overloaded method for default closeCurrent = true
      * @param currentActivity current activity
@@ -50,9 +59,25 @@ public class TransitionManager
      */
     static public void PreviousActivity(Activity currentActivity, boolean closeCurrent)
     {
-        Intent intent = new Intent(currentActivity,previousActivity.getClass());
+        Intent intent = new Intent(currentActivity,previousActivity);
         currentActivity.startActivity(intent);
         if(closeCurrent){currentActivity.finish();}
+    }
+
+    /**
+     * Handles transitions from the menu items specifically
+     * @param currentActivity current activity
+     * @param menuBtnId id of the selected menu button
+     */
+    static public void MenuTransition(Activity currentActivity, int menuBtnId)
+    {
+        if (menuMap == null)
+        {
+            populateMenuMap();
+        }
+
+        ActivityTransition(currentActivity, menuMap.get(menuBtnId));
+
     }
 
     /**

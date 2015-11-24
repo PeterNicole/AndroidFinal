@@ -1,24 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ndpt.chorescore.main_page_options"
+    tools:context="com.example.ndpt.chorescore.MainPageOptions"
     android:orientation="vertical">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <Button style="@style/ButtonStyle"
         android:id="@+id/btnMainLogin"
         android:text="@string/login"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <Button style="@style/ButtonStyle"
         android:id="@+id/btnMainSignup"
         android:text="@string/signup"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <Button style="@style/ButtonStyle"
         android:id="@+id/btnMainAbout"
         android:text="@string/about"/>
 
