@@ -5,6 +5,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.parse.ParseObject;
+
 /**
  * MainActivity.java
  * Created by Nicole Dahlquist on 11/11/2015.
