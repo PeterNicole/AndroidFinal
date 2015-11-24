@@ -2,37 +2,24 @@ package com.example.ndpt.chorescore;
 
 import android.app.Activity;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-/**
- * About.java
- * Created by Nicole Dahlquist on 20/11/2015.
- *
- * This class provides functionality for the about activity
- */
 
 public class About extends Activity
-    implements GoBackButton.OnFragmentInteractionListener,
-    AboutOne.OnFragmentInteractionListener,
-    AboutTwo.OnFragmentInteractionListener{
-
-
+    implements AboutOne.OnFragmentInteractionListener,
+    AboutTwo.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // No menu
-        //getMenuInflater().inflate(R.menu.menu_about, menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_groups, menu);
         return true;
     }
 
@@ -44,9 +31,7 @@ public class About extends Activity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.menuSignUp) {
-            return true;
-        }
+        TransitionManager.MenuTransition(this, id);
 
         return super.onOptionsItemSelected(item);
     }

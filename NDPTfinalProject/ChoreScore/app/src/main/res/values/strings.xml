@@ -39,5 +39,11 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Menu Item Titles -->
+    <string name ="group_menu_title">Groups</string>
+    <string name ="logout_menu_title">Logout</string>
+    <string name ="chores_menu_title">Chores</string>
+    <string name ="points_menu_title">Points</string>
+
 
 </resources>

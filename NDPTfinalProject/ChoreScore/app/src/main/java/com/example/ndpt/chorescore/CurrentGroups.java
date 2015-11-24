@@ -1,6 +1,6 @@
 package com.example.ndpt.chorescore;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,7 +10,7 @@ import android.view.MenuItem;
  *
  * This class provides functionality for the current groups activity
  */
-public class CurrentGroups extends AppCompatActivity {
+public class CurrentGroups extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +33,8 @@ public class CurrentGroups extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
+        TransitionManager.MenuTransition(this, id);
 
         return super.onOptionsItemSelected(item);
     }

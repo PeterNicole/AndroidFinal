@@ -1,6 +1,6 @@
 package com.example.ndpt.chorescore;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,7 +10,7 @@ import android.view.MenuItem;
  *
  * This class provides functionality for group creation
  */
-public class CreateGroup extends AppCompatActivity {
+public class CreateGroup extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +32,7 @@ public class CreateGroup extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        TransitionManager.MenuTransition(this, id);
 
         return super.onOptionsItemSelected(item);
     }
