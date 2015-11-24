@@ -8,6 +8,11 @@
     <string name="goBack">Go Back</string>
     <string name="reset">Reset</string>
     <string name="submit">Submit</string>
+    <string name="newGroup">Add a New Group</string>
+    <string name="joinGroup">Join a Group</string>
+    <string name="inviteToGroup">Invite a Friend To Group</string>
+    <string name="viewGroup">View Group</string>
+    <string name="makeDefaultGroup">Make Default Group</string>
 
 
     <!-- TextViews -->
@@ -24,6 +29,7 @@
     <string name="aboutContent2">ChoreScore provides a points-based platform
         that makes completing chores fun!</string>
     <string name="selectGroupName">Select a Group Name</string>
+    <string name="currentGroups">Current Groups:</string>
 
     <!-- Activity Titles -->
     <string name="title_activity_about">About</string>
