@@ -12,7 +12,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/splash_screen"
+        android:icon="@drawable/favicon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:name="com.example.ndpt.chorescore.App"> >
