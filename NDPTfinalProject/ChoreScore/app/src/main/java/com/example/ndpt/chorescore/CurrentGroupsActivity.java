@@ -12,8 +12,8 @@ import android.view.MenuItem;
  * This class provides functionality for the current groups activity
  */
 public class CurrentGroupsActivity extends Activity
-    implements CurrentGroupsButtons.OnFragmentInteractionListener,
-    CurrentGroupsList.OnFragmentInteractionListener {
+    implements CurrentGroupsButtonsFragment.OnFragmentInteractionListener,
+    CurrentGroupsListFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

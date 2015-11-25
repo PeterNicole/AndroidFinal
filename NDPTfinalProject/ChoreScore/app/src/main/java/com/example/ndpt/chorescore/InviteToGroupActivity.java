@@ -1,35 +1,22 @@
 package com.example.ndpt.chorescore;
 
-import android.app.Activity;
-import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-/**
- * LoginActivity.java
- * Created by Nicole Dahlquist on 20/11/2015.
- *
- * This class provides functionality for the login activity
- */
-public class LoginActivity extends Activity
-    implements LoginButtonsFragment.OnFragmentInteractionListener,
-    LoginFormFragment.OnFragmentInteractionListener,
-    GoBackButtonFragment.OnFragmentInteractionListener{
-
-
+public class InviteToGroupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
+        setContentView(R.layout.activity_invite_to_group);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // No menu
-        //getMenuInflater().inflate(R.menu.menu_login, menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_invite_to_group, menu);
         return true;
     }
 
@@ -40,13 +27,11 @@ public class LoginActivity extends Activity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        TransitionManager.MenuTransition(this, id);
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 }

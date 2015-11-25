@@ -49,6 +49,18 @@
             android:name=".GroupDetailsActivity"
             android:label="@string/title_activity_group_details" >
         </activity>
+        <activity
+            android:name=".JoinGroupActivity"
+            android:label="@string/title_activity_join_group" >
+        </activity>
+        <activity
+            android:name=".InviteToGroupActivity"
+            android:label="@string/title_activity_invite_to_group" >
+        </activity>
+        <activity
+            android:name=".ViewGroupActivity"
+            android:label="@string/title_activity_view_group" >
+        </activity>
     </application>
 
 </manifest>

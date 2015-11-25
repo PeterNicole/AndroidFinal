@@ -7,15 +7,16 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
- * LoginButtons.java
+ * SubmitResetButtonsFragment.java
  * Created by Nicole Dahlquist on 21/11/2015.
  *
- * A simple {@link Fragment} subclass for displaying authentication fields portion of login form
+ * A simple {@link Fragment} subclass that displays buttons for create group activity
  */
-public class LoginForm extends Fragment {
+public class SubmitResetButtonsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -24,6 +25,9 @@ public class LoginForm extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Button btnReset;
+    private Button btnSubmit;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -33,11 +37,11 @@ public class LoginForm extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginForm.
+     * @return A new instance of fragment SubmitResetButtonsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static LoginForm newInstance(String param1, String param2) {
-        LoginForm fragment = new LoginForm();
+    public static SubmitResetButtonsFragment newInstance(String param1, String param2) {
+        SubmitResetButtonsFragment fragment = new SubmitResetButtonsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -45,10 +49,45 @@ public class LoginForm extends Fragment {
         return fragment;
     }
 
-    public LoginForm() {
+    public SubmitResetButtonsFragment() {
         // Required empty public constructor
     }
-
+    private void controlCreation(View v){
+        btnReset = (Button)v.findViewById(R.id.btnReset);
+        btnSubmit = (Button)v.findViewById(R.id.btnSubmit);
+        final Activity activity = getActivity();
+        Button[] buttons = {btnSubmit,btnReset};
+        for (Button b : buttons) {
+            final int id = b.getId();
+            b.setOnClickListener((new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (activity instanceof CreateGroupActivity) {
+                        if (id == R.id.btnReset) {
+                            // clear form
+                        }
+                        if (id == R.id.btnSubmit) {
+                            // if valid data
+                                TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
+                            // if invalid data
+                            // display error messages
+                        }
+                    }
+                    if (activity instanceof SignUpActivity) {
+                        if (id == R.id.btnReset) {
+                            // clear form
+                        }
+                        if (id == R.id.btnSubmit) {
+                            // if valid data
+                            TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
+                            // if invalid data
+                            // display error messages
+                        }
+                    }
+                }
+            }));
+        }
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +101,9 @@ public class LoginForm extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login_form, container, false);
+        View v = inflater.inflate(R.layout.fragment_submit_reset_buttons, container, false);
+        controlCreation(v);
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

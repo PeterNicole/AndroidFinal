@@ -10,15 +10,15 @@
     <fragment style="@style/FragmentStyle"
         android:layout_weight="5"
         android:id="@+id/login_fields_fragment"
-        android:name="com.example.ndpt.chorescore.LoginForm"/>
+        android:name="com.example.ndpt.chorescore.LoginFormFragment"/>
 
     <fragment style="@style/FragmentStyle"
         android:layout_weight="1"
         android:id="@+id/login_buttons_fragment"
-        android:name="com.example.ndpt.chorescore.LoginButtons"/>
+        android:name="com.example.ndpt.chorescore.LoginButtonsFragment"/>
 
     <fragment style="@style/FragmentStyle"
         android:layout_weight="1"
         android:id="@+id/login_go_back_button_fragment"
-        android:name="com.example.ndpt.chorescore.GoBackButton"/>
+        android:name="com.example.ndpt.chorescore.GoBackButtonFragment"/>
 </LinearLayout>

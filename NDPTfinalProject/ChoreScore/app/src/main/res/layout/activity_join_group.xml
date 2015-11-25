@@ -4,22 +4,20 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.ndpt.chorescore.AboutActivity"
-    android:orientation="vertical">
+    tools:context="com.example.ndpt.chorescore.JoinGroupActivity">
 
     <fragment style="@style/FragmentStyle"
-        android:layout_weight="2"
-        android:id="@+id/about_content_one_fragment"
-        android:name="com.example.ndpt.chorescore.AboutOneFragment" />
+        android:layout_weight="4"
+        android:name="com.example.ndpt.chorescore.JoinGroupDisplayResultsFragment"
+        android:id="@+id/join_group_display_fragment" />
 
     <fragment style="@style/FragmentStyle"
-        android:layout_weight="2"
-        android:id="@+id/about_content_two_fragment"
-        android:name="com.example.ndpt.chorescore.AboutTwoFragment" />
+        android:layout_weight="4"
+        android:name="com.example.ndpt.chorescore."
+        android:id="@+id/join_group_search_fragment" />
 
     <fragment style="@style/FragmentStyle"
-        android:layout_weight="1"
-        android:id="@+id/about_go_back_fragment"
-        android:name="com.example.ndpt.chorescore.GoBackButtonFragment" />
-
+        android:layout_weight="4"
+        android:name="com.example.ndpt.chorescore.GoBackButtonFragment"
+        android:id="@+id/join_group_go_back_fragment" />
 </LinearLayout>

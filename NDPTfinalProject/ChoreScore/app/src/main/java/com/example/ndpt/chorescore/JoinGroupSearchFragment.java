@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 
 
 /**
- * AboutTwo.java
- * Created by Nicole Dahlquist on 21/11/2015.
- *
- * A simple {@link Fragment} subclass for displaying the second portion of about information
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link JoinGroupSearchFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link JoinGroupSearchFragment#newInstance} factory method to
+ * create an instance of this fragment.
  */
-public class AboutTwo extends Fragment {
+public class JoinGroupSearchFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,11 +35,11 @@ public class AboutTwo extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AboutTwo.
+     * @return A new instance of fragment JoinGroupSearchFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AboutTwo newInstance(String param1, String param2) {
-        AboutTwo fragment = new AboutTwo();
+    public static JoinGroupSearchFragment newInstance(String param1, String param2) {
+        JoinGroupSearchFragment fragment = new JoinGroupSearchFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -45,7 +47,7 @@ public class AboutTwo extends Fragment {
         return fragment;
     }
 
-    public AboutTwo() {
+    public JoinGroupSearchFragment() {
         // Required empty public constructor
     }
 
@@ -62,7 +64,7 @@ public class AboutTwo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about_two, container, false);
+        return inflater.inflate(R.layout.fragment_join_group_search, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

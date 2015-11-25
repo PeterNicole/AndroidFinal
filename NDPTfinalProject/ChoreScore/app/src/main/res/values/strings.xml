@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ChoreScore</string>
 
-    <!--button text -->
+    <!--Button Text -->
     <string name="login">Log In</string>
     <string name="signup">Sign Up</string>
     <string name="about">About</string>
@@ -14,9 +14,7 @@
     <string name="viewGroup">View Group</string>
     <string name="makeDefaultGroup">Make Default Group</string>
 
-
     <!-- TextViews -->
-
     <string name="first_name">First Name:</string>
     <string name="last_name">Last Name:</string>
     <string name="email">E-mail:</string>
@@ -42,14 +40,18 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_group_details">GroupDetails</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <!-- Menu Item Titles -->
     <string name ="group_menu_title">Groups</string>
     <string name ="logout_menu_title">Logout</string>
     <string name ="chores_menu_title">Chores</string>
     <string name ="points_menu_title">Points</string>
+    <string name="title_activity_join_group">JoinGroupActivity</string>
+    <string name="title_activity_invite_to_group">InviteToGroupActivity</string>
+    <string name="title_activity_view_group">ViewGroupActivity</string>
+    <string name="title_activity_make_default_group">MakeDefaultGroupActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -5,8 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 /**
  * SignUpActivity.java
@@ -15,10 +13,10 @@ import android.widget.Button;
  * This class provides functionality for the signup activity
  */
 public class SignUpActivity extends Activity
-    implements SignupButtons.OnFragmentInteractionListener,
-        SignupPersonal.OnFragmentInteractionListener,
-        SignupSecurity.OnFragmentInteractionListener,
-        GoBackButton.OnFragmentInteractionListener{
+    implements SubmitResetButtonsFragment.OnFragmentInteractionListener,
+        SignupPersonalFragment.OnFragmentInteractionListener,
+        SignupSecurityFragment.OnFragmentInteractionListener,
+        GoBackButtonFragment.OnFragmentInteractionListener{
 
 
 

@@ -6,14 +6,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 /**
- * AboutOne.java
+ * AboutActivity.java
  * Created by Nicole Dahlquist on 21/11/2015.
  *
  * This class provides functionality for the About activity
  */
 public class AboutActivity extends Activity
-        implements AboutOne.OnFragmentInteractionListener,
-        AboutTwo.OnFragmentInteractionListener {
+        implements AboutOneFragment.OnFragmentInteractionListener,
+        AboutTwoFragment.OnFragmentInteractionListener,
+        GoBackButtonFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
