@@ -13,10 +13,6 @@
         android:id="@+id/btnCurrentGroupsJoin"/>
 
     <Button style="@style/ButtonStyle"
-        android:text="@string/inviteToGroup"
-        android:id="@+id/btnCurrentGroupsInviteTo"/>
-
-    <Button style="@style/ButtonStyle"
         android:text="@string/viewGroup"
         android:id="@+id/btnCurrentGroupsView"/>
 

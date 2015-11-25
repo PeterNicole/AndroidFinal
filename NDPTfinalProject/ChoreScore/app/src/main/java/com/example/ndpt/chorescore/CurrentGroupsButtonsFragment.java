@@ -29,7 +29,6 @@ public class CurrentGroupsButtonsFragment extends Fragment {
     private String mParam2;
     private Button btnCurrentGroupNewGroup;
     private Button btnCurrentGroupJoinGroup;
-    private Button btnCurrentGroupInviteToGroup;
     private Button btnCurrentGroupViewGroup;
     private Button btnCurrentGroupMakeDefault;
 
@@ -60,11 +59,10 @@ public class CurrentGroupsButtonsFragment extends Fragment {
     private void controlCreation(View v){
         btnCurrentGroupNewGroup = (Button)v.findViewById(R.id.btnCurrentGroupsNew);
         btnCurrentGroupJoinGroup = (Button)v.findViewById(R.id.btnCurrentGroupsJoin);
-        btnCurrentGroupInviteToGroup = (Button)v.findViewById(R.id.btnCurrentGroupsInviteTo);
         btnCurrentGroupViewGroup = (Button)v.findViewById(R.id.btnCurrentGroupsView);
         btnCurrentGroupMakeDefault = (Button)v.findViewById(R.id.btnCurrentGroupsMakeDefault);
         final Activity activity = getActivity();
-        Button[] buttons = {btnCurrentGroupNewGroup, btnCurrentGroupJoinGroup, btnCurrentGroupInviteToGroup,
+        Button[] buttons = {btnCurrentGroupNewGroup, btnCurrentGroupJoinGroup,
                 btnCurrentGroupViewGroup, btnCurrentGroupMakeDefault};
         for (Button b : buttons) {
             final int id = b.getId();
@@ -76,9 +74,6 @@ public class CurrentGroupsButtonsFragment extends Fragment {
                     }
                     if (id == R.id.btnCurrentGroupsJoin) {
                        TransitionManager.ActivityTransition(activity, JoinGroupActivity.class);
-                    }
-                    if (id == R.id.btnCurrentGroupsInviteTo) {
-                        TransitionManager.ActivityTransition(activity, InviteToGroupActivity.class);
                     }
                     if (id == R.id.btnCurrentGroupsView) {
                         TransitionManager.ActivityTransition(activity, ViewGroupActivity.class);
