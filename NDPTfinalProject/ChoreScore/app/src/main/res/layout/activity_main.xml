@@ -7,8 +7,8 @@
     android:orientation="vertical">
 
     <fragment style="@style/FragmentStyle"
-        android:id="@+id/main_image_fragment"
-        android:name="com.example.ndpt.chorescore.MainImageFragment"
+        android:id="@+id/main_usage_display_fragment"
+        android:name="com.example.ndpt.chorescore.MainUsageDisplayFragment"
         android:layout_weight="2"
          />
 
