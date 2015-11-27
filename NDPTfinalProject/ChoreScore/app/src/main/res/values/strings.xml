@@ -13,6 +13,8 @@
     <string name="inviteToGroup">Invite a Friend To Group</string>
     <string name="viewGroup">View Group</string>
     <string name="makeDefaultGroup">Make Default Group</string>
+    <string name="search">Search</string>
+
 
     <!-- TextViews -->
     <string name="first_name">First Name:</string>
@@ -32,6 +34,7 @@
     <string name="numberOfChores">Number of Chores Completed:</string>
     <string name="numberOfPoints">Number of Points Redeemed:</string>
     <string name="joinChoreScore">Join the Growing ChoreScore Community!</string>
+    <string name="search_results">Search Results:</string>
 
     <!-- Activity Titles -->
     <string name="title_activity_about">About</string>
@@ -54,6 +57,8 @@
     <string name="title_activity_view_group">ViewGroupActivity</string>
     <string name="title_activity_make_default_group">MakeDefaultGroupActivity</string>
 
+    <!-- Edit Text -->
+    <string name ="enter_search">Enter Search Keywords Here</string>
 
 
 
