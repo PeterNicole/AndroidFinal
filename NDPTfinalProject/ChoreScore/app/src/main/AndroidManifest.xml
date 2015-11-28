@@ -11,12 +11,12 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@drawable/favicon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name="com.example.ndpt.chorescore.App"> >
-
+        android:theme="@style/AppTheme" >
+ >
         <activity
             android:name=".SplashScreen"
             android:label="@string/app_name" >
@@ -56,40 +56,40 @@
             android:label="@string/title_activity_create_group" >
         </activity>
         <activity
-            android:name=".GroupDetailsActivity"
-            android:label="@string/title_activity_group_details" >
-        </activity>
-        <activity
             android:name=".JoinGroupActivity"
             android:label="@string/title_activity_join_group" >
         </activity>
         <activity
-            android:name=".InviteToGroupActivity"
-            android:label="@string/title_activity_invite_to_group" >
-        </activity>
-        <activity
-            android:name=".ViewGroupActivity"
+            android:name=".ViewGroupNonMemberActivity"
             android:label="@string/title_activity_view_group" >
         </activity>
         <!-- start parse broadcaster and receiver -->
         <service android:name="com.parse.PushService" />
-        <receiver android:name="com.parse.ParsePushBroadcastReceiver"
-            android:exported="false">
+
+        <receiver
+            android:name="com.parse.ParsePushBroadcastReceiver"
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
                 <action android:name="com.parse.push.intent.DELETE" />
                 <action android:name="com.parse.push.intent.OPEN" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.parse.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
+        <receiver
+            android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
                 <category android:name="com.example.ndpt.chorescore" />
             </intent-filter>
         </receiver>
         <!-- end parse broadcaster and receiver -->
+        <activity
+            android:name=".ViewGroupMemberActivity"
+            android:label="@string/title_activity_view_group_member" >
+        </activity>
     </application>
 
 </manifest>

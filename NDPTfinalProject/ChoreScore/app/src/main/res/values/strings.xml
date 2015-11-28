@@ -9,7 +9,8 @@
     <string name="reset">Reset</string>
     <string name="submit">Submit</string>
     <string name="newGroup">Create a New Group</string>
-    <string name="joinGroup">Join a Group</string>
+    <string name="joinGroup">Join Group</string>
+    <string name="joinAGroup">Join a Group</string>
     <string name="inviteToGroup">Invite a Friend To Group</string>
     <string name="viewGroup">View Group</string>
     <string name="makeDefaultGroup">Make Default Group</string>
@@ -59,6 +60,10 @@
 
     <!-- Edit Text -->
     <string name ="enter_search">Enter Search Keywords Here</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_view_group_member">ViewGroupMemberActivity</string>
 
 
 

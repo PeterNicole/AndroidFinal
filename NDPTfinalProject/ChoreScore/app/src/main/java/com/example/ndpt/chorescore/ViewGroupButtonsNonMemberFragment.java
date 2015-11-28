@@ -9,13 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * JoinGroupDisplayResultsFragment.java
- * Created by Nicole Dahlquist on 23/11/2015.
+ * ViewGroupButtonsNonMemberFragment.java
+ * Created by Nicole Dahlquist on 27/11/2015.
  *
  *
- * A simple {@link Fragment} subclass for displaying list of groups based on search criteria
+ * A simple {@link Fragment} subclass for displaying view group buttons for non members
  */
-public class JoinGroupDisplayResultsFragment extends Fragment {
+public class ViewGroupButtonsNonMemberFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,11 +33,11 @@ public class JoinGroupDisplayResultsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment JoinGroupDisplayResultsFragment.
+     * @return A new instance of fragment ViewGroupButtonsNonMemberFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static JoinGroupDisplayResultsFragment newInstance(String param1, String param2) {
-        JoinGroupDisplayResultsFragment fragment = new JoinGroupDisplayResultsFragment();
+    public static ViewGroupButtonsNonMemberFragment newInstance(String param1, String param2) {
+        ViewGroupButtonsNonMemberFragment fragment = new ViewGroupButtonsNonMemberFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -45,7 +45,7 @@ public class JoinGroupDisplayResultsFragment extends Fragment {
         return fragment;
     }
 
-    public JoinGroupDisplayResultsFragment() {
+    public ViewGroupButtonsNonMemberFragment() {
         // Required empty public constructor
     }
 
@@ -57,17 +57,12 @@ public class JoinGroupDisplayResultsFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-    private void controlCreation(View v){
-        // search will display a list of matching groups
-        // on list view item selection will go to activity_view_group_non_member for selected group
-    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_join_group_display_results, container, false);
-        controlCreation(v);
-        return v;
+        return inflater.inflate(R.layout.fragment_view_group_buttons_non_member, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

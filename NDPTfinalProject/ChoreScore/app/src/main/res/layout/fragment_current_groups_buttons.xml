@@ -9,7 +9,7 @@
         android:id="@+id/btnCurrentGroupsNew"/>
 
     <Button style="@style/ButtonStyle"
-        android:text="@string/joinGroup"
+        android:text="@string/joinAGroup"
         android:id="@+id/btnCurrentGroupsJoin"/>
 
     <Button style="@style/ButtonStyle"

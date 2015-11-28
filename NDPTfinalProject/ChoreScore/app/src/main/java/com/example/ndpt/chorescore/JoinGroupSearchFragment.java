@@ -8,15 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
-
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link JoinGroupSearchFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link JoinGroupSearchFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * JoinGroupSearchFragment.java
+ * Created by Nicole Dahlquist on 23/11/2015.
+ *
+ *
+ * A simple {@link Fragment} subclass for displaying group search form
  */
 public class JoinGroupSearchFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -31,14 +28,7 @@ public class JoinGroupSearchFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment JoinGroupSearchFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static JoinGroupSearchFragment newInstance(String param1, String param2) {
         JoinGroupSearchFragment fragment = new JoinGroupSearchFragment();
@@ -62,7 +52,15 @@ public class JoinGroupSearchFragment extends Fragment {
         }
     }
     private void controlCreation(View v){
-        // query group db and display results in JoinGroupDisplayResults listview
+        btnJoinGroupSearch = (Button)v.findViewById(R.id.btnJoinGroupSearch);
+        btnJoinGroupSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // query group db and display results in JoinGroupDisplayResults list view
+                // on list view item select, go to activity_view_group_non_member for selected group (where there is
+                // an option to join
+            }
+        });
     }
 
     @Override

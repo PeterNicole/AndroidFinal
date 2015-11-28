@@ -1,22 +1,31 @@
 package com.example.ndpt.chorescore;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-public class ViewGroupActivity extends AppCompatActivity {
+/**
+ * ViewGroupNonMemberActivity.java
+ * Created by Nicole Dahlquist on 27/11/2015.
+ *
+ * This class provides functionality for the view group activity for non-members
+ */
+public class ViewGroupNonMemberActivity extends Activity
+    implements ViewGroupButtonsNonMemberFragment.OnFragmentInteractionListener,
+    ViewGroupDisplayFragment.OnFragmentInteractionListener,
+    GoBackButtonFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_group);
+        setContentView(R.layout.activity_view_group_non_member);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_view_group, menu);
+        getMenuInflater().inflate(R.menu.menu_groups, menu);
         return true;
     }
 
@@ -27,11 +36,13 @@ public class ViewGroupActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        TransitionManager.MenuTransition(this, id);
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

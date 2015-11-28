@@ -50,6 +50,9 @@ public class CurrentGroupsListFragment extends Fragment {
     public CurrentGroupsListFragment() {
         // Required empty public constructor
     }
+    private void controlCreation(View v) {
+        // on list view item click, display information on selected group on activity_view_group_member
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,9 @@ public class CurrentGroupsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_current_groups_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_current_groups_list, container, false);
+        controlCreation(v);
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

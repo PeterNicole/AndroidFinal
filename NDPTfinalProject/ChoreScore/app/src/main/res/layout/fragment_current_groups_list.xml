@@ -7,7 +7,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/currentGroups" />
+        android:text="@string/currentGroups"
+        android:id="@+id/tvCurrentGroupsLabel"/>
 
     // List view of groups the user currently belongs to
 

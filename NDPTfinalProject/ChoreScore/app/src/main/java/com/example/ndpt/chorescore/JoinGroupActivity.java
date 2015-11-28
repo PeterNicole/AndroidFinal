@@ -6,7 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
+/**
+ * CurrentGroupsActivity.java
+ * Created by Nicole Dahlquist on 23/11/2015.
+ *
+ * This class provides functionality for the join group activity
+ */
 public class JoinGroupActivity extends Activity
     implements JoinGroupDisplayResultsFragment.OnFragmentInteractionListener,
     JoinGroupSearchFragment.OnFragmentInteractionListener,
