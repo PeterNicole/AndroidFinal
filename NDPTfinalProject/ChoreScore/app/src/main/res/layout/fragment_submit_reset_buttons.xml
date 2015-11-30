@@ -1,15 +1,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ndpt.chorescore.CreateGroupButtons"
+    tools:context="com.example.ndpt.chorescore.SubmitResetButtonsFragment"
     android:orientation="vertical">
 
     <Button style="@style/ButtonStyle"
-        android:id="@+id/btnCreateGroupSubmit"
+        android:id="@+id/btnSubmit"
         android:text="@string/submit"/>
 
     <Button style="@style/ButtonStyle"
-        android:id="@+id/btnCreateGroupReset"
+        android:id="@+id/btnReset"
         android:text="@string/reset"/>
 
 </LinearLayout>

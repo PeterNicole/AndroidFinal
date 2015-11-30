@@ -11,12 +11,14 @@ import android.widget.Button;
 
 
 /**
- * SignupButtons.java
- * Created by Nicole Dahlquist on 21/11/2015.
- *
- * A simple {@link Fragment} subclass for displaying the button portion of sign up form
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link CurrentGroupsButtonsFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link CurrentGroupsButtonsFragment#newInstance} factory method to
+ * create an instance of this fragment.
  */
-public class SignupButtons extends Fragment {
+public class CurrentGroupsButtonsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -25,7 +27,10 @@ public class SignupButtons extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button btnSignupSignup;
+    private Button btnCurrentGroupNewGroup;
+    private Button btnCurrentGroupJoinGroup;
+    private Button btnCurrentGroupViewGroup;
+    private Button btnCurrentGroupMakeDefault;
 
     private OnFragmentInteractionListener mListener;
 
@@ -35,11 +40,11 @@ public class SignupButtons extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SignupButtons.
+     * @return A new instance of fragment CurrentGroupsButtonsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SignupButtons newInstance(String param1, String param2) {
-        SignupButtons fragment = new SignupButtons();
+    public static CurrentGroupsButtonsFragment newInstance(String param1, String param2) {
+        CurrentGroupsButtonsFragment fragment = new CurrentGroupsButtonsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -47,29 +52,40 @@ public class SignupButtons extends Fragment {
         return fragment;
     }
 
-    public SignupButtons() {
+    public CurrentGroupsButtonsFragment() {
         // Required empty public constructor
     }
-    private  void controlCreation(View v){
-        btnSignupSignup = (Button)v.findViewById(R.id.btnSignupSignup);
+
+    private void controlCreation(View v){
+        btnCurrentGroupNewGroup = (Button)v.findViewById(R.id.btnCurrentGroupsNew);
+        btnCurrentGroupJoinGroup = (Button)v.findViewById(R.id.btnCurrentGroupsJoin);
+        btnCurrentGroupViewGroup = (Button)v.findViewById(R.id.btnCurrentGroupsView);
+        btnCurrentGroupMakeDefault = (Button)v.findViewById(R.id.btnCurrentGroupsMakeDefault);
         final Activity activity = getActivity();
-        Button[] buttons = {btnSignupSignup};
+        Button[] buttons = {btnCurrentGroupNewGroup, btnCurrentGroupJoinGroup,
+                btnCurrentGroupViewGroup, btnCurrentGroupMakeDefault};
         for (Button b : buttons) {
             final int id = b.getId();
             b.setOnClickListener((new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (id == R.id.btnSignupSignup) {
-                        // if valid sign up form
-                        // TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
-                        // if invalid sign up form
-                        // display error messages
+                    if (id == R.id.btnCurrentGroupsNew) {
+                        TransitionManager.ActivityTransition(activity, CreateGroupActivity.class);
                     }
-
+                    if (id == R.id.btnCurrentGroupsJoin) {
+                       TransitionManager.ActivityTransition(activity, JoinGroupActivity.class);
+                    }
+                    if (id == R.id.btnCurrentGroupsView) {
+                        TransitionManager.ActivityTransition(activity, ViewGroupMemberActivity.class);
+                    }
+                    if (id == R.id.btnCurrentGroupsMakeDefault) {
+                        // set selected group to default group
+                    }
                 }
             }));
         }
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +99,7 @@ public class SignupButtons extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =  inflater.inflate(R.layout.fragment_signup_buttons, container, false);
+        View v =  inflater.inflate(R.layout.fragment_current_groups_buttons, container, false);
         controlCreation(v);
         return v;
     }

@@ -4,22 +4,25 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.ndpt.chorescore.AboutActivity"
+    tools:context="com.example.ndpt.chorescore.JoinGroupActivity"
     android:orientation="vertical">
 
     <fragment style="@style/FragmentStyle"
         android:layout_weight="2"
-        android:id="@+id/about_content_one_fragment"
-        android:name="com.example.ndpt.chorescore.AboutOneFragment" />
+        android:name="com.example.ndpt.chorescore.JoinGroupSearchFragment"
+        android:id="@+id/join_group_display_fragment"
+        tools:layout="@layout/fragment_join_group_search" />
+
 
     <fragment style="@style/FragmentStyle"
-        android:layout_weight="2"
-        android:id="@+id/about_content_two_fragment"
-        android:name="com.example.ndpt.chorescore.AboutTwoFragment" />
+        android:layout_weight="6"
+        android:name="com.example.ndpt.chorescore.JoinGroupDisplayResultsFragment"
+        android:id="@+id/join_group_search_fragment"
+        tools:layout="@layout/fragment_join_group_display_results" />
 
     <fragment style="@style/FragmentStyle"
         android:layout_weight="1"
-        android:id="@+id/about_go_back_fragment"
-        android:name="com.example.ndpt.chorescore.GoBackButtonFragment" />
-
+        android:name="com.example.ndpt.chorescore.GoBackButtonFragment"
+        android:id="@+id/join_group_go_back_fragment"
+        tools:layout="@layout/fragment_go_back_button" />
 </LinearLayout>

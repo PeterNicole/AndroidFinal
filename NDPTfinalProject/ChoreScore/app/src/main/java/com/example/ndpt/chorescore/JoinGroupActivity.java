@@ -2,34 +2,31 @@ package com.example.ndpt.chorescore;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
 /**
- * LoginActivity.java
- * Created by Nicole Dahlquist on 20/11/2015.
+ * CurrentGroupsActivity.java
+ * Created by Nicole Dahlquist on 23/11/2015.
  *
- * This class provides functionality for the login activity
+ * This class provides functionality for the join group activity
  */
-public class LoginActivity extends Activity
-    implements LoginButtonsFragment.OnFragmentInteractionListener,
-    LoginFormFragment.OnFragmentInteractionListener,
+public class JoinGroupActivity extends Activity
+    implements JoinGroupDisplayResultsFragment.OnFragmentInteractionListener,
+    JoinGroupSearchFragment.OnFragmentInteractionListener,
     GoBackButtonFragment.OnFragmentInteractionListener{
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
+        setContentView(R.layout.activity_join_group);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // No menu
-        //getMenuInflater().inflate(R.menu.menu_login, menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_groups, menu);
         return true;
     }
 

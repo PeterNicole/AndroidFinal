@@ -7,13 +7,13 @@
     android:orientation="vertical">
 
     <fragment style="@style/FragmentStyle"
-        android:id="@+id/main_image_fragment"
-        android:name="com.example.ndpt.chorescore.MainImage"
+        android:id="@+id/main_usage_display_fragment"
+        android:name="com.example.ndpt.chorescore.MainUsageDisplayFragment"
         android:layout_weight="2"
          />
 
     <fragment style="@style/FragmentStyle"
         android:id="@+id/main_options_fragment"
-        android:name="com.example.ndpt.chorescore.MainPageOptions"
+        android:name="com.example.ndpt.chorescore.MainPageOptionsFragment"
         android:layout_weight="1"/>
 </LinearLayout>

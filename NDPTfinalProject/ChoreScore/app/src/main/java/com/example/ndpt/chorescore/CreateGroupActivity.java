@@ -1,6 +1,7 @@
 package com.example.ndpt.chorescore;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,7 +11,10 @@ import android.view.MenuItem;
  *
  * This class provides functionality for group creation
  */
-public class CreateGroupActivity extends Activity {
+public class CreateGroupActivity extends Activity
+    implements CreateGroupFormFragment.OnFragmentInteractionListener,
+    SubmitResetButtonsFragment.OnFragmentInteractionListener,
+    GoBackButtonFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +39,10 @@ public class CreateGroupActivity extends Activity {
         TransitionManager.MenuTransition(this, id);
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

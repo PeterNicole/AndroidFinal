@@ -5,31 +5,27 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
 /**
- * LoginActivity.java
- * Created by Nicole Dahlquist on 20/11/2015.
+ * ViewGroupNonMemberActivity.java
+ * Created by Nicole Dahlquist on 27/11/2015.
  *
- * This class provides functionality for the login activity
+ * This class provides functionality for the view group activity for non-members
  */
-public class LoginActivity extends Activity
-    implements LoginButtonsFragment.OnFragmentInteractionListener,
-    LoginFormFragment.OnFragmentInteractionListener,
-    GoBackButtonFragment.OnFragmentInteractionListener{
-
-
+public class ViewGroupNonMemberActivity extends Activity
+    implements ViewGroupButtonsNonMemberFragment.OnFragmentInteractionListener,
+    ViewGroupDisplayFragment.OnFragmentInteractionListener,
+    GoBackButtonFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
+        setContentView(R.layout.activity_view_group_non_member);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // No menu
-        //getMenuInflater().inflate(R.menu.menu_login, menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_groups, menu);
         return true;
     }
 

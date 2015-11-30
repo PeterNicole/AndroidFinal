@@ -1,16 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.example.ndpt.chorescore.LoginButtonsFragment"
+    android:layout_height="match_parent"
+    tools:context="com.example.ndpt.chorescore.ViewGroupButtonsMemberFragment"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <Button style="@style/ButtonStyle"
-            android:text="@string/login"
-            android:id="@+id/btnLoginLogin"/>
+    <Button style="@style/ButtonStyle"
+        android:text="@string/inviteToGroup"
+        android:id="@+id/btnViewGroupInvite"/>
 
     </LinearLayout>
 

@@ -7,33 +7,25 @@
     tools:context="com.example.ndpt.chorescore.SignUpActivity"
     android:orientation="vertical">
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:name="com.example.ndpt.chorescore.SignupPersonal"
+    <fragment style="@style/FragmentStyle"
+        android:layout_weight="4"
+        android:name="com.example.ndpt.chorescore.SignupPersonalFragment"
         android:id="@+id/signup_personal_fragment"
-        android:layout_marginBottom="50dp"/>
+        android:layout_marginBottom="10dp"/>
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:name="com.example.ndpt.chorescore.SignupSecurity"
+    <fragment style="@style/FragmentStyle"
+        android:layout_weight="4"
+        android:name="com.example.ndpt.chorescore.SignupSecurityFragment"
         android:id="@+id/signup_security_fragment"/>
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:name="com.example.ndpt.chorescore.SignupButtons"
-        android:id="@+id/signup_button_fragment"/>
+    <fragment style="@style/FragmentStyle"
+        android:layout_weight="3"
+        android:name="com.example.ndpt.chorescore.SubmitResetButtonsFragment"
+        android:id="@+id/signup_submit_reset_button_fragment"/>
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+    <fragment style="@style/FragmentStyle"
+        android:layout_weight="2"
         android:id="@+id/signup_go_back_button_fragment"
-        android:name="com.example.ndpt.chorescore.GoBackButton"/>
+        android:name="com.example.ndpt.chorescore.GoBackButtonFragment"/>
 
 </LinearLayout>

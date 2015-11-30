@@ -10,12 +10,13 @@ import android.view.ViewGroup;
 
 
 /**
- * AboutTwo.java
+ * SignupSecurityFragment.java
  * Created by Nicole Dahlquist on 21/11/2015.
  *
- * A simple {@link Fragment} subclass for displaying the second portion of about information
+ *
+ * A simple {@link Fragment} subclass for displaying username and password portion of sign up form
  */
-public class AboutTwo extends Fragment {
+public class SignupSecurityFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,11 +34,11 @@ public class AboutTwo extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AboutTwo.
+     * @return A new instance of fragment SignupSecurityFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AboutTwo newInstance(String param1, String param2) {
-        AboutTwo fragment = new AboutTwo();
+    public static SignupSecurityFragment newInstance(String param1, String param2) {
+        SignupSecurityFragment fragment = new SignupSecurityFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -45,7 +46,7 @@ public class AboutTwo extends Fragment {
         return fragment;
     }
 
-    public AboutTwo() {
+    public SignupSecurityFragment() {
         // Required empty public constructor
     }
 
@@ -62,7 +63,7 @@ public class AboutTwo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about_two, container, false);
+        return inflater.inflate(R.layout.fragment_signup_security, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

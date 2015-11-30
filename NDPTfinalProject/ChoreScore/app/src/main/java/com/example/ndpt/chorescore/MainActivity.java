@@ -13,7 +13,7 @@ import android.view.MenuItem;
  */
 
 public class MainActivity extends Activity
-        implements MainImage.OnFragmentInteractionListener, MainPageOptions.OnFragmentInteractionListener{
+        implements MainUsageDisplayFragment.OnFragmentInteractionListener, MainPageOptionsFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

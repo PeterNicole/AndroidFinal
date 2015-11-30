@@ -8,14 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 /**
- * SignupPersonal.java
- * Created by Nicole Dahlquist on 21/11/2015.
+ * ViewGroupDisplayFragment.java
+ * Created by Nicole Dahlquist on 27/11/2015.
  *
- * A simple {@link Fragment} subclass for displaying personal info portion of sign up form
+ *
+ * A simple {@link Fragment} subclass for displaying group details
  */
-public class SignupPersonal extends Fragment {
+public class ViewGroupDisplayFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,11 +33,11 @@ public class SignupPersonal extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SignupPersonal.
+     * @return A new instance of fragment ViewGroupDisplayFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SignupPersonal newInstance(String param1, String param2) {
-        SignupPersonal fragment = new SignupPersonal();
+    public static ViewGroupDisplayFragment newInstance(String param1, String param2) {
+        ViewGroupDisplayFragment fragment = new ViewGroupDisplayFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -45,7 +45,7 @@ public class SignupPersonal extends Fragment {
         return fragment;
     }
 
-    public SignupPersonal() {
+    public ViewGroupDisplayFragment() {
         // Required empty public constructor
     }
 
@@ -62,7 +62,7 @@ public class SignupPersonal extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_signup_personal, container, false);
+        return inflater.inflate(R.layout.fragment_view_group_display, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

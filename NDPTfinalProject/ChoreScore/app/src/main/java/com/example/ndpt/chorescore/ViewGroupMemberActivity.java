@@ -1,21 +1,26 @@
 package com.example.ndpt.chorescore;
 
 import android.app.Activity;
+import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 /**
- * GroupDetailsActivity.java
- * Created by Nicole Dahlquist on 21/11/2015.
+ * ViewGroupMemberActivity.java
+ * Created by Nicole Dahlquist on 27/11/2015.
  *
- * This class provides functionality for displaying the details of a selected group
+ * This class provides functionality for the view group activity for members
  */
-public class GroupDetailsActivity extends Activity {
+public class ViewGroupMemberActivity extends Activity
+    implements ViewGroupDisplayFragment.OnFragmentInteractionListener,
+    ViewGroupButtonsMemberFragment.OnFragmentInteractionListener,
+    GoBackButtonFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_group_details);
+        setContentView(R.layout.activity_view_group_member);
     }
 
     @Override
@@ -35,5 +40,10 @@ public class GroupDetailsActivity extends Activity {
         TransitionManager.MenuTransition(this, id);
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

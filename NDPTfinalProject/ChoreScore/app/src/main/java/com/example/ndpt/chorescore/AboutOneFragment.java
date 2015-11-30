@@ -10,13 +10,12 @@ import android.view.ViewGroup;
 
 
 /**
- * SignupSecurity.java
+ * AboutOneFragment.java
  * Created by Nicole Dahlquist on 21/11/2015.
  *
- *
- * A simple {@link Fragment} subclass for displaying username and password portion of sign up form
+ * A simple {@link Fragment} subclass for displaying the first portion of about information
  */
-public class SignupSecurity extends Fragment {
+public class AboutOneFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,11 +33,11 @@ public class SignupSecurity extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SignupSecurity.
+     * @return A new instance of fragment AboutOneFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SignupSecurity newInstance(String param1, String param2) {
-        SignupSecurity fragment = new SignupSecurity();
+    public static AboutOneFragment newInstance(String param1, String param2) {
+        AboutOneFragment fragment = new AboutOneFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -46,7 +45,7 @@ public class SignupSecurity extends Fragment {
         return fragment;
     }
 
-    public SignupSecurity() {
+    public AboutOneFragment() {
         // Required empty public constructor
     }
 
@@ -63,7 +62,7 @@ public class SignupSecurity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_signup_security, container, false);
+        return inflater.inflate(R.layout.fragment_about_one, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

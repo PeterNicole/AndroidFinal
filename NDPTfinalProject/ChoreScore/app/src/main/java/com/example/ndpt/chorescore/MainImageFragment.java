@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 
 
 /**
- * MainImage.java
+ * MainImageFragment.java
  * Created by Nicole Dahlquist on 11/11/2015.
  *
  * A simple {@link Fragment} subclass that displays the ChoreScore image
 */
-public class MainImage extends Fragment {
+public class MainImageFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,11 +33,11 @@ public class MainImage extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MainImage.
+     * @return A new instance of fragment MainImageFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MainImage newInstance(String param1, String param2) {
-        MainImage fragment = new MainImage();
+    public static MainImageFragment newInstance(String param1, String param2) {
+        MainImageFragment fragment = new MainImageFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -45,7 +45,7 @@ public class MainImage extends Fragment {
         return fragment;
     }
 
-    public MainImage() {
+    public MainImageFragment() {
         // Required empty public constructor
     }
 
