@@ -51,5 +51,10 @@
     <string name ="chores_menu_title">Chores</string>
     <string name ="points_menu_title">Points</string>
 
-
+    <!-- Signup Page error strings -->
+    <!-- Note: \u0020 is a space character for leading/trailing spaces -->
+    <string name="error_password_match">Your confirmation password must be identical to your original password.</string>
+    <string name="error_password_length">Password must be at least \u0020</string>
+    <string name="error_user_length">User name must be at least \u0020</string>
+    <string name="error_characters_long">\u0020 characters long.</string>
 </resources>

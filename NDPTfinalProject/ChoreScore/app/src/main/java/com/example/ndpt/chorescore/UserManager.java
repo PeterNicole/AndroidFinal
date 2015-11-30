@@ -1,5 +1,8 @@
 package com.example.ndpt.chorescore;
 
+import android.app.Activity;
+import android.widget.Toast;
+
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -16,31 +19,45 @@ public class UserManager
      * Method for creating a new user in the parse database
      * @param userName user name
      * @param password user password
+     * @return Boolean returns true if user created, false if not
      */
-    static public void CreateUser(String userName,String password)
+    static public void CreateUser(String userName,String password, String firstName, String lastName, String email, final Activity activity)
     {
         ParseUser newUser = new ParseUser();
         newUser.setUsername(userName);
         newUser.setPassword(password);
-        //Optional
-        //user.setEmail("bla@bla.com");
+        //Email
+        if (email != null)
+        {
+            newUser.setEmail(email);
+        }
 
-        //For additional custom fields
-        //newUser.put("fieldName", "value");
+        //Additional custom fields
+        if(firstName != null)
+        {
+            newUser.put("firstName", firstName);
+        }
+        if (lastName != null)
+        {
+            newUser.put("lastName", lastName);
+        }
 
         newUser.signUpInBackground(new SignUpCallback()
         {
             @Override
             public void done(ParseException e)
             {
+                //Redirect to current groups on successful login
                 if (e == null)
                 {
-                    //Sign up success
+                    TransitionManager.ActivityTransition(activity,CurrentGroupsActivity.class);
                 }
 
+                //Display login error to user
                 else
                 {
-                    //Sign up fail
+                    Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }
         });
