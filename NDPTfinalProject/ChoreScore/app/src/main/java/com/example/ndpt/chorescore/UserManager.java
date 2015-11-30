@@ -1,6 +1,10 @@
 package com.example.ndpt.chorescore;
 
+import android.app.Activity;
+import android.widget.Toast;
+
 import com.parse.LogInCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -16,31 +20,45 @@ public class UserManager
      * Method for creating a new user in the parse database
      * @param userName user name
      * @param password user password
+     * @return Boolean returns true if user created, false if not
      */
-    static public void CreateUser(String userName,String password)
+    static public void CreateUser(String userName,String password, String firstName, String lastName, String email, final Activity activity)
     {
         ParseUser newUser = new ParseUser();
         newUser.setUsername(userName);
         newUser.setPassword(password);
-        //Optional
-        //user.setEmail("bla@bla.com");
+        //Email
+        if (email != null)
+        {
+            newUser.setEmail(email);
+        }
 
-        //For additional custom fields
-        //newUser.put("fieldName", "value");
+        //Additional custom fields
+        if(firstName != null)
+        {
+            newUser.put("firstName", firstName);
+        }
+        if (lastName != null)
+        {
+            newUser.put("lastName", lastName);
+        }
 
         newUser.signUpInBackground(new SignUpCallback()
         {
             @Override
             public void done(ParseException e)
             {
+                //Redirect to current groups on successful login
                 if (e == null)
                 {
-                    //Sign up success
+                    TransitionManager.ActivityTransition(activity,CurrentGroupsActivity.class);
                 }
 
+                //Display login error to user
                 else
                 {
-                    //Sign up fail
+                    Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+                    toast.show();
                 }
             }
         });
@@ -51,34 +69,57 @@ public class UserManager
      * @param userName user name
      * @param password user password
      */
-    static public void LoginUser(String userName, String password)
+    static public void LoginUser(String userName, String password, final Activity activity)
     {
-        ParseUser.logInInBackground(userName, password, new LogInCallback() {
+        ParseUser.logInInBackground(userName, password, new LogInCallback()
+        {
             @Override
-            public void done(ParseUser user, ParseException e) {
+            public void done(ParseUser user, ParseException e)
+            {
+                //Successful login
                 if (user != null)
                 {
-                    //Successful login
+                    TransitionManager.ActivityTransition(activity,CurrentGroupsActivity.class);
                 }
+
+                //Login fail
                 else
                 {
-                    //login fail
+                    Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+                    toast.show();
                 }
 
             }
         });
     }
 
-    static public void CheckCachedUser()
+    /**
+     * Checks if a user is current logged in, if not redirects to login page
+     * @param activity current activity
+     */
+    static public void CheckCachedUser(Activity activity)
     {
-        ParseUser currentUser = ParseUser.getCurrentUser().getCurrentUser();
-        if(currentUser!= null)
-        {
-            //User currently cached on this device, no login required
-        }
-        else
+        ParseUser currentUser = ParseUser.getCurrentUser();
+
+        //If user is not currently logged in
+        if(currentUser == null)
         {
             //Prompt login
+            TransitionManager.ActivityTransition(activity,LoginActivity.class);
         }
     }
+
+    /**
+     * Logs out the current user
+     */
+    static public void LogoutUser(Activity activity)
+    {
+        ParseUser.getCurrentUser().logOut();
+        if(ParseUser.getCurrentUser() == null)
+        {
+            Toast toast = Toast.makeText(activity,R.string.logout_success, Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
 }
