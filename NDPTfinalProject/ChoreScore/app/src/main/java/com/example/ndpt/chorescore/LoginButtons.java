@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 /**
@@ -57,17 +58,23 @@ public class LoginButtons extends Fragment {
         Button[] buttons = {btnLoginLogin};
         for (Button b : buttons) {
             final int id = b.getId();
-            b.setOnClickListener((new View.OnClickListener() {
+            b.setOnClickListener((new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
-                    if (id == R.id.btnLoginLogin) {
-                        // if valid login form
-                        // TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
-                        // if invalid login form
-                        // display error messages
+                public void onClick(View v)
+                {
+                    if (id == R.id.btnLoginLogin)
+                    {
+                        EditText userEt = (EditText)activity.findViewById(R.id.etLoginUsername);
+                        EditText passEt = (EditText)activity.findViewById(R.id.etLoginPassword);
+                        String user = userEt.getText().toString();
+                        String pass = passEt.getText().toString();
+
+                        if(user != null && pass != null)
+                        {
+                            UserManager.LoginUser(user,pass,activity);
+                        }
                     }
-
-
                 }
             }));
         }

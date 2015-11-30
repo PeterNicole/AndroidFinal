@@ -16,7 +16,6 @@
 
 
     <!-- TextViews -->
-
     <string name="first_name">First Name:</string>
     <string name="last_name">Last Name:</string>
     <string name="email">E-mail:</string>
@@ -24,6 +23,7 @@
     <string name="password">Select Password:</string>
     <string name="confirmPassword">Confirm Password:</string>
     <string name="username">Select Username:</string>
+    <string name="usernameOnly">Username:</string>
     <string name="aboutContent1">The ChoreScore app provides a way for you and your house mates
         to organize what chores need to be done.  </string>
     <string name="aboutContent2">ChoreScore provides a points-based platform
@@ -42,7 +42,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_group_details">GroupDetails</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Menu Item Titles -->
@@ -57,4 +57,7 @@
     <string name="error_password_length">Password must be at least \u0020</string>
     <string name="error_user_length">User name must be at least \u0020</string>
     <string name="error_characters_long">\u0020 characters long.</string>
+
+    <!-- Log out -->
+    <string name="logout_success">Logged out</string>
 </resources>

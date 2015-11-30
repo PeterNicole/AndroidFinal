@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.widget.Toast;
 
 import com.parse.LogInCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -56,7 +57,7 @@ public class UserManager
                 //Display login error to user
                 else
                 {
-                    Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
                     toast.show();
                 }
             }
@@ -68,34 +69,57 @@ public class UserManager
      * @param userName user name
      * @param password user password
      */
-    static public void LoginUser(String userName, String password)
+    static public void LoginUser(String userName, String password, final Activity activity)
     {
-        ParseUser.logInInBackground(userName, password, new LogInCallback() {
+        ParseUser.logInInBackground(userName, password, new LogInCallback()
+        {
             @Override
-            public void done(ParseUser user, ParseException e) {
+            public void done(ParseUser user, ParseException e)
+            {
+                //Successful login
                 if (user != null)
                 {
-                    //Successful login
+                    TransitionManager.ActivityTransition(activity,CurrentGroupsActivity.class);
                 }
+
+                //Login fail
                 else
                 {
-                    //login fail
+                    Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+                    toast.show();
                 }
 
             }
         });
     }
 
-    static public void CheckCachedUser()
+    /**
+     * Checks if a user is current logged in, if not redirects to login page
+     * @param activity current activity
+     */
+    static public void CheckCachedUser(Activity activity)
     {
-        ParseUser currentUser = ParseUser.getCurrentUser().getCurrentUser();
-        if(currentUser!= null)
-        {
-            //User currently cached on this device, no login required
-        }
-        else
+        ParseUser currentUser = ParseUser.getCurrentUser();
+
+        //If user is not currently logged in
+        if(currentUser == null)
         {
             //Prompt login
+            TransitionManager.ActivityTransition(activity,LoginActivity.class);
         }
     }
+
+    /**
+     * Logs out the current user
+     */
+    static public void LogoutUser(Activity activity)
+    {
+        ParseUser.getCurrentUser().logOut();
+        if(ParseUser.getCurrentUser() == null)
+        {
+            Toast toast = Toast.makeText(activity,R.string.logout_success, Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
 }
