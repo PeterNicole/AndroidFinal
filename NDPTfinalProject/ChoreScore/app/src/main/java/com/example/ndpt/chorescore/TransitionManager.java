@@ -25,8 +25,6 @@ public class TransitionManager
         menuMap.put(R.id.mi_groups,CurrentGroupsActivity.class);
         menuMap.put(R.id.mi_chores,CurrentGroupsActivity.class);
         menuMap.put(R.id.mi_points,CurrentGroupsActivity.class);
-        menuMap.put(R.id.mi_logout, CurrentGroupsActivity.class);
-
     }
     /**
      * Overloaded method for default closeCurrent = true
@@ -71,12 +69,23 @@ public class TransitionManager
      */
     static public void MenuTransition(Activity currentActivity, int menuBtnId)
     {
-        if (menuMap == null)
+        //Logout menu item
+        if(menuBtnId == R.id.mi_logout)
         {
-            populateMenuMap();
+            UserManager.LogoutUser(currentActivity);
         }
 
-        ActivityTransition(currentActivity, menuMap.get(menuBtnId));
+        //Activity transition menu items
+        else
+        {
+            if (menuMap == null)
+            {
+                populateMenuMap();
+            }
+
+            ActivityTransition(currentActivity, menuMap.get(menuBtnId));
+        }
+
 
     }
 
