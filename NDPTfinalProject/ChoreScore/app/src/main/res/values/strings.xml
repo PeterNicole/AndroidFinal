@@ -66,12 +66,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_view_group_member">ViewGroupMemberActivity</string>
 	
-	<!-- Signup Page error strings -->
+	<!-- User and Group error strings -->
     <!-- Note: \u0020 is a space character for leading/trailing spaces -->
     <string name="error_password_match">Your confirmation password must be identical to your original password.</string>
     <string name="error_password_length">Password must be at least \u0020</string>
     <string name="error_user_length">User name must be at least \u0020</string>
+    <string name="error_group_name_length">Group name must be at least \u0020</string>
     <string name="error_characters_long">\u0020 characters long.</string>
+    <string name="error_group_name_taken">Group name in use</string>
 
     <!-- Log out -->
     <string name="logout_success">Logged out</string>
