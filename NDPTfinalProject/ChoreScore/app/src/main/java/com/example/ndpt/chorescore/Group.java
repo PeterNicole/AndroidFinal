@@ -13,9 +13,32 @@ public class Group
 
     public Group(String groupId, String adminId, String name)
     {
-        this.groupId = groupId;
-        this.adminId = adminId;
-        this.name = name;
+        this.setGroupId(groupId);
+        this.setAdminId(adminId);
+        this.setName(name);
     }
 
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(String adminId) {
+        this.adminId = adminId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
