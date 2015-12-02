@@ -1,4 +1,7 @@
 package com.example.ndpt.chorescore;
+import android.app.Activity;
+import android.widget.Toast;
+
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -17,7 +20,7 @@ public class GroupManager
      * @param groupId
      * @return Group
      */
-    public static Group RetrieveGroup(String groupId)
+    public static Group RetrieveGroup(String groupId, Activity activity)
     {
         String name = "";
         String admin = "";
@@ -36,6 +39,8 @@ public class GroupManager
         catch (ParseException e)
         {
             //Display parse exception
+            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
         }
 
         return new Group(groupId, admin, name);
@@ -47,17 +52,17 @@ public class GroupManager
      * @param adminId
      * @return Group
      */
-    public static void CreateGroup(String name, String adminId)
+    public static void CreateGroup(String name, String adminId, Activity activity)
     {
         //Check for group with same name
-        ArrayList<Group> sameNameGroups = RetrieveAll(name);
+        ArrayList<Group> sameNameGroups = RetrieveAll(name, activity);
 
         //Name is unique
         if(sameNameGroups.size() == 0)
         {
             //Initialize the parse object
             ParseObject group = new ParseObject("Group");
-            group.put("adminId", adminId);
+            group.put("admin", adminId);
             group.put("name", name);
 
             //Save the parse object
@@ -67,6 +72,8 @@ public class GroupManager
         else
         {
             //Fail to create group, name taken
+            Toast toast = Toast.makeText(activity,activity.getString(R.string.error_group_name_taken),Toast.LENGTH_LONG);
+            toast.show();
         }
     }
 
@@ -83,9 +90,9 @@ public class GroupManager
      * Returns a list of all groups
      * @return ArrayList of all groups
      */
-    public static ArrayList<Group> RetrieveAll()
+    public static ArrayList<Group> RetrieveAll(Activity activity)
     {
-        return RetrieveAll("");
+        return RetrieveAll("", activity);
     }
 
     /**
@@ -93,7 +100,7 @@ public class GroupManager
      * @param groupName search fragment for group name
      * @return ArrayList of all groups
      */
-    public static ArrayList<Group> RetrieveAll(String groupName)
+    public static ArrayList<Group> RetrieveAll(String groupName, Activity activity)
     {
         ArrayList<Group> groups = new ArrayList<Group>();
         String name = "";
@@ -119,6 +126,8 @@ public class GroupManager
         catch (ParseException e)
         {
             //Display parse exception
+            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
         }
 
         return groups;

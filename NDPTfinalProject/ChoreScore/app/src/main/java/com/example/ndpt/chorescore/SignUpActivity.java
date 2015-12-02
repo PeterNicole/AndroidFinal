@@ -127,6 +127,12 @@ public class SignUpActivity extends Activity
                     else if (id == R.id.btnReset)
                     {
                         //clear
+                        firstEv.getText().clear();
+                        lastEv.getText().clear();
+                        emailEv.getText().clear();
+                        passwordEv.getText().clear();
+                        passwordConfirmEv.getText().clear();
+                        userEv.getText().clear();
                     }
                 }
             }));
