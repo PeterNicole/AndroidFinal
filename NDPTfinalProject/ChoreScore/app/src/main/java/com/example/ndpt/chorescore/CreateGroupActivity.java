@@ -5,6 +5,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.parse.ParseUser;
+
 /**
  * CreateGroupActivity.java
  * Created by Nicole Dahlquist on 21/11/2015.
@@ -16,10 +22,16 @@ public class CreateGroupActivity extends Activity
     SubmitResetButtonsFragment.OnFragmentInteractionListener,
     GoBackButtonFragment.OnFragmentInteractionListener{
 
+    //Class scope variables
+    private Button btnReset;
+    private Button btnSubmit;
+    private final int GROUP_NAME_LENGTH = 6;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_group);
+        controlCreation();
     }
 
     @Override
@@ -44,5 +56,51 @@ public class CreateGroupActivity extends Activity
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    private void controlCreation(){
+        btnReset = (Button)findViewById(R.id.btnReset);
+        btnSubmit = (Button)findViewById(R.id.btnSubmit);
+        final Activity activity = this;
+        Button[] buttons = {btnSubmit,btnReset};
+        for (Button b : buttons)
+        {
+            final int id = b.getId();
+            b.setOnClickListener((new View.OnClickListener()
+            {
+
+                @Override
+                public void onClick(View v)
+                {
+                    //Get text from the signup personal fragment
+                    EditText groupNameEv = (EditText)activity.findViewById(R.id.etCreateGroupName);
+
+                    //Initialize strings for user creation
+                    String groupName = groupNameEv.getText().toString();
+
+                    if (id == R.id.btnSubmit)
+                    {
+                        //Check if user is logged in, if not redirect to login page
+                        UserManager.CheckCachedUser(activity);
+                        if(groupName.length() < GROUP_NAME_LENGTH )
+                        {
+                            groupNameEv.setError(getString(R.string.error_group_name_length) + GROUP_NAME_LENGTH + getString(R.string.error_characters_long));
+                        }
+
+                        else
+                        {
+                            GroupManager.CreateGroup(groupName, ParseUser.getCurrentUser().getObjectId(),activity);
+                        }
+
+                    }
+
+                    else if (id == R.id.btnReset)
+                    {
+                        //clear
+                        groupNameEv.getText().clear();
+                    }
+                }
+            }));
+        }
     }
 }

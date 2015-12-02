@@ -6,6 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * CurrentGroupsActivity.java
  * Created by Nicole Dahlquist on 23/11/2015.
@@ -15,12 +23,14 @@ import android.view.MenuItem;
 public class JoinGroupActivity extends Activity
     implements JoinGroupDisplayResultsFragment.OnFragmentInteractionListener,
     JoinGroupSearchFragment.OnFragmentInteractionListener,
-    GoBackButtonFragment.OnFragmentInteractionListener{
+    GoBackButtonFragment.OnFragmentInteractionListener,
+    AdapterView.OnItemClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_group);
+        displayGroups("");
     }
 
     @Override
@@ -43,7 +53,39 @@ public class JoinGroupActivity extends Activity
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onFragmentInteraction(Uri uri)
+    {
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+
+    }
+
+    /**
+     * Displays a list of groups in the join group list view
+     * @param groupName searches for groups containing this string
+     */
+    public void displayGroups(String groupName)
+    {
+        ArrayList<Group> groups = GroupManager.RetrieveAll(groupName, this);
+        ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String,String>>();
+        for (Group g: groups)
+        {
+            HashMap<String,String> map = new HashMap<String, String>();
+            map.put("name",g.getName());
+            data.add(map);
+        }
+
+        int resource = R.layout.listview_group;
+        String[] from = {"name"};
+        int[] to = {R.id.tv_list_group_name};
+
+        SimpleAdapter adapter = new SimpleAdapter(this,data,resource,from,to);
+        ListView groupLv = (ListView) findViewById(R.id.lv_join_groups);
+        groupLv.setOnItemClickListener(this);
+        groupLv.setAdapter(adapter);
     }
 }
