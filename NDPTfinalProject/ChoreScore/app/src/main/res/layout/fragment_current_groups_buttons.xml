@@ -5,18 +5,18 @@
     android:orientation="vertical">
 
     <Button style="@style/ButtonStyle"
-        android:text="@string/newGroup"
+        android:text="@string/new_group"
         android:id="@+id/btnCurrentGroupsNew"/>
 
     <Button style="@style/ButtonStyle"
-        android:text="@string/joinAGroup"
+        android:text="@string/join_a_group"
         android:id="@+id/btnCurrentGroupsJoin"/>
 
     <Button style="@style/ButtonStyle"
-        android:text="@string/viewGroup"
+        android:text="@string/view_group"
         android:id="@+id/btnCurrentGroupsView"/>
 
     <Button style="@style/ButtonStyle"
-        android:text="@string/makeDefaultGroup"
+        android:text="@string/make_default_group"
         android:id="@+id/btnCurrentGroupsMakeDefault"/>
 </LinearLayout>

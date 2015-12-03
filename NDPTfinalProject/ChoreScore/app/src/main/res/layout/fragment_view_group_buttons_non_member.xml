@@ -10,7 +10,7 @@
         android:orientation="horizontal">
 
         <Button style="@style/ButtonStyle"
-            android:text="@string/joinGroup"
+            android:text="@string/join_group"
             android:id="@+id/btnViewGroupJoin"/>
 
     </LinearLayout>

@@ -11,11 +11,9 @@
         android:layout_marginTop="50dp"
         >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <TextView style="@style/TextViewStyle"
             android:id="@+id/tv_main_usage_join"
-            android:text="@string/joinChoreScore"
+            android:text="@string/join_chore_score"
             android:textSize="20sp"/>
 
     </LinearLayout>
@@ -30,12 +28,10 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/tv_main_usage_users"
-        android:text="@string/numberOfUsers"
+        android:text="@string/number_of_users"
         android:textSize="20sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <TextView style="@style/TextViewStyle"
             android:id="@+id/tv_main_usage_user_count"
             android:textSize="20sp"/>
 
@@ -50,12 +46,10 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:id="@+id/tv_main_usage_chores_complete"
-            android:text="@string/numberOfChores"
+            android:text="@string/number_of_chores"
             android:textSize="20sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <TextView style="@style/TextViewStyle"
             android:id="@+id/tv_main_usage_chore_count"
             android:textSize="20sp"/>
 
@@ -70,12 +64,10 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:id="@+id/tv_main_usage_points_redeemed"
-            android:text="@string/numberOfPoints"
+            android:text="@string/number_of_points"
             android:textSize="20sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <TextView style="@style/TextViewStyle"
             android:id="@+id/tv_main_usage_point_count"
             android:textSize="20sp"/>
 

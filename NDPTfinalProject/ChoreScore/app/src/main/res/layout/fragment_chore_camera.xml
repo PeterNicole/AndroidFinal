@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ndpt.chorescore.ChoreCameraFragment"
+    android:orientation="vertical">
+
+    // display empty image box "Take picture" or some such
+    // after picture is taken, display picture in this image box
+
+    // start the camera and allow user to take picture
+    <Button style="@style/ButtonStyle"
+        android:id="@+id/btnChoreCamera"
+        android:text="@string/take_picture"/>
+
+</LinearLayout>

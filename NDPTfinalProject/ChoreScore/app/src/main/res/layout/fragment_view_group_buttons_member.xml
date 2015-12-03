@@ -10,7 +10,7 @@
         android:orientation="horizontal">
 
     <Button style="@style/ButtonStyle"
-        android:text="@string/inviteToGroup"
+        android:text="@string/invite_to_group"
         android:id="@+id/btnViewGroupInvite"/>
 
     </LinearLayout>

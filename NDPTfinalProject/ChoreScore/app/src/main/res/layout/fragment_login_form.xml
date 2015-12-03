@@ -13,7 +13,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:id="@+id/tvLoginUsername"
-            android:text="@string/usernameOnly"
+            android:text="@string/username_only"
             android:layout_weight="1"/>
 
         <EditText
@@ -32,12 +32,10 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:id="@+id/tvLoginPassword"
-            android:text="@string/passwordOnly"
+            android:text="@string/password_only"
             android:layout_weight="1"/>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <EditText style="@style/TextViewStyle"
             android:id="@+id/etLoginPassword"
             android:layout_weight="2"
 			android:inputType="textPassword"/>
