@@ -4,10 +4,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.ndpt.chorescore.CurrentGroupsListFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/currentGroups"
+    <TextView style="@style/TextViewStyle"
+        android:text="@string/current_groups"
         android:id="@+id/tvCurrentGroupsLabel"/>
 
     // List view of groups the user currently belongs to

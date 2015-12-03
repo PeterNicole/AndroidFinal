@@ -4,9 +4,7 @@
     tools:context="com.example.ndpt.chorescore.JoinGroupDisplayResultsFragment"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <TextView style="@style/TextViewStyle"
         android:text="@string/search_results"
         android:id="@+id/tv_join_group_search_results"/>
 

@@ -90,6 +90,18 @@
             android:name=".ViewGroupMemberActivity"
             android:label="@string/title_activity_view_group_member" >
         </activity>
+        <activity
+            android:name=".PendingChoresActivity"
+            android:label="@string/title_activity_pending_chores" >
+        </activity>
+        <activity
+            android:name=".SelectChoresActivity"
+            android:label="@string/title_activity_select_chores" >
+        </activity>
+        <activity
+            android:name=".ChoreDetailsActivity"
+            android:label="@string/title_activity_chore_details" >
+        </activity>
     </application>
 
 </manifest>

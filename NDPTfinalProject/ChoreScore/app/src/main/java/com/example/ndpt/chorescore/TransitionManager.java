@@ -23,7 +23,7 @@ public class TransitionManager
         //Populates the menu map with menu button ids and their associated activity class
         menuMap = new HashMap<Integer,Class>();
         menuMap.put(R.id.mi_groups,CurrentGroupsActivity.class);
-        menuMap.put(R.id.mi_chores,CurrentGroupsActivity.class);
+        menuMap.put(R.id.mi_chores,PendingChoresActivity.class);
         menuMap.put(R.id.mi_points,CurrentGroupsActivity.class);
     }
     /**
