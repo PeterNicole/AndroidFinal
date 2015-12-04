@@ -1,26 +1,22 @@
 package com.example.ndpt.chorescore;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 /**
- * PendingChoresActivity.java
- * Created by Nicole Dahlquist on 02/12/2015.
+ * PointSummaryActivity.java
+ * Created by Nicole Dahlquist on 03/12/2015.
  *
- * This class displays the chores that are pending for the default group as well as admin
- * buttons if the user is the group's admin
+ * This class provides a summary of the default groups earned points
  */
-public class PendingChoresActivity extends Activity
-    implements PendingChoresButtonsFragment.OnFragmentInteractionListener,
-    PendingChoresListviewFragment.OnFragmentInteractionListener {
+public class PointSummaryActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pending_chores);
+        setContentView(R.layout.activity_point_summary);
     }
 
     @Override
@@ -40,10 +36,5 @@ public class PendingChoresActivity extends Activity
         TransitionManager.MenuTransition(this, id);
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 }
