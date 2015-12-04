@@ -24,7 +24,7 @@ public class TransitionManager
         menuMap = new HashMap<Integer,Class>();
         menuMap.put(R.id.mi_groups,CurrentGroupsActivity.class);
         menuMap.put(R.id.mi_chores,PendingChoresActivity.class);
-        menuMap.put(R.id.mi_points,CurrentGroupsActivity.class);
+        menuMap.put(R.id.mi_points,PointSummaryActivity.class);
     }
     /**
      * Overloaded method for default closeCurrent = true

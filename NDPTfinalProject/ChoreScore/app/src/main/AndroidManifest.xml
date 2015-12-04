@@ -102,6 +102,14 @@
             android:name=".ChoreDetailsActivity"
             android:label="@string/title_activity_chore_details" >
         </activity>
+        <activity
+            android:name=".PointSummaryActivity"
+            android:label="@string/title_activity_point_summary" >
+        </activity>
+        <activity
+            android:name=".PointRedemptionActivity"
+            android:label="@string/title_activity_point_redemption" >
+        </activity>
     </application>
 
 </manifest>

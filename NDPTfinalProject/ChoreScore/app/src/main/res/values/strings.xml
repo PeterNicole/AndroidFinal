@@ -46,6 +46,8 @@
     <string name="title">Name:</string>
     <string name="points">Points:</string>
     <string name="due_date">Due Date:</string>
+    <string name="redemption_amount">Amount to Redeem:</string>
+    <string name="redeem">Redeem Now!</string>
 
 
     <!-- Activity Titles -->
@@ -61,6 +63,8 @@
     <string name="title_activity_select_chores">Select Chores</string>
     <string name="title_activity_group_details">Group Details</string>
     <string name="title_activity_chore_details">Chore Details</string>
+    <string name="title_activity_point_summary">Point Summary</string>
+    <string name="title_activity_point_redemption">Point Redemption</string>
 
     <!-- Menu Item Titles -->
     <string name ="group_menu_title">Groups</string>
@@ -87,6 +91,7 @@
 
     <!-- Log out -->
     <string name="logout_success">Logged out</string>
+
     
 
 </resources>

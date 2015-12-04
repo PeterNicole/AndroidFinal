@@ -7,20 +7,20 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 /**
- * PendingChoresActivity.java
- * Created by Nicole Dahlquist on 02/12/2015.
+ * PointRedemptoinActivity.java
+ * Created by Nicole Dahlquist on 03/12/2015.
  *
- * This class displays the chores that are pending for the default group as well as admin
- * buttons if the user is the group's admin
+ * This class provides functionality for redeeming points earned in the default group
  */
-public class PendingChoresActivity extends Activity
-    implements PendingChoresButtonsFragment.OnFragmentInteractionListener,
-    PendingChoresListviewFragment.OnFragmentInteractionListener {
+public class PointRedemptionActivity extends Activity
+    implements GoBackButtonFragment.OnFragmentInteractionListener,
+    PointRedemptionDetailsFragment.OnFragmentInteractionListener,
+    PointRedemptionFormFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pending_chores);
+        setContentView(R.layout.activity_point_redemption);
     }
 
     @Override
