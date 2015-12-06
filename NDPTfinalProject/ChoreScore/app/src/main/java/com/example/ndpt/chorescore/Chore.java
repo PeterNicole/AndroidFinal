@@ -1,5 +1,7 @@
 package com.example.ndpt.chorescore;
 
+import android.graphics.Bitmap;
+
 import java.util.Date;
 
 /**
@@ -15,6 +17,8 @@ public class Chore
     private Date dueDate;
     private int points;
     private String  completerId;
+    private Boolean isApproved;
+    private Bitmap proofImage;
 
 
     /**
@@ -25,8 +29,10 @@ public class Chore
      * @param dueDate
      * @param points
      * @param completerId
+     * @param isApproved
+     * @param proofImage
      */
-    public Chore(String choreId, String groupId, String description, Date dueDate, int points, String completerId)
+    public Chore(String choreId, String groupId, String description, Date dueDate, int points, String completerId, Boolean isApproved, Bitmap proofImage)
     {
         this.setChoreId(choreId);
         this.setGroupId(groupId);
@@ -34,6 +40,8 @@ public class Chore
         this.setDueDate(dueDate);
         this.setPoints(points);
         this.setCompleterId(completerId);
+        this.setIsApproved(isApproved);
+        this.setProofImage(proofImage);
     }
 
     public String getChoreId() {
@@ -82,5 +90,21 @@ public class Chore
 
     public void setCompleterId(String completerId) {
         this.completerId = completerId;
+    }
+
+    public Boolean getIsApproved() {
+        return isApproved;
+    }
+
+    public void setIsApproved(Boolean isApproved) {
+        this.isApproved = isApproved;
+    }
+
+    public Bitmap getProofImage() {
+        return proofImage;
+    }
+
+    public void setProofImage(Bitmap proofImage) {
+        this.proofImage = proofImage;
     }
 }
