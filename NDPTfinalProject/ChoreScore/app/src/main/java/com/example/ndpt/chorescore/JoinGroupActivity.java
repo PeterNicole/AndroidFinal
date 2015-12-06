@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.parse.ParseUser;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -25,6 +27,9 @@ public class JoinGroupActivity extends Activity
     JoinGroupSearchFragment.OnFragmentInteractionListener,
     GoBackButtonFragment.OnFragmentInteractionListener,
     AdapterView.OnItemClickListener{
+
+    //Class scope variables
+    ArrayList<Group> groups;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +66,14 @@ public class JoinGroupActivity extends Activity
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
+        //Check if user is logged in
+        ParseUser currentUser = UserManager.CheckCachedUser(this);
 
+        //Get the group selected from the list view
+        Group currentGroup = groups.get(position);
+
+        //Join the selected group
+        GroupManager.JoinGroup(currentUser.getObjectId(),currentGroup.getGroupId(),this);
     }
 
     /**
@@ -70,7 +82,7 @@ public class JoinGroupActivity extends Activity
      */
     public void displayGroups(String groupName)
     {
-        ArrayList<Group> groups = GroupManager.RetrieveAll(groupName, this);
+        groups = GroupManager.RetrieveAll(groupName, this);
         ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String,String>>();
         for (Group g: groups)
         {

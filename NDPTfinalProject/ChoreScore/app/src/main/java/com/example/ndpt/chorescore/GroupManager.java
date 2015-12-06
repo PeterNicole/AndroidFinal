@@ -117,7 +117,7 @@ public class GroupManager
             //Add each group to the array list
             for (ParseObject p: result)
             {
-                groupId = p.getString("objectId");
+                groupId = p.getObjectId();
                 admin = p.getString("admin");
                 name = p.getString("name");
                 groups.add(new Group(groupId,admin,name));
@@ -170,9 +170,30 @@ public class GroupManager
      * @param groupId
      * @param userId
      */
-    public static void JoinGroup( String userId,String groupId)
+    public static void JoinGroup( String userId,String groupId, Activity activity)
     {
+        ArrayList<String> currentUserGroups = RetrieveUserGroupIds(userId, activity);
 
+        //Check if the user is already a part of this group
+        if(currentUserGroups.contains(groupId))
+        {
+            //User already part of this group
+            Toast toast = Toast.makeText(activity,activity.getString(R.string.error_already_in_group),Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        //Add the group
+        else
+        {
+            //Initialize the parse object for UserGroup
+            ParseObject userGroup = new ParseObject("UserGroup");
+            userGroup.put("userId",userId);
+            userGroup.put("groupId",groupId);
+            userGroup.put("points",0);
+
+            //Save the parse object
+            userGroup.saveInBackground();
+        }
 
     }
 }
