@@ -69,6 +69,9 @@ public class GroupManager
 
             //Save the parse object
             group.saveInBackground();
+
+            //Add admin to the group as a member
+            JoinGroup(adminId,group.getObjectId(),activity);
         }
 
         else
@@ -165,6 +168,47 @@ public class GroupManager
         }
 
         return groupIds;
+    }
+
+    /**
+     * Returns a list of groups for the specified user
+     * @param userId
+     * @param activity
+     * @return list of user grooups
+     */
+    public static ArrayList<Group> RetrieveUserGroups(String userId, Activity activity)
+    {
+        ArrayList<String> groupIds = RetrieveUserGroupIds(userId,activity);
+        ArrayList<Group> userGroups = new ArrayList<Group>();
+        try
+        {
+            //Query the parse database
+            ParseQuery<ParseObject> groupQuery = ParseQuery.getQuery("Group");
+            groupQuery.whereContainedIn("objectId", groupIds);
+
+            List<ParseObject> result = groupQuery.find();
+
+            //Variables for creating group object from parse result
+            String groupId ="";
+            String admin ="";
+            String name = "";
+
+            //Add each group to the array list
+            for (ParseObject p: result)
+            {
+                groupId = p.getObjectId();
+                admin = p.getString("admin");
+                name = p.getString("name");
+                userGroups.add(new Group(groupId,admin,name));
+            }
+        }
+        catch (ParseException e)
+        {
+            //Display parse exception
+            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
+        }
+        return userGroups;
     }
 
     /**

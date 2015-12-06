@@ -64,6 +64,9 @@ public class JoinGroupActivity extends Activity
     }
 
     @Override
+    /**
+     * Click event for join group listview item
+     */
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
         //Check if user is logged in
