@@ -51,6 +51,7 @@
     <!-- Due Date Picker -->
     <DatePicker
         android:id="@+id/dpChoreDatePicker"
+        android:calendarViewShown="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></DatePicker>
 
