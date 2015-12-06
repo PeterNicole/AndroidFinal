@@ -10,11 +10,13 @@
     <fragment style="@style/FragmentStyle"
         android:layout_weight="1"
         android:id="@+id/current_groups_list_fragment"
-        android:name="com.example.ndpt.chorescore.CurrentGroupsListFragment" />
+        android:name="com.example.ndpt.chorescore.CurrentGroupsListFragment"
+        tools:layout="@layout/fragment_current_groups_list" />
 
     <fragment style="@style/FragmentStyle"
         android:layout_weight="1"
         android:id="@+id/current_groups_buttons_fragment"
-        android:name="com.example.ndpt.chorescore.CurrentGroupsButtonsFragment" />
+        android:name="com.example.ndpt.chorescore.CurrentGroupsButtonsFragment"
+        tools:layout="@layout/fragment_current_groups_buttons" />
 
 </LinearLayout>

@@ -94,10 +94,11 @@ public class UserManager
     }
 
     /**
-     * Checks if a user is current logged in, if not redirects to login page
-     * @param activity current activity
+     * Checks if current user is logged in, returns a user if they are, redirects to login page if not
+     * @param activity
+     * @return ParseUser object for current user
      */
-    static public void CheckCachedUser(Activity activity)
+    static public ParseUser CheckCachedUser(Activity activity)
     {
         ParseUser currentUser = ParseUser.getCurrentUser();
 
@@ -107,6 +108,8 @@ public class UserManager
             //Prompt login
             TransitionManager.ActivityTransition(activity,LoginActivity.class);
         }
+
+        return currentUser;
     }
 
     /**

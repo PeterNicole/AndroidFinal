@@ -88,6 +88,7 @@
     <string name="error_group_name_length">Group name must be at least \u0020</string>
     <string name="error_characters_long">\u0020 characters long.</string>
     <string name="error_group_name_taken">Group name in use</string>
+    <string name="error_already_in_group">You have already joined this group.</string>
 
     <!-- Log out -->
     <string name="logout_success">Logged out</string>

@@ -2,12 +2,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ndpt.chorescore.CurrentGroupsListFragment">
+    tools:context="com.example.ndpt.chorescore.CurrentGroupsListFragment"
+    android:orientation="vertical">
 
     <TextView style="@style/TextViewStyle"
         android:text="@string/current_groups"
         android:id="@+id/tvCurrentGroupsLabel"/>
 
-    // List view of groups the user currently belongs to
+    <ListView
+        android:id="@+id/lv_current_groups"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
 
 </LinearLayout>

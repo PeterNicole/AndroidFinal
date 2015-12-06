@@ -2,9 +2,11 @@ package com.example.ndpt.chorescore;
 import android.app.Activity;
 import android.widget.Toast;
 
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +69,9 @@ public class GroupManager
 
             //Save the parse object
             group.saveInBackground();
+
+            //Add admin to the group as a member
+            JoinGroup(adminId,group.getObjectId(),activity);
         }
 
         else
@@ -117,7 +122,7 @@ public class GroupManager
             //Add each group to the array list
             for (ParseObject p: result)
             {
-                groupId = p.getString("objectId");
+                groupId = p.getObjectId();
                 admin = p.getString("admin");
                 name = p.getString("name");
                 groups.add(new Group(groupId,admin,name));
@@ -131,5 +136,131 @@ public class GroupManager
         }
 
         return groups;
+    }
+
+    /**
+     * Returns a list of all the groups a user belongs to
+     * @param userId
+     * @return
+     */
+    public static ArrayList<String> RetrieveUserGroupIds(String userId, Activity activity)
+    {
+        ArrayList<String> groupIds = new ArrayList<String>();
+
+        try
+        {
+            //Query the parse database
+            ParseQuery<ParseObject> groupQuery = ParseQuery.getQuery("UserGroup");
+            groupQuery.whereContains("userId", userId );
+            List<ParseObject> result = groupQuery.find();
+
+            //Add each group to the array list
+            for (ParseObject p: result)
+            {
+                groupIds.add(p.getString("groupId"));
+            }
+        }
+        catch (ParseException e)
+        {
+            //Display parse exception
+            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        return groupIds;
+    }
+
+    /**
+     * Returns a list of groups for the specified user
+     * @param userId
+     * @param activity
+     * @return list of user grooups
+     */
+    public static ArrayList<Group> RetrieveUserGroups(String userId, Activity activity)
+    {
+        ArrayList<String> groupIds = RetrieveUserGroupIds(userId,activity);
+        ArrayList<Group> userGroups = new ArrayList<Group>();
+        try
+        {
+            //Query the parse database
+            ParseQuery<ParseObject> groupQuery = ParseQuery.getQuery("Group");
+            groupQuery.whereContainedIn("objectId", groupIds);
+
+            List<ParseObject> result = groupQuery.find();
+
+            //Variables for creating group object from parse result
+            String groupId ="";
+            String admin ="";
+            String name = "";
+
+            //Add each group to the array list
+            for (ParseObject p: result)
+            {
+                groupId = p.getObjectId();
+                admin = p.getString("admin");
+                name = p.getString("name");
+                userGroups.add(new Group(groupId,admin,name));
+            }
+        }
+        catch (ParseException e)
+        {
+            //Display parse exception
+            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
+        }
+        return userGroups;
+    }
+
+    /**
+     * Adds the specified user to the specified group
+     * @param groupId
+     * @param userId
+     */
+    public static void JoinGroup( String userId,String groupId, Activity activity)
+    {
+        ArrayList<String> currentUserGroups = RetrieveUserGroupIds(userId, activity);
+
+        //Check if the user is already a part of this group
+        if(currentUserGroups.contains(groupId))
+        {
+            //User already part of this group
+            Toast toast = Toast.makeText(activity,activity.getString(R.string.error_already_in_group),Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        //Add the group
+        else
+        {
+            //Initialize the parse object for UserGroup
+            ParseObject userGroup = new ParseObject("UserGroup");
+            userGroup.put("userId",userId);
+            userGroup.put("groupId",groupId);
+            userGroup.put("points", 0);
+
+            //Save the parse object
+            userGroup.saveInBackground();
+
+            //Set the joined group to the users default group
+            SetUserDefaultGroup(groupId, activity);
+        }
+    }
+
+    /**
+     * Sets the default group for the current user and group
+     * @param groupId
+     * @param activity
+     */
+    public static void SetUserDefaultGroup( String groupId, Activity activity)
+    {
+        //Get the current user, redirect if noone logged in
+        ParseUser currentUser = UserManager.CheckCachedUser(activity);
+
+        if(currentUser != null)
+        {
+            //Set the current users group id
+            currentUser.put("defaultGroupId", groupId);
+
+            currentUser.saveInBackground();
+        }
     }
 }
