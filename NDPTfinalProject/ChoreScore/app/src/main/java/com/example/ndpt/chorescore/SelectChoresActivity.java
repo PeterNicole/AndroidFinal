@@ -29,6 +29,7 @@ public class SelectChoresActivity extends Activity
     private SeekBar seekBar;
     private DatePicker datePicker;
     private Button addChoreButton;
+    private TextView tvDueDate;
 
     private final Integer DESCRIPTION_MIN_LENGTH = 6;
     private final Integer DESCRIPTION_MAX_LENGTH = 25;
@@ -72,8 +73,17 @@ public class SelectChoresActivity extends Activity
         datePicker = (DatePicker)findViewById(R.id.dpChoreDatePicker);
         addChoreButton = (Button)findViewById(R.id.btnSelectChoresAdd);
         etDescription = (EditText)findViewById(R.id.etAddChoreDescription);
+        tvDueDate = (TextView)findViewById(R.id.tvDueDate);
         final Activity activity = this;
 
+        //Set the minimum date to tomorrow
+        Date today = new Date();
+        Calendar minDate = Calendar.getInstance();
+        minDate.setTime(today);
+        minDate.add(Calendar.DATE, 1);
+
+        datePicker.setMinDate(minDate.getTime().getTime());
+        
         //Initialize the seekbar text
         tvSeekbar.setText(Integer.toString(seekBar.getProgress()));
 
