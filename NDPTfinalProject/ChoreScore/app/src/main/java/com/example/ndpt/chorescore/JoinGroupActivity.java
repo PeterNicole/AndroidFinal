@@ -69,11 +69,14 @@ public class JoinGroupActivity extends Activity
         //Check if user is logged in
         ParseUser currentUser = UserManager.CheckCachedUser(this);
 
-        //Get the group selected from the list view
-        Group currentGroup = groups.get(position);
+        if(currentUser != null)
+        {
+            //Get the group selected from the list view
+            Group currentGroup = groups.get(position);
 
-        //Join the selected group
-        GroupManager.JoinGroup(currentUser.getObjectId(),currentGroup.getGroupId(),this);
+            //Join the selected group
+            GroupManager.JoinGroup(currentUser.getObjectId(),currentGroup.getGroupId(),this);
+        }
     }
 
     /**

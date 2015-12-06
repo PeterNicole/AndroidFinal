@@ -2,9 +2,11 @@ package com.example.ndpt.chorescore;
 import android.app.Activity;
 import android.widget.Toast;
 
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -189,11 +191,32 @@ public class GroupManager
             ParseObject userGroup = new ParseObject("UserGroup");
             userGroup.put("userId",userId);
             userGroup.put("groupId",groupId);
-            userGroup.put("points",0);
+            userGroup.put("points", 0);
 
             //Save the parse object
             userGroup.saveInBackground();
-        }
 
+            //Set the joined group to the users default group
+            SetUserDefaultGroup(groupId, activity);
+        }
+    }
+
+    /**
+     * Sets the default group for the current user and group
+     * @param groupId
+     * @param activity
+     */
+    public static void SetUserDefaultGroup( String groupId, Activity activity)
+    {
+        //Get the current user, redirect if noone logged in
+        ParseUser currentUser = UserManager.CheckCachedUser(activity);
+
+        if(currentUser != null)
+        {
+            //Set the current users group id
+            currentUser.put("defaultGroupId", groupId);
+
+            currentUser.saveInBackground();
+        }
     }
 }
