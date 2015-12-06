@@ -132,4 +132,47 @@ public class GroupManager
 
         return groups;
     }
+
+    /**
+     * Returns a list of all the groups a user belongs to
+     * @param userId
+     * @return
+     */
+    public static ArrayList<String> RetrieveUserGroupIds(String userId, Activity activity)
+    {
+        ArrayList<String> groupIds = new ArrayList<String>();
+
+        try
+        {
+            //Query the parse database
+            ParseQuery<ParseObject> groupQuery = ParseQuery.getQuery("UserGroup");
+            groupQuery.whereContains("userId", userId );
+            List<ParseObject> result = groupQuery.find();
+
+            //Add each group to the array list
+            for (ParseObject p: result)
+            {
+                groupIds.add(p.getString("groupId"));
+            }
+        }
+        catch (ParseException e)
+        {
+            //Display parse exception
+            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        return groupIds;
+    }
+
+    /**
+     * Adds the specified user to the specified group
+     * @param groupId
+     * @param userId
+     */
+    public static void JoinGroup( String userId,String groupId)
+    {
+
+
+    }
 }
