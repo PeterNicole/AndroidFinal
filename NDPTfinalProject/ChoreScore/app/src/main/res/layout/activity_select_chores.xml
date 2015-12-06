@@ -10,12 +10,14 @@
     <fragment style="@style/FragmentStyle"
         android:name="com.example.ndpt.chorescore.SelectChoresListviewFragment"
         android:layout_weight="7"
-        android:id="@+id/select_chores_listview" />
+        android:id="@+id/select_chores_listview"
+        tools:layout="@layout/fragment_select_chores_listview" />
 
     <fragment style="@style/FragmentStyle"
         android:name="com.example.ndpt.chorescore.SelectChoresButtonsFragment"
         android:layout_weight="1"
-        android:id="@+id/select_chores_buttons" />
+        android:id="@+id/select_chores_buttons"
+        tools:layout="@layout/fragment_select_chores_buttons" />
 
     <fragment style="@style/FragmentStyle"
         android:layout_weight="1"
