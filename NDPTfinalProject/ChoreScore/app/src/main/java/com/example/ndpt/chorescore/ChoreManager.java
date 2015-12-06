@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -29,19 +30,34 @@ public class ChoreManager
      */
     public static void createChore(String groupId, String description, Date dueDate, int points, Activity activity)
     {
-        //Initialize the parse object
-        ParseObject chore = new ParseObject("Chore");
-        chore.put("groupId", groupId);
-        chore.put("description", description);
-        chore.put("dueDate", dueDate);
-        chore.put("points", points);
+        Group currentGroup = GroupManager.RetrieveGroup(groupId,activity);
+        ParseUser currentUser = UserManager.CheckCachedUser(activity);
 
-        //Save the parse object
-        chore.saveInBackground();
+        //Ensure current user is the group admin
+        if(currentUser.getObjectId() == currentGroup.getAdminId())
+        {
+            //Initialize the parse object
+            ParseObject chore = new ParseObject("Chore");
+            chore.put("groupId", groupId);
+            chore.put("description", description);
+            chore.put("dueDate", dueDate);
+            chore.put("points", points);
 
-        //Show success message
-        Toast toast = Toast.makeText(activity, activity.getString(R.string.success_add_chore), Toast.LENGTH_LONG);
-        toast.show();
+            //Save the parse object
+            chore.saveInBackground();
+
+            //Show success message
+            Toast toast = Toast.makeText(activity, activity.getString(R.string.success_add_chore), Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        else
+        {
+            //Show error message
+            Toast toast = Toast.makeText(activity, activity.getString(R.string.error_add_chore), Toast.LENGTH_LONG);
+            toast.show();
+        }
+
     }
 
     public static ArrayList<Chore> getPendingGroupChores(String groupId, Activity activity)
