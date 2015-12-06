@@ -4,7 +4,10 @@
     tools:context="com.example.ndpt.chorescore.PendingChoresListviewFragment"
     android:orientation="vertical">
 
-    // insert listview of pending chores for default group
-    // clicking a listview item will navigate to the chore details page for the selected item
+    <ListView
+        android:id="@+id/lv_pending_chores"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
 
 </LinearLayout>

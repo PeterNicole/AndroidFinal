@@ -33,31 +33,34 @@ public class ChoreManager
         Group currentGroup = GroupManager.RetrieveGroup(groupId,activity);
         ParseUser currentUser = UserManager.CheckCachedUser(activity);
 
-        //Ensure current user is the group admin
-        if(currentUser.getObjectId().equals(currentGroup.getAdminId()))
+        if(currentUser != null)
         {
-            //Initialize the parse object
-            ParseObject chore = new ParseObject("Chore");
-            chore.put("groupId", groupId);
-            chore.put("description", description);
-            chore.put("dueDate", dueDate);
-            chore.put("points", points);
+            //Ensure current user is the group admin
+            if(currentUser.getObjectId().equals(currentGroup.getAdminId()))
+            {
+                //Initialize the parse object
+                ParseObject chore = new ParseObject("Chore");
+                chore.put("groupId", groupId);
+                chore.put("description", description);
+                chore.put("dueDate", dueDate);
+                chore.put("points", points);
+                chore.put("isApproved",false);
 
-            //Save the parse object
-            chore.saveInBackground();
+                //Save the parse object
+                chore.saveInBackground();
 
-            //Show success message
-            Toast toast = Toast.makeText(activity, activity.getString(R.string.success_add_chore), Toast.LENGTH_LONG);
-            toast.show();
+                //Show success message
+                Toast toast = Toast.makeText(activity, activity.getString(R.string.success_add_chore), Toast.LENGTH_LONG);
+                toast.show();
+            }
+
+            else
+            {
+                //Show error message
+                Toast toast = Toast.makeText(activity, activity.getString(R.string.error_add_chore), Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
-
-        else
-        {
-            //Show error message
-            Toast toast = Toast.makeText(activity, activity.getString(R.string.error_add_chore), Toast.LENGTH_LONG);
-            toast.show();
-        }
-
     }
 
     public static ArrayList<Chore> getPendingGroupChores(String groupId, Activity activity)

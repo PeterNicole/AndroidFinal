@@ -83,7 +83,7 @@ public class SelectChoresActivity extends Activity
         minDate.add(Calendar.DATE, 1);
 
         datePicker.setMinDate(minDate.getTime().getTime());
-        
+
         //Initialize the seekbar text
         tvSeekbar.setText(Integer.toString(seekBar.getProgress()));
 
