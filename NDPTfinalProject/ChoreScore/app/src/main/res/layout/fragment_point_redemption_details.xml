@@ -29,7 +29,7 @@
         <TextView style="@style/TextViewStyle"
             android:id="@+id/tv_point_redemption_point_label"
             android:textSize="20sp"
-            android:text="@string/points"/>
+            android:text="@string/chore_points"/>
 
         <TextView style="@style/TextViewStyle"
             android:textSize="20sp"

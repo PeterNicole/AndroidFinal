@@ -34,7 +34,7 @@ public class ChoreManager
         ParseUser currentUser = UserManager.CheckCachedUser(activity);
 
         //Ensure current user is the group admin
-        if(currentUser.getObjectId() == currentGroup.getAdminId())
+        if(currentUser.getObjectId().equals(currentGroup.getAdminId()))
         {
             //Initialize the parse object
             ParseObject chore = new ParseObject("Chore");

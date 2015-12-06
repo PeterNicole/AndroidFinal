@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ndpt.chorescore.SelectChoresCreateFormFragment"
+    android:orientation="vertical">
+
+    <!-- Description -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chore_description"/>
+
+        <EditText
+            android:id="@+id/etAddChoreDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- Points Label -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chore_points"/>
+        <TextView
+            android:id="@+id/tvChorePointSeekBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!-- Points Seek Bar -->
+    <SeekBar
+        android:id="@+id/sbChorePointSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="1000"/>
+
+    <!-- Due Date Label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chore_due_date"/>
+
+    <!-- Due Date Picker -->
+    <DatePicker
+        android:id="@+id/dpChoreDatePicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></DatePicker>
+
+
+</LinearLayout>

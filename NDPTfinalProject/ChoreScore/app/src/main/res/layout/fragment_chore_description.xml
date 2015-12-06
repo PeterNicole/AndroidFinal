@@ -30,7 +30,7 @@
         <TextView style="@style/TextViewStyle"
             android:id="@+id/tv_chore_desc_date_label"
             android:textSize="20sp"
-            android:text="@string/due_date"/>
+            android:text="@string/chore_due_date"/>
 
         <TextView style="@style/TextViewStyle"
             android:textSize="20sp"
@@ -46,7 +46,7 @@
         <TextView style="@style/TextViewStyle"
             android:id="@+id/tv_chore_desc_points_label"
             android:textSize="20sp"
-            android:text="@string/points"/>
+            android:text="@string/chore_points"/>
 
         <TextView style="@style/TextViewStyle"
             android:textSize="20sp"
