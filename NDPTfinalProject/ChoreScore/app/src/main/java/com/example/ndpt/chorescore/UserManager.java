@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.widget.Toast;
 
 import com.parse.LogInCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -120,7 +119,7 @@ public class UserManager
         ParseUser.getCurrentUser().logOut();
         if(ParseUser.getCurrentUser() == null)
         {
-            Toast toast = Toast.makeText(activity,R.string.logout_success, Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(activity,R.string.success_logout, Toast.LENGTH_LONG);
             toast.show();
         }
     }

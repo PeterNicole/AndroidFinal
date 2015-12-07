@@ -1,6 +1,11 @@
 package com.example.ndpt.chorescore;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +18,8 @@ import android.widget.SimpleAdapter;
 
 import com.parse.ParseUser;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,7 +33,10 @@ import java.util.HashMap;
 public class PendingChoresActivity extends Activity
     implements PendingChoresButtonsFragment.OnFragmentInteractionListener,
     PendingChoresListviewFragment.OnFragmentInteractionListener, AdapterView.OnItemClickListener {
+
+    //Class scope variables
     ArrayList<Chore> chores;
+    Bitmap image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,9 +100,82 @@ public class PendingChoresActivity extends Activity
 
     }
 
+    /**
+     * Listview item click event for pending chore listview
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-        //Chore click
+        //Pending chore click dialogue box
+        final AlertDialog.Builder choreSubmissionDialog = new AlertDialog.Builder(this);
+
+        //Initialize the dialog box
+        choreSubmissionDialog.setTitle(getString(R.string.dialog_submit_chore_title))
+                .setMessage(getString(R.string.dialog_submit_chore_message))
+                .setPositiveButton(getString(R.string.dialog_okay), new DialogInterface.OnClickListener()
+                {
+                    //Okay click event
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        setImageIntent();
+                    }
+                })
+                .setNegativeButton(getString(R.string.dialog_cancel), new DialogInterface.OnClickListener()
+                {
+                    //Cancel click event
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        //Do nothing
+                    }
+                })
+                .show();
+    }
+
+    /**
+     * Creates intent for choosing an image to customize the game token images
+     */
+    private void setImageIntent()
+    {
+        try
+        {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select picture"),0);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error on setImage: " + e.getMessage());
+        }
+    }
+
+    /**
+     * onActivityResult used to set image variable after it has been selected in setImage
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if(resultCode == RESULT_OK)
+        {
+            try
+            {
+                Uri selectImageUri = data.getData();
+                InputStream is = getContentResolver().openInputStream(selectImageUri);
+                image = BitmapFactory.decodeStream(is);
+            }
+
+            catch (FileNotFoundException e)
+            {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

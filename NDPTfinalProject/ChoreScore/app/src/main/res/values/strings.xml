@@ -97,9 +97,13 @@
 
     <!-- Success messages -->
     <string name="success_add_chore">Chore added!</string>
+    <string name="success_logout">Logged out</string>
 
-    <!-- Log out -->
-    <string name="logout_success">Logged out</string>
+    <!-- Dialog boxes -->
+    <string name="dialog_submit_chore_title">Submit Chore</string>
+    <string name="dialog_submit_chore_message">Upload a picture showing your completed task to earn points.</string>
+    <string name="dialog_okay">Okay</string>
+    <string name="dialog_cancel">Cancel</string>
 
     
 
