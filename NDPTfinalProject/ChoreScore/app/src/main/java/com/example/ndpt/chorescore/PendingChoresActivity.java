@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -120,21 +121,17 @@ public class PendingChoresActivity extends Activity
         //Initialize the dialog box
         choreSubmissionDialog.setTitle(getString(R.string.dialog_submit_chore_title))
             .setMessage(getString(R.string.dialog_submit_chore_message))
-            .setPositiveButton(getString(R.string.dialog_okay), new DialogInterface.OnClickListener()
-            {
+            .setPositiveButton(getString(R.string.dialog_okay), new DialogInterface.OnClickListener() {
                 //Okay click event
                 @Override
-                public void onClick(DialogInterface dialog, int which)
-                {
+                public void onClick(DialogInterface dialog, int which) {
                     setImageIntent(positionFinal);
                 }
             })
-            .setNegativeButton(getString(R.string.dialog_cancel), new DialogInterface.OnClickListener()
-            {
+            .setNegativeButton(getString(R.string.dialog_cancel), new DialogInterface.OnClickListener() {
                 //Cancel click event
                 @Override
-                public void onClick(DialogInterface dialog, int which)
-                {
+                public void onClick(DialogInterface dialog, int which) {
                     //Do nothing
                 }
             })
@@ -148,9 +145,7 @@ public class PendingChoresActivity extends Activity
     {
         try
         {
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(Intent.createChooser(intent, "Select picture"), position);
         }
         catch (Exception e)
@@ -175,16 +170,17 @@ public class PendingChoresActivity extends Activity
         {
             try
             {
-                //Get image from intent
-                Uri selectImageUri = data.getData();
-                InputStream is = getContentResolver().openInputStream(selectImageUri);
-                image = BitmapFactory.decodeStream(is);
+                Bundle extras = data.getExtras();
+                image = (Bitmap)extras.get("data");
 
-                //Update the chore with the image and the users id
-                ChoreManager.UpdateChoreState(chore.getChoreId(), currentUser.getObjectId(), false, image, activity);
+                if(image!= null)
+                {
+                    //Update the chore with the image and the users id
+                    ChoreManager.UpdateChoreState(chore.getChoreId(), currentUser.getObjectId(), false, image, activity);
+                }
             }
 
-            catch (FileNotFoundException e)
+            catch (Exception e)
             {
                 System.out.println(e.getMessage());
             }

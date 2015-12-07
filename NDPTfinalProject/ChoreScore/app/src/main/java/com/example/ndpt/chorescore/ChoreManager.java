@@ -78,6 +78,7 @@ public class ChoreManager
             ParseQuery<ParseObject> choreQuery  = ParseQuery.getQuery("Chore");
             choreQuery.whereContains("groupId", groupId);
             choreQuery.whereGreaterThanOrEqualTo("dueDate", currentDate);
+            choreQuery.whereDoesNotExist("completerId");
 
             List<ParseObject> result = choreQuery.find();
 
@@ -137,10 +138,10 @@ public class ChoreManager
             {
                 //Prepare the image file for upload
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                proofImage.compress(Bitmap.CompressFormat.PNG,100,stream);
+                proofImage.compress(Bitmap.CompressFormat.JPEG,1000,stream);
                 byte[] image = stream.toByteArray();
 
-                ParseFile imageFile = new ParseFile(choreId + "proof.png",image);
+                ParseFile imageFile = new ParseFile(choreId + "-proof.png",image);
                 imageFile.saveInBackground();
 
                 //Upload the image
