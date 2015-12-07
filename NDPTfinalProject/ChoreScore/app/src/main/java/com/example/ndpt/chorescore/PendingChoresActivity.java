@@ -18,6 +18,7 @@ import android.widget.SimpleAdapter;
 
 import com.parse.ParseUser;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -110,44 +111,47 @@ public class PendingChoresActivity extends Activity
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
+        //Initialize variables for submission event
+        final int positionFinal = position;
+
         //Pending chore click dialogue box
         final AlertDialog.Builder choreSubmissionDialog = new AlertDialog.Builder(this);
 
         //Initialize the dialog box
         choreSubmissionDialog.setTitle(getString(R.string.dialog_submit_chore_title))
-                .setMessage(getString(R.string.dialog_submit_chore_message))
-                .setPositiveButton(getString(R.string.dialog_okay), new DialogInterface.OnClickListener()
+            .setMessage(getString(R.string.dialog_submit_chore_message))
+            .setPositiveButton(getString(R.string.dialog_okay), new DialogInterface.OnClickListener()
+            {
+                //Okay click event
+                @Override
+                public void onClick(DialogInterface dialog, int which)
                 {
-                    //Okay click event
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        setImageIntent();
-                    }
-                })
-                .setNegativeButton(getString(R.string.dialog_cancel), new DialogInterface.OnClickListener()
+                    setImageIntent(positionFinal);
+                }
+            })
+            .setNegativeButton(getString(R.string.dialog_cancel), new DialogInterface.OnClickListener()
+            {
+                //Cancel click event
+                @Override
+                public void onClick(DialogInterface dialog, int which)
                 {
-                    //Cancel click event
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        //Do nothing
-                    }
-                })
-                .show();
+                    //Do nothing
+                }
+            })
+            .show();
     }
 
     /**
      * Creates intent for choosing an image to customize the game token images
      */
-    private void setImageIntent()
+    private void setImageIntent(int position)
     {
         try
         {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Select picture"),0);
+            startActivityForResult(Intent.createChooser(intent, "Select picture"), position);
         }
         catch (Exception e)
         {
@@ -163,13 +167,21 @@ public class PendingChoresActivity extends Activity
      */
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if(resultCode == RESULT_OK)
+        ParseUser currentUser = UserManager.CheckCachedUser(this);
+        Activity activity = this;
+        Chore chore = chores.get(requestCode);
+
+        if(resultCode == RESULT_OK && currentUser != null)
         {
             try
             {
+                //Get image from intent
                 Uri selectImageUri = data.getData();
                 InputStream is = getContentResolver().openInputStream(selectImageUri);
                 image = BitmapFactory.decodeStream(is);
+
+                //Update the chore with the image and the users id
+                ChoreManager.UpdateChoreState(chore.getChoreId(), currentUser.getObjectId(), false, image, activity);
             }
 
             catch (FileNotFoundException e)
