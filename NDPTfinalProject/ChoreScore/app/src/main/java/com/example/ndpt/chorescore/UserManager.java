@@ -112,6 +112,16 @@ public class UserManager
     }
 
     /**
+     * Returns the user name of a given user
+     * @param userId
+     * @return
+     */
+    static public String getUserName(String userId)
+    {
+        return "user manager method not done lulz";
+    }
+
+    /**
      * Logs out the current user
      */
     static public void LogoutUser(Activity activity)

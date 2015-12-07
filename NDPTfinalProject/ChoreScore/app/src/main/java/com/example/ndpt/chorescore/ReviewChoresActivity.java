@@ -81,8 +81,7 @@ public class ReviewChoresActivity extends Activity
                 HashMap<String,String> map = new HashMap<String, String>();
                 map.put("desc",c.getDescription());
                 map.put("points",Integer.toString(c.getPoints()));
-                map.put("name", "bobby");
-                //map.put("name", c.getDueDate().toString());
+                map.put("name", UserManager.getUserName(c.getCompleterId()));
                 data.add(map);
             }
 
