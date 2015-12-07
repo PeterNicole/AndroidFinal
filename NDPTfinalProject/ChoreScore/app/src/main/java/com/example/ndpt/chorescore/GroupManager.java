@@ -88,7 +88,7 @@ public class GroupManager
      */
     public static void DeleteGroup(String groupId)
     {
-
+        //TODO
     }
 
     /**
@@ -236,6 +236,7 @@ public class GroupManager
             userGroup.put("userId",userId);
             userGroup.put("groupId",groupId);
             userGroup.put("points", 0);
+            userGroup.put("cumulativePoints", 0);
 
             //Save the parse object
             userGroup.saveInBackground();

@@ -1,23 +1,21 @@
 package com.example.ndpt.chorescore;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SelectChoresListviewFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SelectChoresListviewFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * ReviewChoresListviewFragment.java
+ * Created by Peter Thomson on 06/12/2015.
+ *
+ * A simple {@link Fragment} subclass for displaying the chores to be reviewed for the group
  */
-public class SelectChoresListviewFragment extends Fragment {
+public class ReviewChoresListviewFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,11 +33,11 @@ public class SelectChoresListviewFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SelectChoresListviewFragment.
+     * @return A new instance of fragment PendingChoresListviewFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SelectChoresListviewFragment newInstance(String param1, String param2) {
-        SelectChoresListviewFragment fragment = new SelectChoresListviewFragment();
+    public static ReviewChoresListviewFragment newInstance(String param1, String param2) {
+        ReviewChoresListviewFragment fragment = new ReviewChoresListviewFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -47,7 +45,7 @@ public class SelectChoresListviewFragment extends Fragment {
         return fragment;
     }
 
-    public SelectChoresListviewFragment() {
+    public ReviewChoresListviewFragment() {
         // Required empty public constructor
     }
 
@@ -59,12 +57,16 @@ public class SelectChoresListviewFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    private void controlCreation(View v){
+        // on list view item click, navigate to Chore Details page for selected item
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_select_chores_listview, container, false);
+        View v = inflater.inflate(R.layout.fragment_review_chores_listview, container, false);
+        controlCreation(v);
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

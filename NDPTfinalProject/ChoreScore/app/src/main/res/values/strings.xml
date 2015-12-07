@@ -44,10 +44,11 @@
     <string name="search_results">Search Results:</string>
     <string name="group_name">Group Name:</string>
     <string name="title">Name:</string>
-    <string name="points">Points:</string>
-    <string name="due_date">Due Date:</string>
     <string name="redemption_amount">Amount to Redeem:</string>
     <string name="redeem">Redeem Now!</string>
+    <string name="chore_description">Description:</string>
+    <string name="chore_points">Points:</string>
+    <string name="chore_due_date">Due Date:</string>
 
 
     <!-- Activity Titles -->
@@ -65,12 +66,14 @@
     <string name="title_activity_chore_details">Chore Details</string>
     <string name="title_activity_point_summary">Point Summary</string>
     <string name="title_activity_point_redemption">Point Redemption</string>
+    <string name="title_activity_review_chores">Review Chores</string>
 
     <!-- Menu Item Titles -->
     <string name ="group_menu_title">Groups</string>
     <string name ="logout_menu_title">Logout</string>
     <string name ="chores_menu_title">Chores</string>
     <string name ="points_menu_title">Points</string>
+    <string name ="chore_review_menu_title">Review Chores</string>
 
 
     <!-- Edit Text -->
@@ -89,9 +92,20 @@
     <string name="error_characters_long">\u0020 characters long.</string>
     <string name="error_group_name_taken">Group name in use</string>
     <string name="error_already_in_group">You have already joined this group.</string>
+    <string name="error_add_chore">You are not authorized to create a chore.</string>
+    <string name="error_description_length">Description must be between </string>
+    <string name="and">\u0020 and \u0020</string>
+    <string name="error_date_before">Due date must not be before the current date.</string>
 
-    <!-- Log out -->
-    <string name="logout_success">Logged out</string>
+    <!-- Success messages -->
+    <string name="success_add_chore">Chore added!</string>
+    <string name="success_logout">Logged out</string>
+
+    <!-- Dialog boxes -->
+    <string name="dialog_submit_chore_title">Submit Chore</string>
+    <string name="dialog_submit_chore_message">Upload a picture showing your completed task to earn points.</string>
+    <string name="dialog_okay">Okay</string>
+    <string name="dialog_cancel">Cancel</string>
 
     
 

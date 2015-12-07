@@ -12,10 +12,4 @@
         android:layout_weight="7"
         android:id="@+id/pending_chores_listview" />
 
-    // these buttons should only show if the user is admin for the group
-    <fragment style="@style/FragmentStyle"
-        android:name="com.example.ndpt.chorescore.PendingChoresButtonsFragment"
-        android:layout_weight="1"
-        android:id="@+id/pending_chores_buttons" />
-
 </LinearLayout>
