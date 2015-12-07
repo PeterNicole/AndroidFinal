@@ -66,12 +66,14 @@
     <string name="title_activity_chore_details">Chore Details</string>
     <string name="title_activity_point_summary">Point Summary</string>
     <string name="title_activity_point_redemption">Point Redemption</string>
+    <string name="title_activity_review_chores">Review Chores</string>
 
     <!-- Menu Item Titles -->
     <string name ="group_menu_title">Groups</string>
     <string name ="logout_menu_title">Logout</string>
     <string name ="chores_menu_title">Chores</string>
     <string name ="points_menu_title">Points</string>
+    <string name ="chore_review_menu_title">Review Chores</string>
 
 
     <!-- Edit Text -->

@@ -65,6 +65,12 @@ public class ChoreManager
         }
     }
 
+    /**
+     * Returns a list of all chores in the group that are still available for completion
+     * @param groupId
+     * @param activity
+     * @return ArrayList of Chore objects
+     */
     public static ArrayList<Chore> getPendingGroupChores(String groupId, Activity activity)
     {
         ArrayList<Chore> chores = new ArrayList<Chore>();
@@ -97,6 +103,58 @@ public class ChoreManager
                 description = p.getString("description");
                 dueDate = p.getDate("dueDate");
                 points = p.getInt("points");
+                chores.add(new Chore(choreId,groupId,description,dueDate,points,completerId,isApproved,proofImage));
+            }
+        }
+
+        catch (com.parse.ParseException e)
+        {
+            //Display parse exception
+            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        return chores;
+    }
+
+    /**
+     * Gets a list of all chores which have been submitted as complete, to be approved by the group admin
+     * @param groupId
+     * @param activity
+     * @return ArrayList of Chore objects
+     */
+    public static ArrayList<Chore> getSubmittedGroupChores(String groupId, Activity activity)
+    {
+        ArrayList<Chore> chores = new ArrayList<Chore>();
+
+        try
+        {
+
+            //Query the parse database
+            ParseQuery<ParseObject> choreQuery  = ParseQuery.getQuery("Chore");
+            choreQuery.whereContains("groupId", groupId);
+            choreQuery.whereExists("completerId");
+            choreQuery.whereEqualTo("isApproved", false);
+
+            List<ParseObject> result = choreQuery.find();
+
+            //Initialize variables for creating pending chore objects
+            String choreId;
+            String description;
+            Date dueDate;
+            int points;
+            String completerId;
+            Boolean isApproved;
+            Bitmap proofImage = null;
+
+            for (ParseObject p:result)
+            {
+                choreId = p.getObjectId();
+                description = p.getString("description");
+                dueDate = p.getDate("dueDate");
+                points = p.getInt("points");
+                completerId = p.getString("completerId");
+                isApproved = p.getBoolean("isApproved");
                 chores.add(new Chore(choreId,groupId,description,dueDate,points,completerId,isApproved,proofImage));
             }
         }
