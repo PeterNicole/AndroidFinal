@@ -138,12 +138,10 @@ public class ReviewChoresActivity extends Activity
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        ChoreManager.UpdateUserPoints(chore.getCompleterId(), chore.getGroupId(),chore.getPoints(),activity);
-                        ChoreManager.UpdateChoreState(chore.getChoreId(),chore.getCompleterId(),true,null,activity,new Runnable()
-                        {
+                        ChoreManager.UpdateUserPoints(chore.getCompleterId(), chore.getGroupId(), chore.getPoints(), activity);
+                        ChoreManager.UpdateChoreState(chore.getChoreId(), chore.getCompleterId(), true, null, activity, new Runnable() {
                             @Override
-                            public void run()
-                            {
+                            public void run() {
                                 DisplayChores();
                             }
                         });
@@ -155,7 +153,14 @@ public class ReviewChoresActivity extends Activity
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        ChoreManager.UpdateChoreState(chore.getChoreId(), null, false, null, activity, null);
+                        ChoreManager.UpdateChoreState(chore.getChoreId(), null, false, null, activity, new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                DisplayChores();
+                            }
+                        });
                     }
                 });
 
