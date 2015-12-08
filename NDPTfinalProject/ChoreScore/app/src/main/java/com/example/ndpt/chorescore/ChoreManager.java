@@ -250,7 +250,9 @@ public class ChoreManager
                            }
                        }
                    });
-               } else {
+               }
+               else
+               {
                    Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
                    toast.show();
                }

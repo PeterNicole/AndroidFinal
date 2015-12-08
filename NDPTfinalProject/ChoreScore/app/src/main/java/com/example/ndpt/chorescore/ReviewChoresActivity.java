@@ -141,7 +141,8 @@ public class ReviewChoresActivity extends Activity
                         ChoreManager.UpdateUserPoints(chore.getCompleterId(), chore.getGroupId(), chore.getPoints(), activity);
                         ChoreManager.UpdateChoreState(chore.getChoreId(), chore.getCompleterId(), chore.getCompleterName(), true, null, activity, new Runnable() {
                             @Override
-                            public void run() {
+                            public void run()
+                            {
                                 DisplayChores();
                             }
                         });

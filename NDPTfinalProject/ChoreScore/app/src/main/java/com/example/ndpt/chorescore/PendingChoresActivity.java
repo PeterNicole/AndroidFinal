@@ -163,12 +163,13 @@ public class PendingChoresActivity extends Activity
     {
         ParseUser currentUser = UserManager.CheckCachedUser(this);
         Activity activity = this;
-        Chore chore = chores.get(requestCode);
+
 
         if(resultCode == RESULT_OK && currentUser != null)
         {
             try
             {
+                Chore chore = chores.get(requestCode);
                 Bundle extras = data.getExtras();
                 image = (Bitmap)extras.get("data");
 
@@ -187,6 +188,7 @@ public class PendingChoresActivity extends Activity
 
             catch (Exception e)
             {
+                DisplayChores();
                 System.out.println(e.getMessage());
             }
         }
