@@ -17,6 +17,7 @@ public class Chore
     private Date dueDate;
     private int points;
     private String  completerId;
+    private String completerName;
     private Boolean isApproved;
     private Bitmap proofImage;
 
@@ -32,7 +33,7 @@ public class Chore
      * @param isApproved
      * @param proofImage
      */
-    public Chore(String choreId, String groupId, String description, Date dueDate, int points, String completerId, Boolean isApproved, Bitmap proofImage)
+    public Chore(String choreId, String groupId, String description, Date dueDate, int points, String completerId,String completerName, Boolean isApproved, Bitmap proofImage)
     {
         this.setChoreId(choreId);
         this.setGroupId(groupId);
@@ -40,8 +41,10 @@ public class Chore
         this.setDueDate(dueDate);
         this.setPoints(points);
         this.setCompleterId(completerId);
+        this.setCompleterName(completerName);
         this.setIsApproved(isApproved);
         this.setProofImage(proofImage);
+
     }
 
     public String getChoreId() {
@@ -106,5 +109,13 @@ public class Chore
 
     public void setProofImage(Bitmap proofImage) {
         this.proofImage = proofImage;
+    }
+
+    public String getCompleterName() {
+        return completerName;
+    }
+
+    public void setCompleterName(String completerName) {
+        this.completerName = completerName;
     }
 }

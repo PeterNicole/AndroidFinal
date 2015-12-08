@@ -175,7 +175,7 @@ public class PendingChoresActivity extends Activity
                 if(image!= null)
                 {
                     //Update the chore with the image and the users id
-                    ChoreManager.UpdateChoreState(chore.getChoreId(), currentUser.getObjectId(), false, image, activity, new Runnable() {
+                    ChoreManager.UpdateChoreState(chore.getChoreId(), currentUser.getObjectId(), currentUser.getUsername(), false, image, activity, new Runnable() {
                         @Override
                         public void run()
                         {

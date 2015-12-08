@@ -96,6 +96,7 @@ public class ChoreManager
             Date dueDate;
             int points;
             String completerId = "";
+            String completerName = "";
             Boolean isApproved = false;
             Bitmap proofImage = null;
 
@@ -105,7 +106,7 @@ public class ChoreManager
                 description = p.getString("description");
                 dueDate = p.getDate("dueDate");
                 points = p.getInt("points");
-                chores.add(new Chore(choreId,groupId,description,dueDate,points,completerId,isApproved,proofImage));
+                chores.add(new Chore(choreId,groupId,description,dueDate,points,completerId,completerName,isApproved,proofImage));
             }
         }
 
@@ -145,6 +146,7 @@ public class ChoreManager
             Date dueDate;
             int points;
             String completerId;
+            String completerName;
             Boolean isApproved;
             Bitmap proofImage = null;
 
@@ -155,8 +157,9 @@ public class ChoreManager
                 dueDate = p.getDate("dueDate");
                 points = p.getInt("points");
                 completerId = p.getString("completerId");
+                completerName = p.getString("completerName");
                 isApproved = p.getBoolean("isApproved");
-                chores.add(new Chore(choreId,groupId,description,dueDate,points,completerId,isApproved,proofImage));
+                chores.add(new Chore(choreId,groupId,description,dueDate,points,completerId,completerName,isApproved,proofImage));
             }
         }
 
@@ -177,7 +180,7 @@ public class ChoreManager
      * @param isApproved
      * @param proofImage
      */
-    public static void UpdateChoreState(final String choreId, final String completerId, final Boolean isApproved, final Bitmap proofImage, final Activity activity, final Runnable callback)
+    public static void UpdateChoreState(final String choreId, final String completerId, final String completerName, final Boolean isApproved, final Bitmap proofImage, final Activity activity, final Runnable callback)
     {
         //Query the parse database for the chore object
         ParseQuery<ParseObject> choreQuery = ParseQuery.getQuery("Chore");
@@ -201,12 +204,14 @@ public class ChoreManager
                    if(completerId == null)
                    {
                        choreObject.remove("completerId");
+                       choreObject.remove("completerName");
                    }
 
                    //Delete completer id if null
                    else
                    {
                        choreObject.put("completerId", completerId);
+                       choreObject.put("completerName", completerName);
                    }
 
                    //Set image if not null
@@ -237,7 +242,6 @@ public class ChoreManager
                                    //Run the callback method after updating
                                    callback.run();
                                }
-
                            }
                            else
                            {

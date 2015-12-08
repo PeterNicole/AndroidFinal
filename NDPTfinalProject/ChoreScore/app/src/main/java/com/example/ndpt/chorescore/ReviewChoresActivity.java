@@ -90,7 +90,7 @@ public class ReviewChoresActivity extends Activity
                 HashMap<String,String> map = new HashMap<String, String>();
                 map.put("desc",c.getDescription());
                 map.put("points",Integer.toString(c.getPoints()));
-                map.put("name", UserManager.getUserName(c.getCompleterId()));
+                map.put("name", c.getCompleterName());
                 data.add(map);
             }
 
@@ -139,7 +139,7 @@ public class ReviewChoresActivity extends Activity
                     public void onClick(DialogInterface dialog, int which)
                     {
                         ChoreManager.UpdateUserPoints(chore.getCompleterId(), chore.getGroupId(), chore.getPoints(), activity);
-                        ChoreManager.UpdateChoreState(chore.getChoreId(), chore.getCompleterId(), true, null, activity, new Runnable() {
+                        ChoreManager.UpdateChoreState(chore.getChoreId(), chore.getCompleterId(), chore.getCompleterName(), true, null, activity, new Runnable() {
                             @Override
                             public void run() {
                                 DisplayChores();
@@ -153,7 +153,7 @@ public class ReviewChoresActivity extends Activity
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        ChoreManager.UpdateChoreState(chore.getChoreId(), null, false, null, activity, new Runnable()
+                        ChoreManager.UpdateChoreState(chore.getChoreId(), null, null, false, null, activity, new Runnable()
                         {
                             @Override
                             public void run()
