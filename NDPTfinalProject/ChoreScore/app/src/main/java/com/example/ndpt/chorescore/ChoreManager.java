@@ -216,6 +216,46 @@ public class ChoreManager
             Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
             toast.show();
         }
+    }
+
+    /**
+     * Updates the users points for a specific userGroup combination
+     * @param userId
+     * @param groupId
+     * @param points amount of points to change (can be negative)
+     */
+    public static void UpdateUserPoints(String userId, String groupId, Integer points, Activity activity)
+    {
+        try
+        {
+            //Query the parse database for the userGroup object
+            ParseQuery<ParseObject> userGroupQuery = ParseQuery.getQuery("UserGroup");
+            userGroupQuery.whereEqualTo("userId", userId);
+            userGroupQuery.whereEqualTo("groupId", groupId);
+
+            //Retrieve the userGroup object from the query result
+            List<ParseObject> result = userGroupQuery.find();
+            ParseObject userGroupObject = result.get(0);
+
+            //Update the chore properties
+            userGroupObject.increment("points", points);
+
+            //Update cumulative points if adding points
+            if(points > 0)
+            {
+                userGroupObject.increment("cumulativePoints", points);
+            }
+
+            //Save object with updated information
+            userGroupObject.saveInBackground();
+        }
+
+        catch (ParseException e)
+        {
+            //Display parse exception
+            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
+        }
 
     }
 }
