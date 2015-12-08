@@ -106,6 +106,10 @@
     <string name="dialog_submit_chore_message">Upload a picture showing your completed task to earn points.</string>
     <string name="dialog_okay">Okay</string>
     <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_approve_chore">Approve</string>
+    <string name="dialog_deny_chore">Deny</string>
+    <string name="dialog_approve_chore_title">Reviewing Chore</string>
+    <string name="dialog_approve_chore_message">Press approve to reward points. Press deny if the chore was not properly completed.</string>
 
     
 
