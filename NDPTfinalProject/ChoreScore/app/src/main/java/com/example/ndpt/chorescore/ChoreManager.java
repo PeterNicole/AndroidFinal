@@ -134,7 +134,7 @@ public class ChoreManager
             ParseQuery<ParseObject> choreQuery  = ParseQuery.getQuery("Chore");
             choreQuery.whereContains("groupId", groupId);
             choreQuery.whereExists("completerId");
-            choreQuery.whereEqualTo("isApproved", false);
+            choreQuery.whereEqualTo("isApproved", null);
 
             List<ParseObject> result = choreQuery.find();
 

@@ -131,7 +131,28 @@ public class ReviewChoresActivity extends Activity
         Group choreGroup = GroupManager.RetrieveGroup(chore.getGroupId(), activity);
         final AlertDialog.Builder choreApprovalDialog = new AlertDialog.Builder(this);
         choreApprovalDialog.setTitle(getString(R.string.dialog_approve_chore_title))
-                .setMessage(getString(R.string.dialog_approve_chore_message));
+                .setMessage(getString(R.string.dialog_approve_chore_message))
+                .setPositiveButton(getString(R.string.dialog_approve_chore), new DialogInterface.OnClickListener()
+                {
+                    //Approve review button click
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        ChoreManager.UpdateUserPoints(chore.getCompleterId(), chore.getGroupId(),chore.getPoints(),activity);
+                        ChoreManager.UpdateChoreState(chore.getChoreId(),chore.getCompleterId(),true,null,activity);
+                        DisplayChores();
+                    }
+                })
+                .setNegativeButton(getString(R.string.dialog_deny_chore), new DialogInterface.OnClickListener()
+                {
+                    //Deny chore button click
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        ChoreManager.UpdateChoreState(chore.getChoreId(),chore.getCompleterId(),false,null,activity);
+                        DisplayChores();
+                    }
+                });
 
         //Ensure current user is the admin of the group
         if(user != null && choreGroup.getAdminId().equals(user.getObjectId()))
