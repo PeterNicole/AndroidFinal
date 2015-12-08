@@ -110,22 +110,21 @@ public class PendingChoresActivity extends Activity
      * @param id
      */
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    public void onItemClick(AdapterView<?> parent, View view, final int position, long id)
     {
-        //Initialize variables for submission event
-        final int positionFinal = position;
-
         //Pending chore click dialogue box
         final AlertDialog.Builder choreSubmissionDialog = new AlertDialog.Builder(this);
 
         //Initialize the dialog box
         choreSubmissionDialog.setTitle(getString(R.string.dialog_submit_chore_title))
             .setMessage(getString(R.string.dialog_submit_chore_message))
-            .setPositiveButton(getString(R.string.dialog_okay), new DialogInterface.OnClickListener() {
+            .setPositiveButton(getString(R.string.dialog_okay), new DialogInterface.OnClickListener()
+            {
                 //Okay click event
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    setImageIntent(positionFinal);
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    setImageIntent(position);
                 }
             })
             .setNegativeButton(getString(R.string.dialog_cancel), new DialogInterface.OnClickListener() {
@@ -176,7 +175,13 @@ public class PendingChoresActivity extends Activity
                 if(image!= null)
                 {
                     //Update the chore with the image and the users id
-                    ChoreManager.UpdateChoreState(chore.getChoreId(), currentUser.getObjectId(), false, image, activity);
+                    ChoreManager.UpdateChoreState(chore.getChoreId(), currentUser.getObjectId(), false, image, activity, new Runnable() {
+                        @Override
+                        public void run()
+                        {
+                            DisplayChores();
+                        }
+                    });
                 }
             }
 

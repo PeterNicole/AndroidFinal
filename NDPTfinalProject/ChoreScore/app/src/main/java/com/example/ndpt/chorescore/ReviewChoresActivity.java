@@ -139,8 +139,14 @@ public class ReviewChoresActivity extends Activity
                     public void onClick(DialogInterface dialog, int which)
                     {
                         ChoreManager.UpdateUserPoints(chore.getCompleterId(), chore.getGroupId(),chore.getPoints(),activity);
-                        ChoreManager.UpdateChoreState(chore.getChoreId(),chore.getCompleterId(),true,null,activity);
-                        DisplayChores();
+                        ChoreManager.UpdateChoreState(chore.getChoreId(),chore.getCompleterId(),true,null,activity,new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                DisplayChores();
+                            }
+                        });
                     }
                 })
                 .setNegativeButton(getString(R.string.dialog_deny_chore), new DialogInterface.OnClickListener()
@@ -149,8 +155,7 @@ public class ReviewChoresActivity extends Activity
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        ChoreManager.UpdateChoreState(chore.getChoreId(),chore.getCompleterId(),false,null,activity);
-                        DisplayChores();
+                        ChoreManager.UpdateChoreState(chore.getChoreId(), null, false, null, activity, null);
                     }
                 });
 

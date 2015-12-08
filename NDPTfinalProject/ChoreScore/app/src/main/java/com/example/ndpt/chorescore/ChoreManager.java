@@ -5,11 +5,14 @@ import android.graphics.Bitmap;
 import android.media.Image;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -123,48 +126,52 @@ public class ChoreManager
      * @param activity
      * @return ArrayList of Chore objects
      */
-    public static ArrayList<Chore> getSubmittedGroupChores(String groupId, Activity activity)
+    public static ArrayList<Chore> getSubmittedGroupChores(final String groupId, final Activity activity)
     {
-        ArrayList<Chore> chores = new ArrayList<Chore>();
+        final ArrayList<Chore> chores = new ArrayList<Chore>();
 
-        try
+        //Query the parse database
+        ParseQuery<ParseObject> choreQuery  = ParseQuery.getQuery("Chore");
+        choreQuery.whereContains("groupId", groupId);
+        choreQuery.whereExists("completerId");
+        choreQuery.whereEqualTo("isApproved", false);
+
+        choreQuery.findInBackground(new FindCallback<ParseObject>()
         {
-
-            //Query the parse database
-            ParseQuery<ParseObject> choreQuery  = ParseQuery.getQuery("Chore");
-            choreQuery.whereContains("groupId", groupId);
-            choreQuery.whereExists("completerId");
-            choreQuery.whereEqualTo("isApproved", null);
-
-            List<ParseObject> result = choreQuery.find();
-
-            //Initialize variables for creating pending chore objects
-            String choreId;
-            String description;
-            Date dueDate;
-            int points;
-            String completerId;
-            Boolean isApproved;
-            Bitmap proofImage = null;
-
-            for (ParseObject p:result)
+            @Override
+            public void done(List<ParseObject> objects, ParseException e)
             {
-                choreId = p.getObjectId();
-                description = p.getString("description");
-                dueDate = p.getDate("dueDate");
-                points = p.getInt("points");
-                completerId = p.getString("completerId");
-                isApproved = p.getBoolean("isApproved");
-                chores.add(new Chore(choreId,groupId,description,dueDate,points,completerId,isApproved,proofImage));
-            }
-        }
+                if(e == null)
+                {
+                    //Initialize variables for creating pending chore objects
+                    String choreId;
+                    String description;
+                    Date dueDate;
+                    int points;
+                    String completerId;
+                    Boolean isApproved;
+                    Bitmap proofImage = null;
 
-        catch (com.parse.ParseException e)
-        {
-            //Display parse exception
-            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
-            toast.show();
-        }
+                    for (ParseObject p:objects)
+                    {
+                        choreId = p.getObjectId();
+                        description = p.getString("description");
+                        dueDate = p.getDate("dueDate");
+                        points = p.getInt("points");
+                        completerId = p.getString("completerId");
+                        isApproved = p.getBoolean("isApproved");
+                        chores.add(new Chore(choreId,groupId,description,dueDate,points,completerId,isApproved,proofImage));
+                    }
+                }
+
+                else
+                {
+                    //Display parse exception
+                    Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
 
         return chores;
     }
@@ -172,50 +179,77 @@ public class ChoreManager
     /**
      * Updates the state of am existing chore for chore submissions and approvals
      * @param choreId
-     * @param completerId
+     * @param completerId setting to null will delete
      * @param isApproved
      * @param proofImage
      */
-    public static void UpdateChoreState(String choreId, String completerId, Boolean isApproved, Bitmap proofImage, Activity activity)
+    public static void UpdateChoreState(final String choreId, final String completerId, final Boolean isApproved, final Bitmap proofImage, final Activity activity, final Runnable callback)
     {
-        try
-        {
-            //Query the parse database for the chore object
-            ParseQuery<ParseObject> choreQuery = ParseQuery.getQuery("Chore");
-            choreQuery.whereEqualTo("objectId", choreId);
+        //Query the parse database for the chore object
+        ParseQuery<ParseObject> choreQuery = ParseQuery.getQuery("Chore");
+        choreQuery.whereEqualTo("objectId", choreId);
 
-            //Retrieve the chore object from the query result
-            List<ParseObject> result = choreQuery.find();
-            ParseObject choreObject = result.get(0);
+        //Retrieve the chore object from the query result
+       choreQuery.findInBackground(new FindCallback<ParseObject>()
+       {
+           @Override
+           public void done(List<ParseObject> objects, ParseException e)
+           {
+               if(e == null)
+               {
+                   ParseObject choreObject = objects.get(0);
 
-            //Update the chore properties
-            choreObject.put("completerId", completerId);
-            choreObject.put("isApproved", isApproved);
 
-            if(proofImage != null)
-            {
-                //Prepare the image file for upload
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                proofImage.compress(Bitmap.CompressFormat.JPEG,1000,stream);
-                byte[] image = stream.toByteArray();
+                   //Update the chore properties
+                   choreObject.put("isApproved", isApproved);
 
-                ParseFile imageFile = new ParseFile(choreId + "-proof.png",image);
-                imageFile.saveInBackground();
+                   //Set completer id if not null
+                   if(completerId == null)
+                   {
+                       choreObject.remove("completerId");
+                   }
 
-                //Upload the image
-                choreObject.put("proofImage", imageFile);
-            }
+                   //Delete completer id if null
+                   else
+                   {
+                       choreObject.put("completerId", completerId);
+                   }
 
-            //Save object with updated information
-            choreObject.saveInBackground();
-        }
+                   //Set image if not null
+                   if (proofImage != null)
+                   {
+                       //Prepare the image file for upload
+                       ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                       proofImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                       byte[] image = stream.toByteArray();
 
-        catch (ParseException e)
-        {
-            //Display parse exception
-            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
-            toast.show();
-        }
+                       ParseFile imageFile = new ParseFile(choreId + "-proof.png", image);
+                       imageFile.saveInBackground();
+
+                       //Upload the image
+                       choreObject.put("proofImage", imageFile);
+                   }
+
+                   //Save object with updated information
+                   choreObject.saveInBackground(new SaveCallback()
+                   {
+                       @Override
+                       public void done(ParseException e)
+                       {
+                           if(e == null)
+                           {
+                               //Run the callback method after updating
+                               callback.run();
+                           }
+
+                       }
+                   });
+               } else {
+                   Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+                   toast.show();
+               }
+           }
+       });
     }
 
     /**
