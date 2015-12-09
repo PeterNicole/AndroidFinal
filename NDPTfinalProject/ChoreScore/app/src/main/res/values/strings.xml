@@ -37,7 +37,9 @@
         that makes completing chores fun!</string>
     <string name="select_group_name">Select a Group Name</string>
     <string name="current_groups">Current Groups:</string>
-    <string name="number_of_users">Number of People:</string>
+    <string name="members_label">Members</string>
+    <string name="admin_label">Admin:</string>
+    <string name="number_of_users">Number of Users:</string>
     <string name="number_of_chores">Number of Chores Completed:</string>
     <string name="number_of_points">Number of Points Redeemed:</string>
     <string name="join_chore_score">Join the Growing ChoreScore Community!</string>

@@ -76,7 +76,7 @@ public class CurrentGroupsButtonsFragment extends Fragment {
                        TransitionManager.ActivityTransition(activity, JoinGroupActivity.class);
                     }
                     if (id == R.id.btnCurrentGroupsView) {
-                        TransitionManager.ActivityTransition(activity, ViewGroupMemberActivity.class);
+                        TransitionManager.ActivityTransition(activity, ViewGroupActivity.class);
                     }
                     if (id == R.id.btnCurrentGroupsMakeDefault) {
                         // set selected group to default group

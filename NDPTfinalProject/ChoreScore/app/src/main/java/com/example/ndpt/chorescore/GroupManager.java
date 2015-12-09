@@ -178,6 +178,50 @@ public class GroupManager
     }
 
     /**
+     * Returns a list of all member names for a particular group
+     * @param groupId
+     * @return ArrayList<String>() containing member names
+     */
+    public static ArrayList<String> RetreiveGroupMemberNames(String groupId, Activity activity)
+    {
+        ArrayList<String> memberNames = new ArrayList<String>();
+
+        try
+        {
+            //Query the parse database for the member ids
+            ParseQuery<ParseObject> memberIdQuery = ParseQuery.getQuery("UserGroup");
+            memberIdQuery.whereContains("groupId", groupId);
+            List<ParseObject> result = memberIdQuery.find();
+
+            //Initialize member name query
+            ParseQuery<ParseObject> memberNameQuery = ParseQuery.getQuery("_User");
+
+            //Add each member id to the member name query
+            for (ParseObject p: result)
+            {
+                memberNameQuery.whereEqualTo("objectId",p.getString("userId"));
+            }
+
+            //Query the parse database for the member names
+            List<ParseObject> nameResult = memberNameQuery.find();
+
+            for (ParseObject p: nameResult)
+            {
+                //Add each name to the array list
+                memberNames.add(p.getString("username"));
+            }
+        }
+        catch (ParseException e)
+        {
+            //Display parse exception
+            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        return memberNames;
+    }
+
+    /**
      * Returns a list of groups for the specified user
      * @param userId
      * @param activity
