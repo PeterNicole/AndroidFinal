@@ -7,38 +7,24 @@
     tools:context="com.example.ndpt.chorescore.PointRedemptionActivity"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <fragment style="@style/FragmentStyle"
-            android:layout_weight="2"
-            android:name="com.example.ndpt.chorescore.PointRedemptionDetailsFragment"
-            android:id="@+id/point_redemption_details" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <fragment style="@style/FragmentStyle"
-            android:layout_weight="2"
-            android:name="com.example.ndpt.chorescore.PointRedemptionFormFragment"
-            android:id="@+id/point_redemption_form" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
 
         <fragment style="@style/FragmentStyle"
             android:layout_weight="1"
-            android:name="com.example.ndpt.chorescore.GoBackButtonFragment"
-            android:id="@+id/point_redemption_go_back"/>
+            android:name="com.example.ndpt.chorescore.PointRedemptionDetailsFragment"
+            android:id="@+id/point_redemption_details"
+            tools:layout="@layout/fragment_point_redemption_details" />
 
-    </LinearLayout>
+        <fragment style="@style/FragmentStyle"
+            android:layout_weight="1"
+            android:name="com.example.ndpt.chorescore.PointRedemptionFormFragment"
+            android:id="@+id/point_redemption_form"
+            tools:layout="@layout/fragment_point_redemption_form" />
+
+        <fragment style="@style/FragmentStyle"
+            android:layout_height="wrap_content"
+            android:name="com.example.ndpt.chorescore.GoBackButtonFragment"
+            android:id="@+id/point_redemption_go_back"
+            tools:layout="@layout/fragment_go_back_button" />
 
 </LinearLayout>

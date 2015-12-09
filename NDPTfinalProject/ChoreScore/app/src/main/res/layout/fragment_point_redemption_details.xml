@@ -27,13 +27,28 @@
         android:layout_marginBottom="20dp">
 
         <TextView style="@style/TextViewStyle"
-            android:id="@+id/tv_point_redemption_point_label"
             android:textSize="20sp"
-            android:text="@string/chore_points"/>
+            android:text="@string/chore_total_points"/>
 
         <TextView style="@style/TextViewStyle"
             android:textSize="20sp"
-            android:id="@+id/tv_point_redemption_points"/>
+            android:id="@+id/tv_point_redemption_total_points"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <TextView style="@style/TextViewStyle"
+            android:id="@+id/tv_point_redemption_current_point_label"
+            android:textSize="20sp"
+            android:text="@string/chore_current_points"/>
+
+        <TextView style="@style/TextViewStyle"
+            android:textSize="20sp"
+            android:id="@+id/tv_point_redemption_current_points"/>
 
     </LinearLayout>
 
