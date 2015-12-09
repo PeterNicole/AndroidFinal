@@ -8,6 +8,7 @@ package com.example.ndpt.chorescore;
 import android.app.Application;
 import com.parse.Parse;
 import com.parse.ParseInstallation;
+import com.parse.ParseUser;
 
 public class App extends Application
 {
@@ -21,7 +22,16 @@ public class App extends Application
 
         Parse.initialize(this, "eeFeLikeQiwpaLAtdDuboSkFYpNEQZgYzlSWvlFU", "ol43zjzNsEiCtRqVHD1i0z3V7BLLXOc4DyD4Mhgy");
 
-        ParseInstallation.getCurrentInstallation().saveInBackground();
+        ParseUser user = ParseUser.getCurrentUser();
+
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+
+        if(user != null)
+        {
+            installation.put("userId", user.getObjectId());
+        }
+
+        installation.saveInBackground();
 
     }
 }

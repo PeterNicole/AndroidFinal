@@ -31,7 +31,7 @@ public class SelectChoresActivity extends Activity
     private Button addChoreButton;
     private TextView tvDueDate;
 
-    private final Integer SEEKBAR_FACTOR = 10;
+    private final Integer SEEKBAR_FACTOR = 50;
     private final Integer DESCRIPTION_MIN_LENGTH = 6;
     private final Integer DESCRIPTION_MAX_LENGTH = 25;
 

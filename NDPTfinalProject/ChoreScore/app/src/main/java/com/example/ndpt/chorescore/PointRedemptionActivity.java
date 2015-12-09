@@ -32,8 +32,9 @@ public class PointRedemptionActivity extends Activity
     PointRedemptionFormFragment.OnFragmentInteractionListener {
 
     //Class scope variables
-    private final Integer SEEK_FACTOR = 10;
+    private final Integer SEEK_FACTOR = 50;
     private SeekBar sbPointRedemption;
+    private TextView tvGroupName;
     private TextView tvCurrentPoints;
     private TextView tvTotalPoints;
     private TextView tvSeekBar;
@@ -75,7 +76,7 @@ public class PointRedemptionActivity extends Activity
      */
     public void controlCreation()
     {
-        ParseUser currentUser = UserManager.CheckCachedUser(this);
+        final ParseUser currentUser = UserManager.CheckCachedUser(this);
         final Activity activity = this;
         if(currentUser != null)
         {
@@ -93,41 +94,41 @@ public class PointRedemptionActivity extends Activity
                     if(e == null)
                     {
                         ParseObject object = objects.get(0);
+                        final Group group = GroupManager.RetrieveGroup(object.getString("groupId"), activity);
 
                         //Initialize controls from the view
                         sbPointRedemption = (SeekBar)findViewById(R.id.sbPointRedeemption);
+                        tvGroupName = (TextView)findViewById(R.id.tv_point_redemption_group_name);
                         tvSeekBar = (TextView)findViewById(R.id.tv_point_redemption_redemption_seekbar);
                         tvCurrentPoints = (TextView)findViewById(R.id.tv_point_redemption_current_points);
                         tvTotalPoints = (TextView)findViewById(R.id.tv_point_redemption_total_points);
                         btnRedeemPoints = (Button)findViewById(R.id.btnPointRedemptionSubmit);
 
                         //Seek bar initialization
-                        sbPointRedemption.setMax(object.getInt("points"));
-                        sbPointRedemption.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
-                        {
+                        sbPointRedemption.setMax(object.getInt("points")/SEEK_FACTOR);
+                        sbPointRedemption.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                             @Override
-                            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
-                            {
-                                tvSeekBar.setText(Integer.toString(sbPointRedemption.getProgress()*SEEK_FACTOR));
+                            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                                tvSeekBar.setText(Integer.toString(sbPointRedemption.getProgress() * SEEK_FACTOR));
                             }
 
                             @Override
-                            public void onStartTrackingTouch(SeekBar seekBar)
-                            {
+                            public void onStartTrackingTouch(SeekBar seekBar) {
                                 //Do nothing
                             }
 
                             @Override
-                            public void onStopTrackingTouch(SeekBar seekBar)
-                            {
+                            public void onStopTrackingTouch(SeekBar seekBar) {
                                 //Do nothing
                             }
                         });
 
-                        //Set points
+                        //Set points && group name
+                        tvGroupName.setText(group.getName());
                         tvCurrentPoints.setText(Integer.toString(object.getInt("points")));
                         tvTotalPoints.setText(Integer.toString(object.getInt("cumulativePoints")));
                         tvSeekBar.setText("0");
+                        sbPointRedemption.setProgress(0);
 
                         //Redeem points button click event
                         btnRedeemPoints.setOnClickListener(new View.OnClickListener()
@@ -135,7 +136,17 @@ public class PointRedemptionActivity extends Activity
                             @Override
                             public void onClick(View v)
                             {
+                                //Set point value to negative of the selected value
+                                Integer points = -sbPointRedemption.getProgress() * SEEK_FACTOR;
 
+                                //Remove the points from the user
+                                ChoreManager.UpdateUserPoints(currentUser.getObjectId(), group.getGroupId(), points, activity);
+
+                                //Send a notification to the admin
+                                NotificationPusher.PushMessageToUser(group.getAdminId(),currentUser.getUsername() + getString(R.string.notification_redeemed) + -points + getString(R.string.notification_points));
+
+                                //Re-create the controls
+                                controlCreation();
                             }
                         });
 

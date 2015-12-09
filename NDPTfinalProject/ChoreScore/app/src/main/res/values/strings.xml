@@ -113,6 +113,10 @@
     <string name="dialog_approve_chore_title">Reviewing Chore</string>
     <string name="dialog_approve_chore_message">Press approve to reward points. Press deny if the chore was not properly completed.</string>
 
+    <!-- Notification Strings -->
+    <string name="notification_redeemed">\u0020 redeemed \u0020</string>
+    <string name="notification_points">\u0020 points.</string>
+
     
 
 </resources>
