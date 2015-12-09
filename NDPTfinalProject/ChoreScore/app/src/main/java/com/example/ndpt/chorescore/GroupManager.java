@@ -99,15 +99,6 @@ public class GroupManager
     }
 
     /**
-     * Deletes the specified group
-     * @param groupId
-     */
-    public static void DeleteGroup(String groupId)
-    {
-        //TODO
-    }
-
-    /**
      * Returns a list of all groups
      * @return ArrayList of all groups
      */
