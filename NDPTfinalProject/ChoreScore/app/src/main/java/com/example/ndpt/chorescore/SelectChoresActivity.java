@@ -31,6 +31,7 @@ public class SelectChoresActivity extends Activity
     private Button addChoreButton;
     private TextView tvDueDate;
 
+    private final Integer SEEKBAR_FACTOR = 50;
     private final Integer DESCRIPTION_MIN_LENGTH = 6;
     private final Integer DESCRIPTION_MAX_LENGTH = 25;
 
@@ -94,7 +95,7 @@ public class SelectChoresActivity extends Activity
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
             {
                 //Set the text view to the current value
-                tvSeekbar.setText(Integer.toString(seekBar.getProgress()));
+                tvSeekbar.setText(Integer.toString(seekBar.getProgress()*SEEKBAR_FACTOR));
             }
 
             @Override
@@ -125,7 +126,7 @@ public class SelectChoresActivity extends Activity
                 calender.set(datePicker.getYear(),datePicker.getMonth(),datePicker.getDayOfMonth());
                 Date date = calender.getTime();
 
-                Integer points = seekBar.getProgress();
+                Integer points = seekBar.getProgress()*SEEKBAR_FACTOR;
 
                 //Check description is valid
                 if(description.length() < DESCRIPTION_MIN_LENGTH || description.length() > DESCRIPTION_MAX_LENGTH)

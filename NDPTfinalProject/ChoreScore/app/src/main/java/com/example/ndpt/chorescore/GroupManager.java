@@ -7,6 +7,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class GroupManager
      * @param adminId
      * @return Group
      */
-    public static void CreateGroup(String name, String adminId, Activity activity)
+    public static void CreateGroup(final String name, final String adminId, final Activity activity)
     {
         //Check for group with same name
         ArrayList<Group> sameNameGroups = RetrieveAll(name, activity);
@@ -63,15 +64,30 @@ public class GroupManager
         if(sameNameGroups.size() == 0)
         {
             //Initialize the parse object
-            ParseObject group = new ParseObject("Group");
+            final ParseObject group = new ParseObject("Group");
             group.put("admin", adminId);
             group.put("name", name);
 
             //Save the parse object
-            group.saveInBackground();
+            group.saveInBackground(new SaveCallback()
+            {
+                @Override
+                public void done(ParseException e)
+                {
+                    if(e == null)
+                    {
+                        //Add admin to the group as a member
+                        JoinGroup(adminId,group.getObjectId(),activity);
+                    }
 
-            //Add admin to the group as a member
-            JoinGroup(adminId,group.getObjectId(),activity);
+                    else
+                    {
+                        //Display parse error
+                        Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                }
+            });
         }
 
         else

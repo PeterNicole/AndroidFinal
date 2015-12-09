@@ -5,11 +5,13 @@ import android.graphics.Bitmap;
 import android.media.Image;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -94,6 +96,7 @@ public class ChoreManager
             Date dueDate;
             int points;
             String completerId = "";
+            String completerName = "";
             Boolean isApproved = false;
             Bitmap proofImage = null;
 
@@ -103,7 +106,7 @@ public class ChoreManager
                 description = p.getString("description");
                 dueDate = p.getDate("dueDate");
                 points = p.getInt("points");
-                chores.add(new Chore(choreId,groupId,description,dueDate,points,completerId,isApproved,proofImage));
+                chores.add(new Chore(choreId,groupId,description,dueDate,points,completerId,completerName,isApproved,proofImage));
             }
         }
 
@@ -129,7 +132,6 @@ public class ChoreManager
 
         try
         {
-
             //Query the parse database
             ParseQuery<ParseObject> choreQuery  = ParseQuery.getQuery("Chore");
             choreQuery.whereContains("groupId", groupId);
@@ -144,6 +146,7 @@ public class ChoreManager
             Date dueDate;
             int points;
             String completerId;
+            String completerName;
             Boolean isApproved;
             Bitmap proofImage = null;
 
@@ -154,8 +157,9 @@ public class ChoreManager
                 dueDate = p.getDate("dueDate");
                 points = p.getInt("points");
                 completerId = p.getString("completerId");
+                completerName = p.getString("completerName");
                 isApproved = p.getBoolean("isApproved");
-                chores.add(new Chore(choreId,groupId,description,dueDate,points,completerId,isApproved,proofImage));
+                chores.add(new Chore(choreId,groupId,description,dueDate,points,completerId,completerName,isApproved,proofImage));
             }
         }
 
@@ -172,42 +176,120 @@ public class ChoreManager
     /**
      * Updates the state of am existing chore for chore submissions and approvals
      * @param choreId
-     * @param completerId
+     * @param completerId setting to null will delete
      * @param isApproved
      * @param proofImage
      */
-    public static void UpdateChoreState(String choreId, String completerId, Boolean isApproved, Bitmap proofImage, Activity activity)
+    public static void UpdateChoreState(final String choreId, final String completerId, final String completerName, final Boolean isApproved, final Bitmap proofImage, final Activity activity, final Runnable callback)
+    {
+        //Query the parse database for the chore object
+        ParseQuery<ParseObject> choreQuery = ParseQuery.getQuery("Chore");
+        choreQuery.whereEqualTo("objectId", choreId);
+
+        //Retrieve the chore object from the query result
+       choreQuery.findInBackground(new FindCallback<ParseObject>()
+       {
+           @Override
+           public void done(List<ParseObject> objects, ParseException e)
+           {
+               if(e == null)
+               {
+                   ParseObject choreObject = objects.get(0);
+
+
+                   //Update the chore properties
+                   choreObject.put("isApproved", isApproved);
+
+                   //Set completer id if not null
+                   if(completerId == null)
+                   {
+                       choreObject.remove("completerId");
+                       choreObject.remove("completerName");
+                   }
+
+                   //Delete completer id if null
+                   else
+                   {
+                       choreObject.put("completerId", completerId);
+                       choreObject.put("completerName", completerName);
+                   }
+
+                   //Set image if not null
+                   if (proofImage != null)
+                   {
+                       //Prepare the image file for upload
+                       ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                       proofImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                       byte[] image = stream.toByteArray();
+
+                       ParseFile imageFile = new ParseFile(choreId + "-proof.png", image);
+                       imageFile.saveInBackground();
+
+                       //Upload the image
+                       choreObject.put("proofImage", imageFile);
+                   }
+
+                   //Save object with updated information
+                   choreObject.saveInBackground(new SaveCallback()
+                   {
+                       @Override
+                       public void done(ParseException e)
+                       {
+                           if(e == null)
+                           {
+                               if(callback != null)
+                               {
+                                   //Run the callback method after updating
+                                   callback.run();
+                               }
+                           }
+                           else
+                           {
+                               Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+                               toast.show();
+                           }
+                       }
+                   });
+               }
+               else
+               {
+                   Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+                   toast.show();
+               }
+           }
+       });
+    }
+
+    /**
+     * Updates the users points for a specific userGroup combination
+     * @param userId
+     * @param groupId
+     * @param points amount of points to change (can be negative)
+     */
+    public static void UpdateUserPoints(String userId, String groupId, Integer points, Activity activity)
     {
         try
         {
-            //Query the parse database for the chore object
-            ParseQuery<ParseObject> choreQuery = ParseQuery.getQuery("Chore");
-            choreQuery.whereEqualTo("objectId", choreId);
+            //Query the parse database for the userGroup object
+            ParseQuery<ParseObject> userGroupQuery = ParseQuery.getQuery("UserGroup");
+            userGroupQuery.whereEqualTo("userId", userId);
+            userGroupQuery.whereEqualTo("groupId", groupId);
 
-            //Retrieve the chore object from the query result
-            List<ParseObject> result = choreQuery.find();
-            ParseObject choreObject = result.get(0);
+            //Retrieve the userGroup object from the query result
+            List<ParseObject> result = userGroupQuery.find();
+            ParseObject userGroupObject = result.get(0);
 
             //Update the chore properties
-            choreObject.put("completerId", completerId);
-            choreObject.put("isApproved", isApproved);
+            userGroupObject.increment("points", points);
 
-            if(proofImage != null)
+            //Update cumulative points if adding points
+            if(points > 0)
             {
-                //Prepare the image file for upload
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                proofImage.compress(Bitmap.CompressFormat.JPEG,1000,stream);
-                byte[] image = stream.toByteArray();
-
-                ParseFile imageFile = new ParseFile(choreId + "-proof.png",image);
-                imageFile.saveInBackground();
-
-                //Upload the image
-                choreObject.put("proofImage", imageFile);
+                userGroupObject.increment("cumulativePoints", points);
             }
 
             //Save object with updated information
-            choreObject.saveInBackground();
+            userGroupObject.saveInBackground();
         }
 
         catch (ParseException e)

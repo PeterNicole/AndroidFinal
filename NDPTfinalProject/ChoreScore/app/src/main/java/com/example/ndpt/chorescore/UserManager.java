@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
@@ -78,6 +79,10 @@ public class UserManager
                 //Successful login
                 if (user != null)
                 {
+                    //Add the user id to the installation on login for targetted notifications
+                    ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                    installation.put("userId",user.getObjectId());
+                    installation.saveInBackground();
                     TransitionManager.ActivityTransition(activity,CurrentGroupsActivity.class);
                 }
 

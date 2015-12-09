@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,10 +13,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
+import com.parse.GetCallback;
+import com.parse.GetDataCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -81,8 +90,7 @@ public class ReviewChoresActivity extends Activity
                 HashMap<String,String> map = new HashMap<String, String>();
                 map.put("desc",c.getDescription());
                 map.put("points",Integer.toString(c.getPoints()));
-                map.put("name", "bobby");
-                //map.put("name", c.getDueDate().toString());
+                map.put("name", c.getCompleterName());
                 data.add(map);
             }
 
@@ -108,7 +116,98 @@ public class ReviewChoresActivity extends Activity
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
+        Chore chore = chores.get(position);
+        choreApprovalPrompt(chore,this);
+    }
 
+    /**
+     * Displays a dialog box for approval of chore by an admin
+     * @param chore
+     * @param activity
+     */
+    public void choreApprovalPrompt(final Chore chore, final Activity activity)
+    {
+        ParseUser user = UserManager.CheckCachedUser(activity);
+        Group choreGroup = GroupManager.RetrieveGroup(chore.getGroupId(), activity);
+        final AlertDialog.Builder choreApprovalDialog = new AlertDialog.Builder(this);
+        choreApprovalDialog.setTitle(getString(R.string.dialog_approve_chore_title))
+                .setMessage(getString(R.string.dialog_approve_chore_message))
+                .setPositiveButton(getString(R.string.dialog_approve_chore), new DialogInterface.OnClickListener()
+                {
+                    //Approve review button click
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        ChoreManager.UpdateUserPoints(chore.getCompleterId(), chore.getGroupId(), chore.getPoints(), activity);
+                        ChoreManager.UpdateChoreState(chore.getChoreId(), chore.getCompleterId(), chore.getCompleterName(), true, null, activity, new Runnable() {
+                            @Override
+                            public void run()
+                            {
+                                DisplayChores();
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton(getString(R.string.dialog_deny_chore), new DialogInterface.OnClickListener()
+                {
+                    //Deny chore button click
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        ChoreManager.UpdateChoreState(chore.getChoreId(), null, null, false, null, activity, new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                DisplayChores();
+                            }
+                        });
+                    }
+                });
+
+        //Ensure current user is the admin of the group
+        if(user != null && choreGroup.getAdminId().equals(user.getObjectId()))
+        {
+            ParseQuery<ParseObject> choreQuery = new ParseQuery<ParseObject>("Chore");
+            choreQuery.getInBackground(chore.getChoreId(), new GetCallback<ParseObject>()
+            {
+                @Override
+                public void done(ParseObject object, ParseException e)
+                {
+                    //Get the parse file
+                    ParseFile fileObject = (ParseFile) object.get("proofImage");
+
+                    //Get the image from the parse file
+                    fileObject.getDataInBackground(new GetDataCallback()
+                    {
+                        @Override
+                        public void done(byte[] data, ParseException e)
+                        {
+                            if(e == null)
+                            {
+                                //Decode image from the image file derived byte array
+                                Bitmap imageBmp = BitmapFactory.decodeByteArray(data,0,data.length);
+                                ImageView proofImageView = new ImageView(activity);
+                                proofImageView.setImageBitmap(imageBmp);
+
+                                //Create the dialog box with the image
+                                choreApprovalDialog.setView(proofImageView);
+                                choreApprovalDialog.show();
+                            }
+
+
+                            //Display parse error message
+                            else
+                            {
+                                Toast toast = Toast.makeText(activity,e.getMessage(), Toast.LENGTH_LONG);
+                                toast.show();
+                            }
+                        }
+                    });
+
+                }
+            });
+        }
     }
 
 

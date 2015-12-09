@@ -10,6 +10,12 @@
     <fragment style="@style/FragmentStyle"
         android:name="com.example.ndpt.chorescore.PendingChoresListviewFragment"
         android:layout_weight="7"
-        android:id="@+id/pending_chores_listview" />
+        android:id="@+id/pending_chores_listview"
+        tools:layout="@layout/fragment_pending_chores_listview" />
 
+    <fragment style="@style/FragmentStyle"
+        android:name="com.example.ndpt.chorescore.PendingChoresButtonsFragment"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_pending_chores_buttons"
+        android:id="@+id/pending_chores_buttons"/>
 </LinearLayout>
