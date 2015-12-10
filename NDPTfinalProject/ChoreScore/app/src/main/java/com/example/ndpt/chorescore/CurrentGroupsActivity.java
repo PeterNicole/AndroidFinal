@@ -120,6 +120,10 @@ public class CurrentGroupsActivity extends Activity
             SimpleAdapter adapter = new SimpleAdapter(this,data,resource,from,to);
             groupLv.setOnItemClickListener(this);
             groupLv.setAdapter(adapter);
+
+            //Set the selector
+            groupLv.setSelector(R.drawable.selector);
+            groupLv.setItemChecked(selected,true);
         }
     }
 }
