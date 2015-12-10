@@ -30,7 +30,8 @@ public class CurrentGroupsButtonsFragment extends Fragment {
     private Button btnCurrentGroupNewGroup;
     private Button btnCurrentGroupJoinGroup;
     private Button btnCurrentGroupViewGroup;
-    private Button btnCurrentGroupMakeDefault;
+    private Button btnCurrentGroupViewChores;
+    private Button btnCurrentGroupRedeemPoints;
 
     private OnFragmentInteractionListener mListener;
 
@@ -57,29 +58,47 @@ public class CurrentGroupsButtonsFragment extends Fragment {
     }
 
     private void controlCreation(View v){
+        //Initialize buttons from the fragments view
         btnCurrentGroupNewGroup = (Button)v.findViewById(R.id.btnCurrentGroupsNew);
         btnCurrentGroupJoinGroup = (Button)v.findViewById(R.id.btnCurrentGroupsJoin);
         btnCurrentGroupViewGroup = (Button)v.findViewById(R.id.btnCurrentGroupsView);
-        btnCurrentGroupMakeDefault = (Button)v.findViewById(R.id.btnCurrentGroupsMakeDefault);
+        btnCurrentGroupViewChores = (Button)v.findViewById(R.id.btnCurrentGroupsViewChores);
+        btnCurrentGroupRedeemPoints = (Button)v.findViewById(R.id.btnCurrentGroupsRedeemPoints);
         final Activity activity = getActivity();
         Button[] buttons = {btnCurrentGroupNewGroup, btnCurrentGroupJoinGroup,
-                btnCurrentGroupViewGroup, btnCurrentGroupMakeDefault};
+                btnCurrentGroupViewGroup, btnCurrentGroupViewChores,btnCurrentGroupRedeemPoints};
         for (Button b : buttons) {
             final int id = b.getId();
-            b.setOnClickListener((new View.OnClickListener() {
+            b.setOnClickListener((new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
-                    if (id == R.id.btnCurrentGroupsNew) {
+                public void onClick(View v)
+                {
+                    if (id == R.id.btnCurrentGroupsNew)
+                    {
+                        //Transition to new groups activity
                         TransitionManager.ActivityTransition(activity, CreateGroupActivity.class);
                     }
-                    if (id == R.id.btnCurrentGroupsJoin) {
-                       TransitionManager.ActivityTransition(activity, JoinGroupActivity.class);
+                    if (id == R.id.btnCurrentGroupsJoin)
+                    {
+                        //Transition to join groups activity
+                        TransitionManager.ActivityTransition(activity, JoinGroupActivity.class);
                     }
-                    if (id == R.id.btnCurrentGroupsView) {
+                    if (id == R.id.btnCurrentGroupsView)
+                    {
+                        //Transition to view groups activity
                         TransitionManager.ActivityTransition(activity, ViewGroupActivity.class);
                     }
-                    if (id == R.id.btnCurrentGroupsMakeDefault) {
-                        // set selected group to default group
+                    if (id == R.id.btnCurrentGroupsViewChores)
+                    {
+                        //Transition to pending chores activity
+                        TransitionManager.ActivityTransition(activity, PendingChoresActivity.class);
+                    }
+
+                    if (id == R.id.btnCurrentGroupsRedeemPoints)
+                    {
+                        //Transition to
+                        TransitionManager.ActivityTransition(activity, PointRedemptionActivity.class);
                     }
                 }
             }));

@@ -107,10 +107,10 @@ public class UserManager
         ParseUser currentUser = ParseUser.getCurrentUser();
 
         //If user is not currently logged in
-        if(currentUser == null)
+        if(currentUser == null && activity.getClass() != MainActivity.class)
         {
             //Prompt login
-            TransitionManager.ActivityTransition(activity,LoginActivity.class);
+            TransitionManager.ActivityTransition(activity,MainActivity.class);
         }
 
         return currentUser;
@@ -126,6 +126,7 @@ public class UserManager
         {
             Toast toast = Toast.makeText(activity,R.string.success_logout, Toast.LENGTH_LONG);
             toast.show();
+            TransitionManager.ActivityTransition(activity, MainActivity.class);
         }
     }
 
