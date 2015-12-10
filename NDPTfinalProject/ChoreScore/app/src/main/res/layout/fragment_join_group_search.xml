@@ -12,5 +12,5 @@
 
     <Button style="@style/ButtonStyle"
         android:id="@+id/btnJoinGroupSearch"
-        android:text="@string/search"/>
+        android:text=""/>
 </LinearLayout>
