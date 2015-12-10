@@ -158,4 +158,31 @@ public class UserManager
 
     }
 
+    /**
+     * Gets the total count of registered users from the parse database
+     * @param activity
+     * @return number of users
+     */
+    static public Integer getUserCount(Activity activity)
+    {
+        Integer userCount = 0;
+        try
+        {
+            ParseQuery<ParseObject> userQuery = ParseQuery.getQuery("_User");
+            List<ParseObject> result = userQuery.find();
+            userCount = result.size();
+
+        }
+
+        catch (ParseException e)
+        {
+            //Display parse exception
+            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        return userCount;
+
+    }
+
 }

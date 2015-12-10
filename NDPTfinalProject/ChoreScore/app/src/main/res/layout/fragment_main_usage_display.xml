@@ -36,6 +36,26 @@
             android:textSize="20sp"/>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_main_usage_groups_label"
+            android:text="@string/number_of_groups"
+            android:textSize="20sp"/>
+
+        <TextView style="@style/TextViewStyle"
+            android:id="@+id/tv_main_usage_groups_count"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,24 +74,5 @@
             android:textSize="20sp"/>
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_main_usage_points_redeemed"
-            android:text="@string/number_of_points"
-            android:textSize="20sp"/>
-
-        <TextView style="@style/TextViewStyle"
-            android:id="@+id/tv_main_usage_point_count"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
-
 
 </LinearLayout>

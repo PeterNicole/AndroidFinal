@@ -89,7 +89,7 @@ public class ViewGroupActivity extends Activity
 
             //Set group admin
             String adminName = UserManager.getUserName(group.getAdminId(),this);
-            
+
 
 
             //Populate group members list view
@@ -108,7 +108,6 @@ public class ViewGroupActivity extends Activity
 
             SimpleAdapter adapter = new SimpleAdapter(this,data,resource,from,to);
             lvMembers.setAdapter(adapter);
-
         }
     }
 }

@@ -298,6 +298,32 @@ public class ChoreManager
             Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
             toast.show();
         }
+    }
+
+    /**
+     * Gets the total count of chores from the parse database
+     * @param activity
+     * @return number of users
+     */
+    static public Integer getChoreCount(Activity activity)
+    {
+        Integer choreCount = 0;
+        try
+        {
+            //Query the group table to get the number of groups
+            ParseQuery<ParseObject> choreQuery = ParseQuery.getQuery("Chore");
+            List<ParseObject> result = choreQuery.find();
+            choreCount = result.size();
+        }
+
+        catch (ParseException e)
+        {
+            //Display parse exception
+            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        return choreCount;
 
     }
 }

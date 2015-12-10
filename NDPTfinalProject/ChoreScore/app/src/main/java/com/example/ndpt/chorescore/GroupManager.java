@@ -315,4 +315,31 @@ public class GroupManager
             currentUser.saveInBackground();
         }
     }
+
+    /**
+     * Gets the total count of groups from the parse database
+     * @param activity
+     * @return number of groups
+     */
+    static public Integer getGroupCount(Activity activity)
+    {
+        Integer groupCount = 0;
+        try
+        {
+            //Query the groups table to get the count
+            ParseQuery<ParseObject> groupQuery = ParseQuery.getQuery("Group");
+            List<ParseObject> result = groupQuery.find();
+            groupCount = result.size();
+        }
+
+        catch (ParseException e)
+        {
+            //Display parse exception
+            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        return groupCount;
+
+    }
 }

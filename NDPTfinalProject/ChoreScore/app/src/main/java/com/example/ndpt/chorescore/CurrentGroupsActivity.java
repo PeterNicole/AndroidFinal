@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.parse.ParseUser;
 
@@ -69,7 +70,15 @@ public class CurrentGroupsActivity extends Activity
      */
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-        //TODO add something here
+        //Get the selected group
+        Group g = groups.get(position);
+
+        //Set the users default group
+        GroupManager.SetUserDefaultGroup(g.getGroupId(),this);
+
+        //Message the user
+        Toast toast = Toast.makeText(this,getString(R.string.success_group) + g.getName(),Toast.LENGTH_LONG);
+        toast.show();
     }
     /**
      * Displays a list of groups in the current group list view
@@ -97,6 +106,5 @@ public class CurrentGroupsActivity extends Activity
             groupLv.setOnItemClickListener(this);
             groupLv.setAdapter(adapter);
         }
-
     }
 }

@@ -40,8 +40,8 @@
     <string name="members_label">Members</string>
     <string name="admin_label">Admin:</string>
     <string name="number_of_users">Number of Users:</string>
-    <string name="number_of_chores">Number of Chores Completed:</string>
-    <string name="number_of_points">Number of Points Redeemed:</string>
+    <string name="number_of_chores">Chores Completed:</string>
+    <string name="number_of_groups">Number of Groups:</string>
     <string name="join_chore_score">Join the Growing ChoreScore Community!</string>
     <string name="search_results">Search Results:</string>
     <string name="group_name">Group Name:</string>
@@ -104,6 +104,7 @@
     <!-- Success messages -->
     <string name="success_add_chore">Chore added!</string>
     <string name="success_logout">Logged out</string>
+    <string name="success_group">Current group set to:\u0020</string>
 
     <!-- Dialog boxes -->
     <string name="dialog_submit_chore_title">Submit Chore</string>
