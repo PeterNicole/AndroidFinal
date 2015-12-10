@@ -28,6 +28,7 @@ public class PendingChoresButtonsFragment extends Fragment {
 
     private Button btnAddToList;
     private Button btnReviewChores;
+    private Button btnGroups;
 
     private OnFragmentInteractionListener mListener;
 
@@ -62,9 +63,10 @@ public class PendingChoresButtonsFragment extends Fragment {
         //Get buttons from fragments view
         btnAddToList = (Button)v.findViewById(R.id.btnPendingChoresAdd);
         btnReviewChores = (Button)v.findViewById(R.id.btnPendingChoresReview);
+        btnGroups = (Button)v.findViewById(R.id.btnPendingChoresGroups);
 
         final Activity activity = getActivity();
-        Button[] buttons = { btnAddToList, btnReviewChores};
+        Button[] buttons = { btnAddToList, btnReviewChores, btnGroups};
         for (Button b : buttons) {
             final int id = b.getId();
 
@@ -82,6 +84,11 @@ public class PendingChoresButtonsFragment extends Fragment {
                     if (id == R.id.btnPendingChoresReview)
                     {
                         TransitionManager.ActivityTransition(activity, ReviewChoresActivity.class);
+                    }
+
+                    if(id == R.id.btnPendingChoresGroups)
+                    {
+                        TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
                     }
                 }
             }));

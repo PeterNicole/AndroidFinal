@@ -37,7 +37,8 @@ import java.util.HashMap;
  * This class displays the chores that are awaiting review from a group admin
  */
 public class ReviewChoresActivity extends Activity
-    implements ReviewChoresListviewFragment.OnFragmentInteractionListener, AdapterView.OnItemClickListener {
+    implements ReviewChoresListviewFragment.OnFragmentInteractionListener,
+        GoBackButtonFragment.OnFragmentInteractionListener, AdapterView.OnItemClickListener {
 
     //Class scope variables
     ArrayList<Chore> chores;
@@ -194,7 +195,6 @@ public class ReviewChoresActivity extends Activity
                                 choreApprovalDialog.setView(proofImageView);
                                 choreApprovalDialog.show();
                             }
-
 
                             //Display parse error message
                             else
