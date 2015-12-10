@@ -98,7 +98,7 @@ public class UserManager
     }
 
     /**
-     * Checks if current user is logged in, returns a user if they are, redirects to home page if not
+     * Checks if current user is logged in, returns a user if they are, redirects to login page if not
      * @param activity
      * @return ParseUser object for current user
      */
@@ -107,10 +107,10 @@ public class UserManager
         ParseUser currentUser = ParseUser.getCurrentUser();
 
         //If user is not currently logged in
-        if(currentUser == null && activity.getClass() != MainActivity.class)
+        if(currentUser == null)
         {
             //Prompt login
-            TransitionManager.ActivityTransition(activity,MainActivity.class);
+            TransitionManager.ActivityTransition(activity,LoginActivity.class);
         }
 
         return currentUser;

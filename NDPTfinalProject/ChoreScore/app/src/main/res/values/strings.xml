@@ -14,12 +14,11 @@
     <string name="invite_to_group">Invite a Friend To Group</string>
     <string name="view_group">View Group</string>
     <string name="make_default_group">Make Default Group</string>
-    <string name="view_chores">View Chores</string>
     <string name="search">Search</string>
     <string name="add_chore">Add Chores To List</string>
     <string name="manage_chores">Manage Chores</string>
     <string name="add_selected">Add Selected Chores</string>
-    <string name="redeem_points">Redeem Points</string>
+    <string name="take_picture">Take Picture</string>
 
 
 
@@ -83,6 +82,10 @@
 
     <!-- Edit Text -->
     <string name ="enter_search">Enter Search Keywords Here</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_view_group_member">ViewGroupMemberActivity</string>
 	
 	<!-- User and Group error strings -->
     <!-- Note: \u0020 is a space character for leading/trailing spaces -->
