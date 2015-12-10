@@ -89,6 +89,7 @@ public class ViewGroupActivity extends Activity
 
             //Set group admin
             String adminName = UserManager.getUserName(group.getAdminId(),this);
+            tvAdminName.setText(adminName);
 
 
 
