@@ -15,7 +15,13 @@
 
     <fragment style="@style/FragmentStyle"
         android:name="com.example.ndpt.chorescore.PendingChoresButtonsFragment"
-        android:layout_weight="1"
+        android:layout_weight="2"
         tools:layout="@layout/fragment_pending_chores_buttons"
         android:id="@+id/pending_chores_buttons"/>
+
+    <fragment style="@style/FragmentStyle"
+        android:layout_weight="1"
+        android:name="com.example.ndpt.chorescore.GoBackButtonFragment"
+        android:id="@+id/view_group_go_back_fragment"
+        tools:layout="@layout/fragment_go_back_button" />
 </LinearLayout>

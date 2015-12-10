@@ -34,7 +34,8 @@ import java.util.HashMap;
  */
 public class PendingChoresActivity extends Activity
     implements PendingChoresButtonsFragment.OnFragmentInteractionListener,
-    PendingChoresListviewFragment.OnFragmentInteractionListener, AdapterView.OnItemClickListener {
+    PendingChoresListviewFragment.OnFragmentInteractionListener,
+    GoBackButtonFragment.OnFragmentInteractionListener, AdapterView.OnItemClickListener {
 
     //Class scope variables
     ArrayList<Chore> chores;
