@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.parse.ParseUser;
+
 /**
  * MainActivity.java
  * Created by Nicole Dahlquist on 11/11/2015.
@@ -27,6 +29,7 @@ public class MainActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        CheckLogin();
         DisplayStats();
     }
 
@@ -56,6 +59,18 @@ public class MainActivity extends Activity
 
     }
 
+
+    /**
+     * Transitions to the current groups activity if the user is already logged in
+     */
+    public void CheckLogin()
+    {
+        ParseUser currentUser = UserManager.CheckCachedUser(this);
+        if(currentUser != null)
+        {
+            TransitionManager.ActivityTransition(this, CurrentGroupsActivity.class);
+        }
+    }
     /**
      * Populates the textviews on the activity with the stats from the parse database
      */
