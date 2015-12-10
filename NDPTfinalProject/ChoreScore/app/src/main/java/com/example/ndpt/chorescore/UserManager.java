@@ -6,8 +6,12 @@ import android.widget.Toast;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import java.util.List;
 
 /**
  * Created by Peter Thomson on 24/11/2015.
@@ -71,25 +75,21 @@ public class UserManager
      */
     static public void LoginUser(String userName, String password, final Activity activity)
     {
-        ParseUser.logInInBackground(userName, password, new LogInCallback()
-        {
+        ParseUser.logInInBackground(userName, password, new LogInCallback() {
             @Override
-            public void done(ParseUser user, ParseException e)
-            {
+            public void done(ParseUser user, ParseException e) {
                 //Successful login
-                if (user != null)
-                {
+                if (user != null) {
                     //Add the user id to the installation on login for targetted notifications
                     ParseInstallation installation = ParseInstallation.getCurrentInstallation();
-                    installation.put("userId",user.getObjectId());
+                    installation.put("userId", user.getObjectId());
                     installation.saveInBackground();
-                    TransitionManager.ActivityTransition(activity,CurrentGroupsActivity.class);
+                    TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
                 }
 
                 //Login fail
-                else
-                {
-                    Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+                else {
+                    Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
                     toast.show();
                 }
 
@@ -127,6 +127,62 @@ public class UserManager
             Toast toast = Toast.makeText(activity,R.string.success_logout, Toast.LENGTH_LONG);
             toast.show();
         }
+    }
+
+    /**
+     * Gets the name of a user from the parse database
+     * @param userId
+     * @param activity
+     * @return user name
+     */
+    static public String getUserName(String userId, Activity activity)
+    {
+        String name = "";
+        try
+        {
+            ParseQuery<ParseObject> nameQuery = ParseQuery.getQuery("_User");
+            nameQuery.whereEqualTo("objectId", userId);
+            List<ParseObject> result = nameQuery.find();
+            name = result.get(0).getString("username");
+
+        }
+
+        catch (ParseException e)
+        {
+            //Display parse exception
+            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        return name;
+
+    }
+
+    /**
+     * Gets the total count of registered users from the parse database
+     * @param activity
+     * @return number of users
+     */
+    static public Integer getUserCount(Activity activity)
+    {
+        Integer userCount = 0;
+        try
+        {
+            ParseQuery<ParseObject> userQuery = ParseQuery.getQuery("_User");
+            List<ParseObject> result = userQuery.find();
+            userCount = result.size();
+
+        }
+
+        catch (ParseException e)
+        {
+            //Display parse exception
+            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        return userCount;
+
     }
 
 }

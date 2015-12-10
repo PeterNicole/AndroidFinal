@@ -51,24 +51,12 @@ public class JoinGroupSearchFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-    private void controlCreation(View v){
-        btnJoinGroupSearch = (Button)v.findViewById(R.id.btnJoinGroupSearch);
-        btnJoinGroupSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // query group db and display results in JoinGroupDisplayResults list view
-                // on list view item select, go to activity_view_group_non_member for selected group (where there is
-                // an option to join
-            }
-        });
-    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_join_group_search, container, false);
-        controlCreation(v);
         return v;
     }
 

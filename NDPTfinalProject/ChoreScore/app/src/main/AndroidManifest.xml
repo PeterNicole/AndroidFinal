@@ -64,10 +64,6 @@
             android:label="@string/title_activity_join_group" >
         </activity>
         <activity
-            android:name=".ViewGroupNonMemberActivity"
-            android:label="@string/title_activity_view_group" >
-        </activity>
-        <activity
             android:name=".ReviewChoresActivity"
             android:label="@string/title_activity_review_chores" >
         </activity>
@@ -95,7 +91,7 @@
         </receiver>
         <!-- end parse broadcaster and receiver -->
         <activity
-            android:name=".ViewGroupMemberActivity"
+            android:name=".ViewGroupActivity"
             android:label="@string/title_activity_view_group_member" >
         </activity>
         <activity
