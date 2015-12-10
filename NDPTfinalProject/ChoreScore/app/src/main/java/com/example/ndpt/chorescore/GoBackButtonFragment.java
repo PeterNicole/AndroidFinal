@@ -53,10 +53,13 @@ public class GoBackButtonFragment extends Fragment {
     private void controlCreation(View v){
         final Activity activity = getActivity();
         btnGoBack = (Button)v.findViewById(R.id.btnGoBack);
-        btnGoBack.setOnClickListener(new View.OnClickListener() {
+        btnGoBack.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                TransitionManager.PreviousActivity(activity, true);
+            public void onClick(View v)
+            {
+                //Goes back to the central currentGroupsActivity
+                TransitionManager.ActivityTransition(getActivity(),CurrentGroupsActivity.class);
             }
         });
 

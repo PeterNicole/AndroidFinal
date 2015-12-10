@@ -17,6 +17,10 @@
         android:id="@+id/btnCurrentGroupsView"/>
 
     <Button style="@style/ButtonStyle"
-        android:text="@string/make_default_group"
-        android:id="@+id/btnCurrentGroupsMakeDefault"/>
+        android:text="@string/view_chores"
+        android:id="@+id/btnCurrentGroupsViewChores"/>
+
+    <Button style="@style/ButtonStyle"
+        android:text="@string/redeem_points"
+        android:id="@+id/btnCurrentGroupsRedeemPoints"/>
 </LinearLayout>
