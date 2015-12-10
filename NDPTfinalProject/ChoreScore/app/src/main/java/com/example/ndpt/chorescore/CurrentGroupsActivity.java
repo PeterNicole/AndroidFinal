@@ -1,6 +1,8 @@
 package com.example.ndpt.chorescore;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -74,7 +76,7 @@ public class CurrentGroupsActivity extends Activity
         Group g = groups.get(position);
 
         //Set the users default group
-        GroupManager.SetUserDefaultGroup(g.getGroupId(),this);
+        GroupManager.SetUserDefaultGroup(g.getGroupId(), this);
 
         //Message the user
         Toast toast = Toast.makeText(this,getString(R.string.success_group) + g.getName(),Toast.LENGTH_LONG);
@@ -88,10 +90,24 @@ public class CurrentGroupsActivity extends Activity
         ParseUser currentUser = UserManager.CheckCachedUser(this);
         if(currentUser != null)
         {
+            //Get listview from the view
+            ListView groupLv = (ListView) findViewById(R.id.lv_current_groups);
+
+            //Get the users groups and default group from parse database
             groups = GroupManager.RetrieveUserGroups(currentUser.getObjectId(),this);
+            String defaultGroup = currentUser.getString("defaultGroupId");
+            Integer selected = 0;
+
+            //Initialize the listview
             ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String,String>>();
             for (Group g: groups)
             {
+                //Set the selected item for the default group
+                if(g.getGroupId().equals(defaultGroup))
+                {
+                    selected = data.size();
+                }
+
                 HashMap<String,String> map = new HashMap<String, String>();
                 map.put("name",g.getName());
                 data.add(map);
@@ -102,7 +118,6 @@ public class CurrentGroupsActivity extends Activity
             int[] to = {R.id.tv_list_group_name};
 
             SimpleAdapter adapter = new SimpleAdapter(this,data,resource,from,to);
-            ListView groupLv = (ListView) findViewById(R.id.lv_current_groups);
             groupLv.setOnItemClickListener(this);
             groupLv.setAdapter(adapter);
         }
