@@ -99,15 +99,6 @@ public class GroupManager
     }
 
     /**
-     * Returns a list of all groups
-     * @return ArrayList of all groups
-     */
-    public static ArrayList<Group> RetrieveAll(Activity activity)
-    {
-        return RetrieveAll("", activity);
-    }
-
-    /**
      * Returns a list of all groups with name matching the string
      * @param groupName search fragment for group name
      * @return ArrayList of all groups
@@ -182,9 +173,10 @@ public class GroupManager
      * @param groupId
      * @return ArrayList<String>() containing member names
      */
-    public static ArrayList<String> RetreiveGroupMemberNames(String groupId, Activity activity)
+    public static ArrayList<String> RetrieveGroupMemberNames(String groupId, Activity activity)
     {
         ArrayList<String> memberNames = new ArrayList<String>();
+        ArrayList<String> memberIds = new ArrayList<String>();
 
         try
         {
@@ -199,10 +191,11 @@ public class GroupManager
             //Add each member id to the member name query
             for (ParseObject p: result)
             {
-                memberNameQuery.whereEqualTo("objectId",p.getString("userId"));
+                memberIds.add(p.getString("userId"));
             }
 
             //Query the parse database for the member names
+            memberNameQuery.whereContainedIn("objectId", memberIds);
             List<ParseObject> nameResult = memberNameQuery.find();
 
             for (ParseObject p: nameResult)
@@ -294,6 +287,10 @@ public class GroupManager
 
             //Set the joined group to the users default group
             SetUserDefaultGroup(groupId, activity);
+
+            //Display success message
+            Toast toast = Toast.makeText(activity,activity.getString(R.string.success_group_joined),Toast.LENGTH_LONG);
+            toast.show();
         }
     }
 

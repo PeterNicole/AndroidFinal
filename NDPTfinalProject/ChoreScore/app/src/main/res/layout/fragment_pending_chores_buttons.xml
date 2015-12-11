@@ -8,4 +8,12 @@
     android:id="@+id/btnPendingChoresAdd"
     android:text="@string/add_chore"/>
 
+    <Button style="@style/ButtonStyle"
+        android:id="@+id/btnPendingChoresReview"
+        android:text="@string/review_chores"/>
+
+    <Button style="@style/ButtonStyle"
+        android:id="@+id/btnPendingChoresGroups"
+        android:text="@string/current_groups_btn"/>
+
 </LinearLayout>

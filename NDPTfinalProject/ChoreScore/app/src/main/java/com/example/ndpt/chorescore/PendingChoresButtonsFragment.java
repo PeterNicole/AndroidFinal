@@ -27,6 +27,8 @@ public class PendingChoresButtonsFragment extends Fragment {
     private String mParam2;
 
     private Button btnAddToList;
+    private Button btnReviewChores;
+    private Button btnGroups;
 
     private OnFragmentInteractionListener mListener;
 
@@ -52,20 +54,42 @@ public class PendingChoresButtonsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private void controlCreation(View v) {
+    /**
+     * Creates controls for the pending chores button fragment
+     * @param v
+     */
+    private void controlCreation(View v)
+    {
+        //Get buttons from fragments view
         btnAddToList = (Button)v.findViewById(R.id.btnPendingChoresAdd);
+        btnReviewChores = (Button)v.findViewById(R.id.btnPendingChoresReview);
+        btnGroups = (Button)v.findViewById(R.id.btnPendingChoresGroups);
 
         final Activity activity = getActivity();
-        Button[] buttons = { btnAddToList};
+        Button[] buttons = { btnAddToList, btnReviewChores, btnGroups};
         for (Button b : buttons) {
             final int id = b.getId();
-            b.setOnClickListener((new View.OnClickListener() {
+
+            //Set button click listeners for navigation
+            b.setOnClickListener((new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
-                    if (id == R.id.btnPendingChoresAdd) {
+                public void onClick(View v)
+                {
+                    if (id == R.id.btnPendingChoresAdd)
+                    {
                         TransitionManager.ActivityTransition(activity, SelectChoresActivity.class);
                     }
 
+                    if (id == R.id.btnPendingChoresReview)
+                    {
+                        TransitionManager.ActivityTransition(activity, ReviewChoresActivity.class);
+                    }
+
+                    if(id == R.id.btnPendingChoresGroups)
+                    {
+                        TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
+                    }
                 }
             }));
         }

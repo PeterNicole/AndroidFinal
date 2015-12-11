@@ -2,7 +2,6 @@ package com.example.ndpt.chorescore;
 
 import android.app.Activity;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,7 +35,10 @@ public class ViewGroupActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_group_member);
-        DisplayGroupDetails();
+        if(UserManager.UserHasDefaultGroup(this))
+        {
+            DisplayGroupDetails();
+        }
     }
 
     @Override
@@ -89,11 +91,11 @@ public class ViewGroupActivity extends Activity
 
             //Set group admin
             String adminName = UserManager.getUserName(group.getAdminId(),this);
-
+            tvAdminName.setText(adminName);
 
 
             //Populate group members list view
-            groupMembers = GroupManager.RetreiveGroupMemberNames(group.getGroupId(),this);
+            groupMembers = GroupManager.RetrieveGroupMemberNames(group.getGroupId(), this);
             ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String,String>>();
             for (String s: groupMembers)
             {

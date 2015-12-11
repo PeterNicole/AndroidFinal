@@ -22,8 +22,12 @@ import com.parse.ParseUser;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import static java.lang.Thread.sleep;
 
 /**
  * PendingChoresActivity.java
@@ -34,17 +38,26 @@ import java.util.HashMap;
  */
 public class PendingChoresActivity extends Activity
     implements PendingChoresButtonsFragment.OnFragmentInteractionListener,
-    PendingChoresListviewFragment.OnFragmentInteractionListener, AdapterView.OnItemClickListener {
+    PendingChoresListviewFragment.OnFragmentInteractionListener,
+    GoBackButtonFragment.OnFragmentInteractionListener, AdapterView.OnItemClickListener {
 
     //Class scope variables
-    ArrayList<Chore> chores;
-    Bitmap image;
+    private ArrayList<Chore> chores;
+    private Bitmap image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending_chores);
-        DisplayChores();
+        if(UserManager.UserHasDefaultGroup(this))
+        {
+            ParseUser currentUser =  UserManager.CheckCachedUser(this);
+            if (currentUser!= null)
+            {
+                chores = ChoreManager.getPendingGroupChores(currentUser.getString("defaultGroupId"),this);
+                DisplayChores(chores);
+            }
+        }
     }
 
     @Override
@@ -72,34 +85,30 @@ public class PendingChoresActivity extends Activity
     }
 
     /**
-     * Populates the list view with the current users default group chores
+     * Populates the list view with a list of chores
+     *
+     * @param chores list of chores
      */
-    public void DisplayChores()
+    public void DisplayChores(ArrayList<Chore> chores)
     {
-        ParseUser currentUser =  UserManager.CheckCachedUser(this);
-        if (currentUser!= null)
+        ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String,String>>();
+        for (Chore c: chores)
         {
-            chores = ChoreManager.getPendingGroupChores(currentUser.getString("defaultGroupId"),this);
-            ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String,String>>();
-            for (Chore c: chores)
-            {
-                HashMap<String,String> map = new HashMap<String, String>();
-                map.put("desc",c.getDescription());
-                map.put("points",Integer.toString(c.getPoints()));
-                map.put("date", c.getDueDate().toString()); //TODO format date
-                data.add(map);
-            }
-
-            int resource = R.layout.listview_pending_chores;
-            String[] from = {"desc","points","date"};
-            int[] to = {R.id.tv_chore_desc_listview,R.id.tv_chore_points_listview, R.id.tv_chore_date_listview};
-
-            SimpleAdapter adapter = new SimpleAdapter(this,data,resource,from,to);
-            ListView groupLv = (ListView) findViewById(R.id.lv_pending_chores);
-            groupLv.setOnItemClickListener(this);
-            groupLv.setAdapter(adapter);
+            HashMap<String,String> map = new HashMap<String, String>();
+            map.put("desc",c.getDescription());
+            map.put("points",Integer.toString(c.getPoints()));
+            map.put("date", new SimpleDateFormat("MM-dd-yyyy").format(c.getDueDate()));
+            data.add(map);
         }
 
+        int resource = R.layout.listview_pending_chores;
+        String[] from = {"desc","points","date"};
+        int[] to = {R.id.tv_chore_desc_listview,R.id.tv_chore_points_listview, R.id.tv_chore_date_listview};
+
+        SimpleAdapter adapter = new SimpleAdapter(this,data,resource,from,to);
+        ListView groupLv = (ListView) findViewById(R.id.lv_pending_chores);
+        groupLv.setOnItemClickListener(this);
+        groupLv.setAdapter(adapter);
     }
 
     /**
@@ -159,37 +168,24 @@ public class PendingChoresActivity extends Activity
      * @param resultCode
      * @param data
      */
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    public void onActivityResult(final int requestCode, int resultCode, Intent data)
     {
         ParseUser currentUser = UserManager.CheckCachedUser(this);
         Activity activity = this;
 
-
         if(resultCode == RESULT_OK && currentUser != null)
         {
-            try
-            {
-                Chore chore = chores.get(requestCode);
-                Bundle extras = data.getExtras();
-                image = (Bitmap)extras.get("data");
+            Chore chore = chores.get(requestCode);
+            Bundle extras = data.getExtras();
+            image = (Bitmap)extras.get("data");
 
-                if(image!= null)
-                {
-                    //Update the chore with the image and the users id
-                    ChoreManager.UpdateChoreState(chore.getChoreId(), currentUser.getObjectId(), currentUser.getUsername(), false, image, activity, new Runnable() {
-                        @Override
-                        public void run()
-                        {
-                            DisplayChores();
-                        }
-                    });
-                }
-            }
-
-            catch (Exception e)
+            if(image!= null)
             {
-                DisplayChores();
-                System.out.println(e.getMessage());
+                chores.remove(requestCode);
+                DisplayChores(chores);
+
+                //Update the chore with the image and the users id
+                ChoreManager.UpdateChoreState(chore.getChoreId(), currentUser.getObjectId(), currentUser.getUsername(), false, image, activity);
             }
         }
     }
