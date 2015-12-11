@@ -218,7 +218,7 @@ public class ChoreManager
                    {
                        //Prepare the image file for upload
                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                       proofImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                       proofImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
                        byte[] image = stream.toByteArray();
 
                        ParseFile imageFile = new ParseFile(choreId + "-proof.png", image);

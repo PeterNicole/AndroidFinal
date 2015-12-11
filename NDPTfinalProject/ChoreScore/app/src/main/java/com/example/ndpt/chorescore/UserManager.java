@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Peter Thomson on 24/11/2015.
  *
- * Class for handling user creations and logins, and any other functions specifc to users
+ * Class for handling user creations and logins, and any other functions specific to users
  */
 public class UserManager
 {

@@ -175,9 +175,13 @@ public class PendingChoresActivity extends Activity
 
         if(resultCode == RESULT_OK && currentUser != null)
         {
+            //Retrieve image from camera picture
             Chore chore = chores.get(requestCode);
             Bundle extras = data.getExtras();
             image = (Bitmap)extras.get("data");
+
+            //Resize the image
+            image = Bitmap.createScaledBitmap(image, image.getWidth() *3/2,image.getHeight()* 3/2,false);
 
             if(image!= null)
             {
