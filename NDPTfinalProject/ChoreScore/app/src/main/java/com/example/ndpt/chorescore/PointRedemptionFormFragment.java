@@ -25,8 +25,6 @@ public class PointRedemptionFormFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private Button btnPointRedemptionRedeem;
-
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -59,32 +57,12 @@ public class PointRedemptionFormFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-    private void controlCreation(View v){
-        btnPointRedemptionRedeem = (Button)v.findViewById(R.id.btnPointRedemptionSubmit);
-        final Activity activity = getActivity();
-        Button[] buttons = { btnPointRedemptionRedeem};
-        for (Button b : buttons) {
-            final int id = b.getId();
-            b.setOnClickListener((new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (id == R.id.btnPointRedemptionSubmit) {
-                        // Remove amount of points entered in editText from current users current points.
-                        // Send notification to other users in default group that the user has
-                        // redeemed x amount of points
-                        TransitionManager.ActivityTransition(activity, PointSummaryActivity.class);
-                    }
-                }
-            }));
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_point_redemption_form, container, false);
-        controlCreation(v);
         return v;
     }
 

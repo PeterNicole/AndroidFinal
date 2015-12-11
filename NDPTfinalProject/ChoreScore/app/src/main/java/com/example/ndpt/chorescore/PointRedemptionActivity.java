@@ -97,7 +97,7 @@ public class PointRedemptionActivity extends Activity
                 {
                     if(e == null)
                     {
-                        ParseObject object = objects.get(0);
+                        final ParseObject object = objects.get(0);
                         final Group group = GroupManager.RetrieveGroup(object.getString("groupId"), activity);
 
                         //Initialize controls from the view
@@ -143,7 +143,7 @@ public class PointRedemptionActivity extends Activity
                                 //Set point value to negative of the selected value
                                 Integer points = -sbPointRedemption.getProgress() * SEEK_FACTOR;
 
-                                if(points < 0)
+                                if(points < 0 && object.getInt("points") > 0)
                                 {
                                     //Remove the points from the user
                                     ChoreManager.UpdateUserPoints(currentUser.getObjectId(), group.getGroupId(), points, activity);

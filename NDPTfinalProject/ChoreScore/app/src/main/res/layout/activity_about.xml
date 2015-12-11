@@ -10,16 +10,19 @@
     <fragment style="@style/FragmentStyle"
         android:layout_weight="2"
         android:id="@+id/about_content_one_fragment"
-        android:name="com.example.ndpt.chorescore.AboutOneFragment" />
+        android:name="com.example.ndpt.chorescore.AboutOneFragment"
+        tools:layout="@layout/fragment_about_one" />
 
     <fragment style="@style/FragmentStyle"
         android:layout_weight="2"
         android:id="@+id/about_content_two_fragment"
-        android:name="com.example.ndpt.chorescore.AboutTwoFragment" />
+        android:name="com.example.ndpt.chorescore.AboutTwoFragment"
+        tools:layout="@layout/fragment_about_two" />
 
     <fragment style="@style/FragmentStyle"
         android:layout_weight="1"
         android:id="@+id/about_go_back_fragment"
-        android:name="com.example.ndpt.chorescore.GoBackButtonFragment" />
+        android:name="com.example.ndpt.chorescore.GoBackButtonFragment"
+        tools:layout="@layout/fragment_go_back_button" />
 
 </LinearLayout>
