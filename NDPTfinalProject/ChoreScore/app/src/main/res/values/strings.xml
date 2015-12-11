@@ -15,16 +15,14 @@
     <string name="view_group">View Group</string>
     <string name="make_default_group">Make Default Group</string>
     <string name="search">Search</string>
-    <string name="add_chore">Add Chores To List</string>
+    <string name="add_chore">Add Chore To List</string>
     <string name="manage_chores">Manage Chores</string>
-    <string name="add_selected">Add Selected Chores</string>
+    <string name="add_selected">Add Chore</string>
     <string name="take_picture">Take Picture</string>
     <string name="redeem_points">Redeem Points</string>
     <string name="view_chores">View Chores</string>
     <string name="review_chores">Review Completed Chores</string>
     <string name="current_groups_btn">Current Groups</string>
-
-
 
     <!-- TextViews -->
     <string name="first_name">First Name:</string>
@@ -69,12 +67,13 @@
     <string name="title_activity_invite_to_group">Invite To Group</string>
     <string name="title_activity_view_group">View Group</string>
     <string name="title_activity_pending_chores">Pending Chores</string>
-    <string name="title_activity_select_chores">Select Chores</string>
+    <string name="title_activity_select_chores">Add Chore</string>
     <string name="title_activity_group_details">Group Details</string>
     <string name="title_activity_chore_details">Chore Details</string>
     <string name="title_activity_point_summary">Point Summary</string>
     <string name="title_activity_point_redemption">Point Redemption</string>
     <string name="title_activity_review_chores">Review Chores</string>
+    <string name="title_activity_view_group_member">Group Details</string>
 
     <!-- Menu Item Titles -->
     <string name ="group_menu_title">Groups</string>
@@ -86,10 +85,6 @@
 
     <!-- Edit Text -->
     <string name ="enter_search">Enter Search Keywords Here</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_view_group_member">ViewGroupMemberActivity</string>
 	
 	<!-- User and Group error strings -->
     <!-- Note: \u0020 is a space character for leading/trailing spaces -->

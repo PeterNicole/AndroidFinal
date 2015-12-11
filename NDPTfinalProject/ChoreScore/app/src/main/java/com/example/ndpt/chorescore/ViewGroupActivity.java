@@ -2,7 +2,6 @@ package com.example.ndpt.chorescore;
 
 import android.app.Activity;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -92,9 +91,8 @@ public class ViewGroupActivity extends Activity
             tvAdminName.setText(adminName);
 
 
-
             //Populate group members list view
-            groupMembers = GroupManager.RetreiveGroupMemberNames(group.getGroupId(),this);
+            groupMembers = GroupManager.RetrieveGroupMemberNames(group.getGroupId(), this);
             ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String,String>>();
             for (String s: groupMembers)
             {

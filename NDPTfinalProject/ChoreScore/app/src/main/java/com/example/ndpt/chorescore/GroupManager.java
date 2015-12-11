@@ -182,9 +182,10 @@ public class GroupManager
      * @param groupId
      * @return ArrayList<String>() containing member names
      */
-    public static ArrayList<String> RetreiveGroupMemberNames(String groupId, Activity activity)
+    public static ArrayList<String> RetrieveGroupMemberNames(String groupId, Activity activity)
     {
         ArrayList<String> memberNames = new ArrayList<String>();
+        ArrayList<String> memberIds = new ArrayList<String>();
 
         try
         {
@@ -199,10 +200,11 @@ public class GroupManager
             //Add each member id to the member name query
             for (ParseObject p: result)
             {
-                memberNameQuery.whereEqualTo("objectId",p.getString("userId"));
+                memberIds.add(p.getString("userId"));
             }
 
             //Query the parse database for the member names
+            memberNameQuery.whereContainedIn("objectId", memberIds);
             List<ParseObject> nameResult = memberNameQuery.find();
 
             for (ParseObject p: nameResult)
