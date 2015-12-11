@@ -2,6 +2,7 @@ package com.example.ndpt.chorescore;
 import android.app.Activity;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -99,6 +100,100 @@ public class GroupManager
     }
 
     /**
+     * Updates the groups admin with the specified user id
+     * @param groupId
+     * @param userId
+     * @param activity
+     */
+    public static void UpdateGroupAdmin(String groupId, final String userId, final Activity activity)
+    {
+        //Query the parse database for the group object
+        ParseQuery<ParseObject> groupQuery = ParseQuery.getQuery("Group");
+        groupQuery.whereEqualTo("objectId", groupId);
+
+        //Retrieve the group object from the query result
+        groupQuery.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+                    ParseObject groupObject = objects.get(0);
+
+                    //Update the groups admin
+                    groupObject.put("admin", userId);
+
+                    //Save object with updated information
+                    groupObject.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e != null) {
+                                //Display parse error message
+                                Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
+                                toast.show();
+                            }
+                        }
+                    });
+                } else {
+                    //Display parse error message
+                    Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
+    }
+
+    /**
+     * Deletes the specified group from the parse database
+     * @param groupId
+     * @param activity
+     */
+    public static void DeleteGroup(String groupId, final Activity activity)
+    {
+        //Delete the group object
+        try
+        {
+            ParseObject.createWithoutData("Group",groupId).deleteEventually();
+        }
+
+        catch(Exception e)
+        {
+            //Display error message
+            Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
+    public static void DeleteUserGroup(String groupId, String userId, final Activity activity)
+    {
+        //Query the data base for the userGroup object
+        ParseQuery<ParseObject> userGroupQuery = ParseQuery.getQuery("UserGroup");
+        userGroupQuery.whereEqualTo("userId", userId);
+        userGroupQuery.whereEqualTo("groupId", groupId);
+
+        //Execute the querty
+        userGroupQuery.findInBackground(new FindCallback<ParseObject>()
+        {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e)
+            {
+                if(e == null)
+                {
+                    //Delete the object
+                    ParseObject userGroupObject = objects.get(0);
+                    userGroupObject.deleteEventually();
+                }
+
+                else
+                {
+                    //Display parse error message
+                    Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
+                    toast.show();
+                }
+
+            }
+        });
+    }
+
+    /**
      * Returns a list of all groups with name matching the string
      * @param groupName search fragment for group name
      * @return ArrayList of all groups
@@ -114,7 +209,7 @@ public class GroupManager
         {
             //Query the parse database
             ParseQuery<ParseObject> groupQuery = ParseQuery.getQuery("Group");
-            groupQuery.whereContains("name", groupName );
+            groupQuery.whereContains("name", groupName);
             List<ParseObject> result = groupQuery.find();
 
             //Add each group to the array list
@@ -212,6 +307,39 @@ public class GroupManager
         }
 
         return memberNames;
+    }
+
+    /**
+     * Returns a list of all member ids for a particular group
+     * @param groupId
+     * @return ArrayList<String>() containing member ids
+     */
+    public static ArrayList<String> RetrieveGroupMemberIds(String groupId, Activity activity)
+    {
+        ArrayList<String> memberIds = new ArrayList<String>();
+
+        try
+        {
+            //Query the parse database for the member ids
+            ParseQuery<ParseObject> memberIdQuery = ParseQuery.getQuery("UserGroup");
+            memberIdQuery.whereContains("groupId", groupId);
+            List<ParseObject> result = memberIdQuery.find();
+
+            //Add each member id to the member name query
+            for (ParseObject p: result)
+            {
+                memberIds.add(p.getString("userId"));
+            }
+
+        }
+        catch (ParseException e)
+        {
+            //Display parse exception
+            Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        return memberIds;
     }
 
     /**

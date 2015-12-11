@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -26,9 +28,11 @@ public class ViewGroupActivity extends Activity
     GoBackButtonFragment.OnFragmentInteractionListener {
 
     //class scope variables
-    TextView tvGroupName;
-    TextView tvAdminName;
-    ListView lvMembers;
+    private TextView tvGroupName;
+    private TextView tvAdminName;
+    private ListView lvMembers;
+    private Button btnLeaveGroup;
+    private Group group;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,6 +42,7 @@ public class ViewGroupActivity extends Activity
         if(UserManager.UserHasDefaultGroup(this))
         {
             DisplayGroupDetails();
+            ControlCreation();
         }
     }
 
@@ -84,7 +89,7 @@ public class ViewGroupActivity extends Activity
 
             //Get the current users group
             String groupId = currentUser.getString("defaultGroupId");
-            Group group = GroupManager.RetrieveGroup(groupId,this);
+            group = GroupManager.RetrieveGroup(groupId,this);
 
             //Set group name
             tvGroupName.setText(group.getName());
@@ -111,5 +116,20 @@ public class ViewGroupActivity extends Activity
             SimpleAdapter adapter = new SimpleAdapter(this,data,resource,from,to);
             lvMembers.setAdapter(adapter);
         }
+    }
+
+    public void ControlCreation()
+    {
+        final Activity activity = this;
+        btnLeaveGroup = (Button)findViewById(R.id.btnLeaveGroup);
+        btnLeaveGroup.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //Click event to leave the current group
+                UserManager.LeaveCurrentGroup(group,activity);
+            }
+        });
     }
 }

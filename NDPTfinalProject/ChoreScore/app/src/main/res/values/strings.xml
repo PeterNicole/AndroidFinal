@@ -23,6 +23,7 @@
     <string name="view_chores">View Chores</string>
     <string name="review_chores">Review Completed Chores</string>
     <string name="current_groups_btn">Current Groups</string>
+    <string name="leave_group_btn">Leave Group</string>
 
     <!-- TextViews -->
     <string name="first_name">First Name:</string>
