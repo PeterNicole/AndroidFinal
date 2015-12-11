@@ -50,11 +50,14 @@ public class ReviewChoresActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_chores);
-        ParseUser currentUser =  UserManager.CheckCachedUser(this);
-        if (currentUser!= null)
+        if(UserManager.UserHasDefaultGroup(this))
         {
-            chores = ChoreManager.getSubmittedGroupChores(currentUser.getString("defaultGroupId"), this);
-            DisplayChores(chores);
+            ParseUser currentUser =  UserManager.CheckCachedUser(this);
+            if (currentUser!= null)
+            {
+                chores = ChoreManager.getSubmittedGroupChores(currentUser.getString("defaultGroupId"), this);
+                DisplayChores(chores);
+            }
         }
     }
 
@@ -198,6 +201,13 @@ public class ReviewChoresActivity extends Activity
                     });
                 }
             });
+        }
+
+        else
+        {
+            //Display message to show current user is not authorized
+            Toast toast = Toast.makeText(activity,activity.getString(R.string.error_review_chore), Toast.LENGTH_LONG);
+            toast.show();
         }
     }
 

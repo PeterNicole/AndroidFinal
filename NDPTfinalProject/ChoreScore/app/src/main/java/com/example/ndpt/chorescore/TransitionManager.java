@@ -25,7 +25,6 @@ public class TransitionManager
         menuMap.put(R.id.mi_groups,CurrentGroupsActivity.class);
         menuMap.put(R.id.mi_chores,PendingChoresActivity.class);
         menuMap.put(R.id.mi_points,PointRedemptionActivity.class);
-        menuMap.put(R.id.mi_review,ReviewChoresActivity.class);
     }
     /**
      * Overloaded method for default closeCurrent = true

@@ -99,15 +99,6 @@ public class GroupManager
     }
 
     /**
-     * Returns a list of all groups
-     * @return ArrayList of all groups
-     */
-    public static ArrayList<Group> RetrieveAll(Activity activity)
-    {
-        return RetrieveAll("", activity);
-    }
-
-    /**
      * Returns a list of all groups with name matching the string
      * @param groupName search fragment for group name
      * @return ArrayList of all groups
@@ -296,6 +287,10 @@ public class GroupManager
 
             //Set the joined group to the users default group
             SetUserDefaultGroup(groupId, activity);
+
+            //Display success message
+            Toast toast = Toast.makeText(activity,activity.getString(R.string.success_group_joined),Toast.LENGTH_LONG);
+            toast.show();
         }
     }
 

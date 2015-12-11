@@ -32,10 +32,12 @@ public class UserManager
         newUser.setUsername(userName);
         newUser.setPassword(password);
         //Email
-        if (email != null)
+        if (email.equals(""))
         {
-            newUser.setEmail(email);
+            email = userName + "@chorescore.com";
         }
+
+        newUser.setEmail(email);
 
         //Additional custom fields
         if(firstName != null)
@@ -92,7 +94,6 @@ public class UserManager
                     Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
                     toast.show();
                 }
-
             }
         });
     }
@@ -145,7 +146,6 @@ public class UserManager
             nameQuery.whereEqualTo("objectId", userId);
             List<ParseObject> result = nameQuery.find();
             name = result.get(0).getString("username");
-
         }
 
         catch (ParseException e)
@@ -186,4 +186,56 @@ public class UserManager
 
     }
 
+    /**
+     * Check if the user has a valid default group assigned, redirect and display message if not
+     * @param activity
+     */
+    static public boolean UserHasDefaultGroup(Activity activity)
+    {
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        boolean hasGroup = true;
+        if(currentUser != null)
+        {
+            String defaultGroupId = currentUser.getString("defaultGroupId");
+
+            //Group id is null
+            if(defaultGroupId == null)
+            {
+                hasGroup = false;
+            }
+
+            else
+            {
+                try
+                {
+                    //Query groups table for group matching the users default group id
+                    ParseQuery<ParseObject> groupQuery = ParseQuery.getQuery("Group");
+                    groupQuery.whereContains("objectId", defaultGroupId);
+                    List<ParseObject> result = groupQuery.find();
+
+                    //Redirect to previous activity if group is invalid or does not exist
+                    if(result.size() <= 0)
+                    {
+                        hasGroup = false;
+                    }
+                }
+
+                catch (ParseException e)
+                {
+                    hasGroup = false;
+                }
+            }
+        }
+
+        if(!hasGroup)
+        {
+            TransitionManager.PreviousActivity(activity,true);
+
+            //Display no group error
+            Toast toast = Toast.makeText(activity,activity.getString(R.string.error_no_group),Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        return hasGroup;
+    }
 }

@@ -35,7 +35,10 @@ public class ViewGroupActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_group_member);
-        DisplayGroupDetails();
+        if(UserManager.UserHasDefaultGroup(this))
+        {
+            DisplayGroupDetails();
+        }
     }
 
     @Override

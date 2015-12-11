@@ -48,13 +48,15 @@ public class PendingChoresActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending_chores);
-        ParseUser currentUser =  UserManager.CheckCachedUser(this);
-        if (currentUser!= null)
+        if(UserManager.UserHasDefaultGroup(this))
         {
-            chores = ChoreManager.getPendingGroupChores(currentUser.getString("defaultGroupId"),this);
-            DisplayChores(chores);
+            ParseUser currentUser =  UserManager.CheckCachedUser(this);
+            if (currentUser!= null)
+            {
+                chores = ChoreManager.getPendingGroupChores(currentUser.getString("defaultGroupId"),this);
+                DisplayChores(chores);
+            }
         }
-
     }
 
     @Override

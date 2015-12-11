@@ -44,7 +44,11 @@ public class PointRedemptionActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_point_redemption);
-        controlCreation();
+        if(UserManager.UserHasDefaultGroup(this))
+        {
+            controlCreation();
+        }
+
     }
 
     @Override
