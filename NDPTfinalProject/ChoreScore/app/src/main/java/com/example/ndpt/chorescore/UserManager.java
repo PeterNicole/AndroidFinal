@@ -9,9 +9,13 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.Thread.sleep;
 
 /**
  * Created by Peter Thomson on 24/11/2015.
@@ -49,21 +53,17 @@ public class UserManager
             newUser.put("lastName", lastName);
         }
 
-        newUser.signUpInBackground(new SignUpCallback()
-        {
+        newUser.signUpInBackground(new SignUpCallback() {
             @Override
-            public void done(ParseException e)
-            {
+            public void done(ParseException e) {
                 //Redirect to current groups on successful login
-                if (e == null)
-                {
-                    TransitionManager.ActivityTransition(activity,CurrentGroupsActivity.class);
+                if (e == null) {
+                    TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
                 }
 
                 //Display login error to user
-                else
-                {
-                    Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
+                else {
+                    Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
                     toast.show();
                 }
             }
@@ -237,5 +237,77 @@ public class UserManager
         }
 
         return hasGroup;
+    }
+
+    static public void LeaveCurrentGroup(Group group, final Activity activity)
+    {
+        try
+        {
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            if(currentUser != null && currentUser.getString("defaultGroupId") != null)
+            {
+                //Check if the member is the only member of the group
+                ArrayList<String> groupMembers = GroupManager.RetrieveGroupMemberIds(group.getGroupId(), activity);
+                groupMembers.remove(currentUser.getObjectId());
+
+                if(groupMembers.size() <= 0)
+                {
+                    //Delete the group if last member
+                    GroupManager.DeleteGroup(group.getGroupId(), activity);
+                }
+
+                else if (currentUser.getObjectId().equals(group.getAdminId()))
+                {
+                    //Set new group admin if the admin is leaving and there are other members
+                    GroupManager.UpdateGroupAdmin(group.getGroupId(),groupMembers.get(0),activity);
+                }
+
+                //Check if the user has other groups
+                ArrayList<String> userGroups = GroupManager.RetrieveUserGroupIds(currentUser.getObjectId(),activity);
+                userGroups.remove(group.getGroupId());
+
+                if(userGroups.size() > 0)
+                {
+                    //Set new default group if user is in other groups
+                    currentUser.put("defaultGroupId", userGroups.get(0));
+                }
+
+                else
+                {
+                    //Reset the current users default group
+                    currentUser.remove("defaultGroupId");
+                }
+
+                //Remove the user from the group
+                GroupManager.DeleteUserGroup(group.getGroupId(), currentUser.getObjectId(), activity);
+
+
+                currentUser.saveInBackground(new SaveCallback()
+                {
+                    @Override
+                    public void done(ParseException e)
+                    {
+                        if (e == null)
+                        {
+                            //Transition to current groups activity
+                            TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
+                        }
+                        else
+                        {
+                            //Display parse error
+                            Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
+                            toast.show();
+                        }
+                    }
+                });
+            }
+        }
+
+        catch (Exception e)
+        {
+            //Display error
+            Toast toast = Toast.makeText(activity,activity.getString(R.string.error_no_group),Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 }

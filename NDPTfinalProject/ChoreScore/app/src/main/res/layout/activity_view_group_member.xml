@@ -13,6 +13,11 @@
         android:id="@+id/view_group_display_fragment"
         tools:layout="@layout/fragment_view_group_display" />
 
+    <fragment style="@style/FragmentStyle"
+        android:layout_weight="1"
+        android:name="com.example.ndpt.chorescore.ViewGroupButtonsMemberFragment"
+        android:id="@+id/view_group_button_fragment"
+        tools:layout="@layout/fragment_view_group_buttons" />
 
     <fragment style="@style/FragmentStyle"
         android:layout_weight="1"
