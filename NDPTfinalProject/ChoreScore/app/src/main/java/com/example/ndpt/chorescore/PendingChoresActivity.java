@@ -25,6 +25,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static java.lang.Thread.sleep;
+
 /**
  * PendingChoresActivity.java
  * Created by Nicole Dahlquist on 02/12/2015.
@@ -181,6 +183,15 @@ public class PendingChoresActivity extends Activity
                         @Override
                         public void run()
                         {
+                            //Wait 1 second and re-display the updated chore list
+                            try
+                            {
+                                sleep(1000);
+                            }
+                            catch (InterruptedException e)
+                            {
+                                e.printStackTrace();
+                            }
                             DisplayChores();
                         }
                     });

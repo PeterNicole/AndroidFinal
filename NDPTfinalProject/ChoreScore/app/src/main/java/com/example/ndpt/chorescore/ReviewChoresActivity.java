@@ -30,6 +30,8 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static java.lang.Thread.sleep;
+
 /**
  * ReviewChoresActivity.java
  * Created by Peter Thomson on 06/12/2015.
@@ -144,6 +146,16 @@ public class ReviewChoresActivity extends Activity
                             @Override
                             public void run()
                             {
+                                //Wait 1 second and re-display the updated chore list
+                                try
+                                {
+                                    sleep(500);
+                                }
+
+                                catch (InterruptedException e)
+                                {
+                                    e.printStackTrace();
+                                }
                                 DisplayChores();
                             }
                         });
@@ -160,6 +172,15 @@ public class ReviewChoresActivity extends Activity
                             @Override
                             public void run()
                             {
+                                //Wait 1 second and re-display the updated chore list
+                                try
+                                {
+                                    sleep(500);
+                                }
+                                catch (InterruptedException e)
+                                {
+                                    e.printStackTrace();
+                                }
                                 DisplayChores();
                             }
                         });
