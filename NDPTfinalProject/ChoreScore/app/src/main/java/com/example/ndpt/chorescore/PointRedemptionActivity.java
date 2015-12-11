@@ -139,14 +139,17 @@ public class PointRedemptionActivity extends Activity
                                 //Set point value to negative of the selected value
                                 Integer points = -sbPointRedemption.getProgress() * SEEK_FACTOR;
 
-                                //Remove the points from the user
-                                ChoreManager.UpdateUserPoints(currentUser.getObjectId(), group.getGroupId(), points, activity);
+                                if(points < 0)
+                                {
+                                    //Remove the points from the user
+                                    ChoreManager.UpdateUserPoints(currentUser.getObjectId(), group.getGroupId(), points, activity);
 
-                                //Send a notification to the admin
-                                NotificationPusher.PushMessageToUser(group.getAdminId(),currentUser.getUsername() + getString(R.string.notification_redeemed) + -points + getString(R.string.notification_points));
+                                    //Send a notification to the admin
+                                    NotificationPusher.PushMessageToUser(group.getAdminId(),currentUser.getUsername() + getString(R.string.notification_redeemed) + -points + getString(R.string.notification_points));
 
-                                //Re-create the controls
-                                controlCreation();
+                                    //Re-create the controls
+                                    controlCreation();
+                                }
                             }
                         });
 

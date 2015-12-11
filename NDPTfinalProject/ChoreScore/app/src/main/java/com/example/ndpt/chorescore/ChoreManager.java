@@ -316,6 +316,5 @@ public class ChoreManager
         }
 
         return choreCount;
-
     }
 }
