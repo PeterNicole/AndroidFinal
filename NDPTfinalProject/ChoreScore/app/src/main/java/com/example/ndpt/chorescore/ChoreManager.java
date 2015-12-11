@@ -180,7 +180,7 @@ public class ChoreManager
      * @param isApproved
      * @param proofImage
      */
-    public static void UpdateChoreState(final String choreId, final String completerId, final String completerName, final Boolean isApproved, final Bitmap proofImage, final Activity activity, final Runnable callback)
+    public static void UpdateChoreState(final String choreId, final String completerId, final String completerName, final Boolean isApproved, final Bitmap proofImage, final Activity activity)
     {
         //Query the parse database for the chore object
         ParseQuery<ParseObject> choreQuery = ParseQuery.getQuery("Chore");
@@ -195,7 +195,6 @@ public class ChoreManager
                if(e == null)
                {
                    ParseObject choreObject = objects.get(0);
-
 
                    //Update the chore properties
                    choreObject.put("isApproved", isApproved);
@@ -235,16 +234,9 @@ public class ChoreManager
                        @Override
                        public void done(ParseException e)
                        {
-                           if(e == null)
+                           if(e != null)
                            {
-                               if(callback != null)
-                               {
-                                   //Run the callback method after updating
-                                   callback.run();
-                               }
-                           }
-                           else
-                           {
+                               //Display parse error message
                                Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
                                toast.show();
                            }
