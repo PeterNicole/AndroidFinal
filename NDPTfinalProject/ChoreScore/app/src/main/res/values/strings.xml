@@ -101,6 +101,7 @@
     <string name="and"> and \u0020</string>
     <string name="error_date_before">Due date must not be before the current date.</string>
     <string name="error_no_group">You must join a group to use this feature.</string>
+    <string name="error_points_zero">Points must not be 0.</string>
 
     <!-- Success messages -->
     <string name="success_add_chore">Chore added!</string>

@@ -23,6 +23,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -96,7 +97,7 @@ public class PendingChoresActivity extends Activity
             HashMap<String,String> map = new HashMap<String, String>();
             map.put("desc",c.getDescription());
             map.put("points",Integer.toString(c.getPoints()));
-            map.put("date", c.getDueDate().toString()); //TODO format date
+            map.put("date", new SimpleDateFormat("MM-dd-yyyy").format(c.getDueDate()));
             data.add(map);
         }
 

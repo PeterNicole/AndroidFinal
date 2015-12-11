@@ -29,7 +29,6 @@ public class SelectChoresActivity extends Activity
     private SeekBar seekBar;
     private DatePicker datePicker;
     private Button addChoreButton;
-    private TextView tvDueDate;
 
     private final Integer SEEKBAR_FACTOR = 50;
     private final Integer DESCRIPTION_MIN_LENGTH = 6;
@@ -78,7 +77,6 @@ public class SelectChoresActivity extends Activity
         datePicker = (DatePicker)findViewById(R.id.dpChoreDatePicker);
         addChoreButton = (Button)findViewById(R.id.btnSelectChoresAdd);
         etDescription = (EditText)findViewById(R.id.etAddChoreDescription);
-        tvDueDate = (TextView)findViewById(R.id.tvDueDate);
         final Activity activity = this;
 
         //Set the minimum date to tomorrow
@@ -148,6 +146,15 @@ public class SelectChoresActivity extends Activity
 
                     //Show error message
                     Toast toast = Toast.makeText(activity,getString(R.string.error_date_before), Toast.LENGTH_LONG);
+                    toast.show();
+                }
+
+                if(points <= 0)
+                {
+                    isValid = false;
+
+                    //Show error message
+                    Toast toast = Toast.makeText(activity,getString(R.string.error_points_zero), Toast.LENGTH_LONG);
                     toast.show();
                 }
 
