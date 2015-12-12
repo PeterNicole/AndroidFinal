@@ -9,7 +9,7 @@
 
     <fragment style="@style/FragmentStyle"
         android:name="com.example.ndpt.chorescore.SelectChoresCreateFormFragment"
-        android:layout_weight="7"
+        android:layout_weight="8"
         android:id="@+id/select_chores_listview"
         tools:layout="@layout/fragment_select_chores_create_form" />
 

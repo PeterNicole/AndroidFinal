@@ -12,7 +12,8 @@
         <TextView style="@style/TextViewStyle"
             android:id="@+id/tv_point_redemption_redemption_amount"
             android:textSize="20sp"
-            android:text="@string/redemption_amount"/>
+            android:text="@string/redemption_amount"
+            android:layout_width="180dp"/>
 
         <TextView style="@style/TextViewStyle"
             android:id="@+id/tv_point_redemption_redemption_seekbar"
@@ -24,7 +25,8 @@
         android:id="@+id/sbPointRedeemption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="0"/>
+        android:max="0"
+        android:layout_marginBottom="20dp"/>
 
     <Button style="@style/ButtonStyle"
         android:id="@+id/btnPointRedemptionSubmit"

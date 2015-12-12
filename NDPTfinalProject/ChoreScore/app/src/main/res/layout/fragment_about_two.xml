@@ -10,7 +10,7 @@
 
         <TextView style="@style/TextViewStyle"
             android:text="@string/about_content_2"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:id="@+id/tvAbout2"/>
 
     </LinearLayout>

@@ -25,7 +25,7 @@
         >
 
         <TextView
-        android:layout_width="300dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:id="@+id/tv_main_usage_users"
         android:text="@string/number_of_users"
@@ -33,7 +33,8 @@
 
         <TextView style="@style/TextViewStyle"
             android:id="@+id/tv_main_usage_user_count"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:gravity="right"/>
 
     </LinearLayout>
 
@@ -44,7 +45,7 @@
         android:layout_marginTop="10dp">
 
         <TextView
-            android:layout_width="300dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:id="@+id/tv_main_usage_groups_label"
             android:text="@string/number_of_groups"
@@ -52,7 +53,8 @@
 
         <TextView style="@style/TextViewStyle"
             android:id="@+id/tv_main_usage_groups_count"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:gravity="right"/>
 
     </LinearLayout>
 
@@ -63,7 +65,7 @@
         android:layout_marginTop="10dp">
 
         <TextView
-            android:layout_width="300dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:id="@+id/tv_main_usage_chores_complete"
             android:text="@string/number_of_chores"
@@ -71,7 +73,8 @@
 
         <TextView style="@style/TextViewStyle"
             android:id="@+id/tv_main_usage_chore_count"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:gravity="right"/>
 
     </LinearLayout>
 

@@ -8,16 +8,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/chore_description"/>
+            android:layout_height="100dp"
+            android:text="@string/chore_description"
+            android:textSize="20sp"/>
 
         <EditText
             android:id="@+id/etAddChoreDescription"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
     </LinearLayout>
 
     <!-- Points Label -->
@@ -25,14 +28,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
-            android:text="@string/chore_points"/>
+            android:text="@string/chore_points"
+            android:textSize="20sp"
+            android:layout_marginBottom="10dp"
+            />
+
         <TextView
             android:id="@+id/tvChorePointSeekBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            />
+
     </LinearLayout>
 
     <!-- Points Seek Bar -->
@@ -47,14 +58,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/chore_due_date"
-        android:id="@+id/tvDueDate"/>
+        android:id="@+id/tvDueDate"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"/>
 
     <!-- Due Date Picker -->
     <DatePicker
         android:id="@+id/dpChoreDatePicker"
         android:calendarViewShown="false"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></DatePicker>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"></DatePicker>
 
 
 </LinearLayout>
