@@ -18,8 +18,7 @@
         android:id="@+id/about_content_two_fragment"
         android:name="com.example.ndpt.chorescore.AboutTwoFragment"
         tools:layout="@layout/fragment_about_two" />
-    <Button
-        android:style="@style/ButtonStyle"
+    <Button style="@style/ButtonStyle"
         android:text="@string/manual_btn"
         android:id="@+id/about_manual_btn"/>
 
