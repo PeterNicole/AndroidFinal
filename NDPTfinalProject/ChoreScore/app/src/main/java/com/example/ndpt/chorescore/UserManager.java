@@ -32,42 +32,44 @@ public class UserManager
      */
     static public void CreateUser(String userName,String password, String firstName, String lastName, String email, final Activity activity)
     {
-        ParseUser newUser = new ParseUser();
-        newUser.setUsername(userName);
-        newUser.setPassword(password);
-        //Email
-        if (email.equals(""))
-        {
-            email = userName + "@chorescore.com";
-        }
-
-        newUser.setEmail(email);
-
-        //Additional custom fields
-        if(firstName != null)
-        {
-            newUser.put("firstName", firstName);
-        }
-        if (lastName != null)
-        {
-            newUser.put("lastName", lastName);
-        }
-
-        newUser.signUpInBackground(new SignUpCallback() {
-            @Override
-            public void done(ParseException e) {
-                //Redirect to current groups on successful login
-                if (e == null) {
-                    TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
-                }
-
-                //Display login error to user
-                else {
-                    Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
-                    toast.show();
-                }
+        try {
+            ParseUser newUser = new ParseUser();
+            newUser.setUsername(userName);
+            newUser.setPassword(password);
+            //Email
+            if (email.equals("")) {
+                email = userName + "@chorescore.com";
             }
-        });
+
+            newUser.setEmail(email);
+
+            //Additional custom fields
+            if (firstName != null) {
+                newUser.put("firstName", firstName);
+            }
+            if (lastName != null) {
+                newUser.put("lastName", lastName);
+            }
+
+            newUser.signUpInBackground(new SignUpCallback() {
+                @Override
+                public void done(ParseException e) {
+                    //Redirect to current groups on successful login
+                    if (e == null) {
+                        TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
+                    }
+
+                    //Display login error to user
+                    else {
+                        Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                }
+            });
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     /**
@@ -77,9 +79,10 @@ public class UserManager
      */
     static public void LoginUser(String userName, String password, final Activity activity)
     {
-        ParseUser.logInInBackground(userName, password, new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException e) {
+        try {
+            ParseUser.logInInBackground(userName, password, new LogInCallback() {
+                @Override
+                public void done(ParseUser user, ParseException e) {
                 //Successful login
                 if (user != null) {
                     //Add the user id to the installation on login for targetted notifications
@@ -94,8 +97,12 @@ public class UserManager
                     Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
                     toast.show();
                 }
-            }
-        });
+                }
+            });
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     /**
@@ -105,16 +112,21 @@ public class UserManager
      */
     static public ParseUser CheckCachedUser(Activity activity)
     {
-        ParseUser currentUser = ParseUser.getCurrentUser();
+        try {
+            ParseUser currentUser = ParseUser.getCurrentUser();
 
-        //If user is not currently logged in
-        if(currentUser == null && activity.getClass() != MainActivity.class)
-        {
-            //Prompt login
-            TransitionManager.ActivityTransition(activity,MainActivity.class);
+            //If user is not currently logged in
+            if (currentUser == null && activity.getClass() != MainActivity.class) {
+                //Prompt login
+                TransitionManager.ActivityTransition(activity, MainActivity.class);
+            }
+
+            return currentUser;
         }
-
-        return currentUser;
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return null;
+        }
     }
 
     /**
@@ -122,12 +134,16 @@ public class UserManager
      */
     static public void LogoutUser(Activity activity)
     {
-        ParseUser.getCurrentUser().logOut();
-        if(ParseUser.getCurrentUser() == null)
-        {
-            Toast toast = Toast.makeText(activity,R.string.success_logout, Toast.LENGTH_LONG);
-            toast.show();
-            TransitionManager.ActivityTransition(activity, MainActivity.class);
+        try {
+            ParseUser.getCurrentUser().logOut();
+            if (ParseUser.getCurrentUser() == null) {
+                Toast toast = Toast.makeText(activity, R.string.success_logout, Toast.LENGTH_LONG);
+                toast.show();
+                TransitionManager.ActivityTransition(activity, MainActivity.class);
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
@@ -192,48 +208,43 @@ public class UserManager
      */
     static public boolean UserHasDefaultGroup(Activity activity)
     {
+
         ParseUser currentUser = ParseUser.getCurrentUser();
         boolean hasGroup = true;
-        if(currentUser != null)
-        {
-            String defaultGroupId = currentUser.getString("defaultGroupId");
+        try {
+            if (currentUser != null) {
+                String defaultGroupId = currentUser.getString("defaultGroupId");
 
-            //Group id is null
-            if(defaultGroupId == null)
-            {
-                hasGroup = false;
-            }
+                //Group id is null
+                if (defaultGroupId == null) {
+                    hasGroup = false;
+                } else {
+                    try {
+                        //Query groups table for group matching the users default group id
+                        ParseQuery<ParseObject> groupQuery = ParseQuery.getQuery("Group");
+                        groupQuery.whereContains("objectId", defaultGroupId);
+                        List<ParseObject> result = groupQuery.find();
 
-            else
-            {
-                try
-                {
-                    //Query groups table for group matching the users default group id
-                    ParseQuery<ParseObject> groupQuery = ParseQuery.getQuery("Group");
-                    groupQuery.whereContains("objectId", defaultGroupId);
-                    List<ParseObject> result = groupQuery.find();
-
-                    //Redirect to previous activity if group is invalid or does not exist
-                    if(result.size() <= 0)
-                    {
+                        //Redirect to previous activity if group is invalid or does not exist
+                        if (result.size() <= 0) {
+                            hasGroup = false;
+                        }
+                    } catch (ParseException e) {
                         hasGroup = false;
                     }
                 }
+            }
 
-                catch (ParseException e)
-                {
-                    hasGroup = false;
-                }
+            if (!hasGroup) {
+                TransitionManager.PreviousActivity(activity, true);
+
+                //Display no group error
+                Toast toast = Toast.makeText(activity, activity.getString(R.string.error_no_group), Toast.LENGTH_LONG);
+                toast.show();
             }
         }
-
-        if(!hasGroup)
-        {
-            TransitionManager.PreviousActivity(activity,true);
-
-            //Display no group error
-            Toast toast = Toast.makeText(activity,activity.getString(R.string.error_no_group),Toast.LENGTH_LONG);
-            toast.show();
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
 
         return hasGroup;

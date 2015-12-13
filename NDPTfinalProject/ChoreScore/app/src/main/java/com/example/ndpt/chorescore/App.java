@@ -15,23 +15,26 @@ public class App extends Application
 
     @Override public void onCreate()
     {
-        super.onCreate();
+        try {
+            super.onCreate();
 
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
+            // Enable Local Datastore.
+            Parse.enableLocalDatastore(this);
 
-        Parse.initialize(this, "eeFeLikeQiwpaLAtdDuboSkFYpNEQZgYzlSWvlFU", "ol43zjzNsEiCtRqVHD1i0z3V7BLLXOc4DyD4Mhgy");
+            Parse.initialize(this, "eeFeLikeQiwpaLAtdDuboSkFYpNEQZgYzlSWvlFU", "ol43zjzNsEiCtRqVHD1i0z3V7BLLXOc4DyD4Mhgy");
 
-        ParseUser user = ParseUser.getCurrentUser();
+            ParseUser user = ParseUser.getCurrentUser();
 
-        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+            ParseInstallation installation = ParseInstallation.getCurrentInstallation();
 
-        if(user != null)
-        {
-            installation.put("userId", user.getObjectId());
+            if (user != null) {
+                installation.put("userId", user.getObjectId());
+            }
+
+            installation.saveInBackground();
         }
-
-        installation.saveInBackground();
-
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 }

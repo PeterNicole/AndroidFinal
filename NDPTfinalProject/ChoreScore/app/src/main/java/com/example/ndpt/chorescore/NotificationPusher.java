@@ -19,12 +19,17 @@ public class NotificationPusher
 {
     static public void PushMessageToUser(String userId, String message)
     {
-        ParsePush push = new ParsePush();
-        ParseQuery<ParseInstallation> parseQuery = ParseQuery.getQuery(ParseInstallation.class);
-        parseQuery.whereEqualTo("userId", userId);
-        push.setQuery(parseQuery);
-        push.setMessage(message);
-        push.sendInBackground();
+        try {
+            ParsePush push = new ParsePush();
+            ParseQuery<ParseInstallation> parseQuery = ParseQuery.getQuery(ParseInstallation.class);
+            parseQuery.whereEqualTo("userId", userId);
+            push.setQuery(parseQuery);
+            push.setMessage(message);
+            push.sendInBackground();
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
 }

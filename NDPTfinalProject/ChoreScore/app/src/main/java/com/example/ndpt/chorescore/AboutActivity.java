@@ -18,8 +18,13 @@ public class AboutActivity extends Activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_about);
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     @Override
@@ -27,12 +32,18 @@ public class AboutActivity extends Activity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        try {
+            int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        TransitionManager.MenuTransition(this, id);
+            //noinspection SimplifiableIfStatement
+            TransitionManager.MenuTransition(this, id);
 
-        return super.onOptionsItemSelected(item);
+            return super.onOptionsItemSelected(item);
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return false;
+        }
     }
 
     @Override

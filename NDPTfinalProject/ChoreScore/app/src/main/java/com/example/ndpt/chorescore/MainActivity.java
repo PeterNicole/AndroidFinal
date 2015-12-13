@@ -27,10 +27,15 @@ public class MainActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        CheckLogin();
-        DisplayStats();
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+            CheckLogin();
+            DisplayStats();
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     @Override

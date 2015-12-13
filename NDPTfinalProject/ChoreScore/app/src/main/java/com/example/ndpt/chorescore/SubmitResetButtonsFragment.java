@@ -39,12 +39,18 @@ public class SubmitResetButtonsFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static SubmitResetButtonsFragment newInstance(String param1, String param2) {
-        SubmitResetButtonsFragment fragment = new SubmitResetButtonsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        try {
+            SubmitResetButtonsFragment fragment = new SubmitResetButtonsFragment();
+            Bundle args = new Bundle();
+            args.putString(ARG_PARAM1, param1);
+            args.putString(ARG_PARAM2, param2);
+            fragment.setArguments(args);
+            return fragment;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return null;
+        }
     }
 
     public SubmitResetButtonsFragment() {
@@ -53,10 +59,15 @@ public class SubmitResetButtonsFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        try {
+            super.onCreate(savedInstanceState);
+            if (getArguments() != null) {
+                mParam1 = getArguments().getString(ARG_PARAM1);
+                mParam2 = getArguments().getString(ARG_PARAM2);
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
@@ -64,14 +75,25 @@ public class SubmitResetButtonsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_submit_reset_buttons, container, false);
-        return v;
+        try {
+            View v = inflater.inflate(R.layout.fragment_submit_reset_buttons, container, false);
+            return v;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return null;
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        try {
+            if (mListener != null) {
+                mListener.onFragmentInteraction(uri);
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
@@ -88,8 +110,13 @@ public class SubmitResetButtonsFragment extends Fragment {
 
     @Override
     public void onDetach() {
-        super.onDetach();
-        mListener = null;
+        try {
+            super.onDetach();
+            mListener = null;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     /**

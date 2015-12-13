@@ -38,17 +38,28 @@ public class JoinGroupActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_join_group);
-        displayGroups("");
-        ControlCreation();
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_join_group);
+            displayGroups("");
+            ControlCreation();
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_groups, menu);
-        return true;
+        try {
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.menu_groups, menu);
+            return true;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -56,11 +67,17 @@ public class JoinGroupActivity extends Activity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        try {
+            int id = item.getItemId();
 
-        TransitionManager.MenuTransition(this, id);
+            TransitionManager.MenuTransition(this, id);
 
-        return super.onOptionsItemSelected(item);
+            return super.onOptionsItemSelected(item);
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -75,16 +92,20 @@ public class JoinGroupActivity extends Activity
      */
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-        //Check if user is logged in
-        ParseUser currentUser = UserManager.CheckCachedUser(this);
+        try {
+            //Check if user is logged in
+            ParseUser currentUser = UserManager.CheckCachedUser(this);
 
-        if(currentUser != null)
-        {
-            //Get the group selected from the list view
-            Group currentGroup = groups.get(position);
+            if (currentUser != null) {
+                //Get the group selected from the list view
+                Group currentGroup = groups.get(position);
 
-            //Join the selected group
-            GroupManager.JoinGroup(currentUser.getObjectId(),currentGroup.getGroupId(),this);
+                //Join the selected group
+                GroupManager.JoinGroup(currentUser.getObjectId(), currentGroup.getGroupId(), this);
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
@@ -94,23 +115,27 @@ public class JoinGroupActivity extends Activity
      */
     public void displayGroups(String groupName)
     {
-        groups = GroupManager.RetrieveAll(groupName, this);
-        ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String,String>>();
-        for (Group g: groups)
-        {
-            HashMap<String,String> map = new HashMap<String, String>();
-            map.put("name",g.getName());
-            data.add(map);
+        try {
+            groups = GroupManager.RetrieveAll(groupName, this);
+            ArrayList<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
+            for (Group g : groups) {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("name", g.getName());
+                data.add(map);
+            }
+
+            int resource = R.layout.listview_group;
+            String[] from = {"name"};
+            int[] to = {R.id.tv_list_group_name};
+
+            SimpleAdapter adapter = new SimpleAdapter(this, data, resource, from, to);
+            ListView groupLv = (ListView) findViewById(R.id.lv_join_groups);
+            groupLv.setOnItemClickListener(this);
+            groupLv.setAdapter(adapter);
         }
-
-        int resource = R.layout.listview_group;
-        String[] from = {"name"};
-        int[] to = {R.id.tv_list_group_name};
-
-        SimpleAdapter adapter = new SimpleAdapter(this,data,resource,from,to);
-        ListView groupLv = (ListView) findViewById(R.id.lv_join_groups);
-        groupLv.setOnItemClickListener(this);
-        groupLv.setAdapter(adapter);
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     /**
@@ -118,18 +143,20 @@ public class JoinGroupActivity extends Activity
      */
     public void ControlCreation()
     {
-        btnSearch = (Button)findViewById(R.id.btnJoinGroupSearch);
-        etSearch = (EditText)findViewById(R.id.etJoinGroupSearch);
+        try {
+            btnSearch = (Button) findViewById(R.id.btnJoinGroupSearch);
+            etSearch = (EditText) findViewById(R.id.etJoinGroupSearch);
 
-        btnSearch.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                String searchFragment = etSearch.getText().toString();
-                displayGroups(searchFragment);
-            }
-        });
-
+            btnSearch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String searchFragment = etSearch.getText().toString();
+                    displayGroups(searchFragment);
+                }
+            });
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 }

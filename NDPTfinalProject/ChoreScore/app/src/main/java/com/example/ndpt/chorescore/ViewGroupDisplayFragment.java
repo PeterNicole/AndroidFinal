@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,12 +38,18 @@ public class ViewGroupDisplayFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static ViewGroupDisplayFragment newInstance(String param1, String param2) {
-        ViewGroupDisplayFragment fragment = new ViewGroupDisplayFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        try {
+            ViewGroupDisplayFragment fragment = new ViewGroupDisplayFragment();
+            Bundle args = new Bundle();
+            args.putString(ARG_PARAM1, param1);
+            args.putString(ARG_PARAM2, param2);
+            fragment.setArguments(args);
+            return fragment;
+        }
+        catch(Exception e){
+            System.out.println("Error " + e.getMessage());
+            return null;
+        }
     }
 
     public ViewGroupDisplayFragment() {
@@ -51,24 +58,40 @@ public class ViewGroupDisplayFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        try{
+            super.onCreate(savedInstanceState);
+            if (getArguments() != null) {
+                mParam1 = getArguments().getString(ARG_PARAM1);
+                mParam2 = getArguments().getString(ARG_PARAM2);
+                }
+            }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_view_group_display, container, false);
+        try {
+            // Inflate the layout for this fragment
+            return inflater.inflate(R.layout.fragment_view_group_display, container, false);
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return null;
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        try {
+            if (mListener != null) {
+                mListener.onFragmentInteraction(uri);
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
@@ -85,8 +108,13 @@ public class ViewGroupDisplayFragment extends Fragment {
 
     @Override
     public void onDetach() {
-        super.onDetach();
-        mListener = null;
+        try {
+            super.onDetach();
+            mListener = null;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     /**

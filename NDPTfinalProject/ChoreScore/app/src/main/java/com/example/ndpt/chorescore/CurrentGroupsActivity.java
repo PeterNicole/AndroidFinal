@@ -35,16 +35,27 @@ public class CurrentGroupsActivity extends Activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_current_groups);
-        displayGroups();
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_current_groups);
+            displayGroups();
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_groups, menu);
-        return true;
+        try {
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.menu_groups, menu);
+            return true;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -52,13 +63,19 @@ public class CurrentGroupsActivity extends Activity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        try {
+            int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+            //noinspection SimplifiableIfStatement
 
-        TransitionManager.MenuTransition(this, id);
+            TransitionManager.MenuTransition(this, id);
 
-        return super.onOptionsItemSelected(item);
+            return super.onOptionsItemSelected(item);
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -72,58 +89,65 @@ public class CurrentGroupsActivity extends Activity
      */
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-        //Get the selected group
-        Group g = groups.get(position);
+        try {
+            //Get the selected group
+            Group g = groups.get(position);
 
-        //Set the users default group
-        GroupManager.SetUserDefaultGroup(g.getGroupId(), this);
+            //Set the users default group
+            GroupManager.SetUserDefaultGroup(g.getGroupId(), this);
 
-        //Message the user
-        Toast toast = Toast.makeText(this,getString(R.string.success_group) + g.getName(),Toast.LENGTH_LONG);
-        toast.show();
+            //Message the user
+            Toast toast = Toast.makeText(this, getString(R.string.success_group) + g.getName(), Toast.LENGTH_LONG);
+            toast.show();
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
     /**
      * Displays a list of groups in the current group list view
      */
     public void displayGroups()
     {
-        ParseUser currentUser = UserManager.CheckCachedUser(this);
-        if(currentUser != null)
-        {
-            //Get listview from the view
-            ListView groupLv = (ListView) findViewById(R.id.lv_current_groups);
+        try {
+            ParseUser currentUser = UserManager.CheckCachedUser(this);
+            if (currentUser != null) {
+                //Get listview from the view
+                ListView groupLv = (ListView) findViewById(R.id.lv_current_groups);
 
-            //Get the users groups and default group from parse database
-            groups = GroupManager.RetrieveUserGroups(currentUser.getObjectId(),this);
-            String defaultGroup = currentUser.getString("defaultGroupId");
-            Integer selected = 0;
+                //Get the users groups and default group from parse database
+                groups = GroupManager.RetrieveUserGroups(currentUser.getObjectId(), this);
+                String defaultGroup = currentUser.getString("defaultGroupId");
+                Integer selected = 0;
 
-            //Initialize the listview
-            ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String,String>>();
-            for (Group g: groups)
-            {
-                //Set the selected item for the default group
-                if(g.getGroupId().equals(defaultGroup))
-                {
-                    selected = data.size();
+                //Initialize the listview
+                ArrayList<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
+                for (Group g : groups) {
+                    //Set the selected item for the default group
+                    if (g.getGroupId().equals(defaultGroup)) {
+                        selected = data.size();
+                    }
+
+                    HashMap<String, String> map = new HashMap<String, String>();
+                    map.put("name", g.getName());
+                    data.add(map);
                 }
 
-                HashMap<String,String> map = new HashMap<String, String>();
-                map.put("name",g.getName());
-                data.add(map);
+                int resource = R.layout.listview_group;
+                String[] from = {"name"};
+                int[] to = {R.id.tv_list_group_name};
+
+                SimpleAdapter adapter = new SimpleAdapter(this, data, resource, from, to);
+                groupLv.setOnItemClickListener(this);
+                groupLv.setAdapter(adapter);
+
+                //Set the selector
+                groupLv.setSelector(R.drawable.selector);
+                groupLv.setItemChecked(selected, true);
             }
-
-            int resource = R.layout.listview_group;
-            String[] from = {"name"};
-            int[] to = {R.id.tv_list_group_name};
-
-            SimpleAdapter adapter = new SimpleAdapter(this,data,resource,from,to);
-            groupLv.setOnItemClickListener(this);
-            groupLv.setAdapter(adapter);
-
-            //Set the selector
-            groupLv.setSelector(R.drawable.selector);
-            groupLv.setItemChecked(selected,true);
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 }
