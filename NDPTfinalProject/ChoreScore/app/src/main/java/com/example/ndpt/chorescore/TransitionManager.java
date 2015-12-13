@@ -20,12 +20,17 @@ public class TransitionManager
 
     static private void populateMenuMap()
     {
-        //Populates the menu map with menu button ids and their associated activity class
-        menuMap = new HashMap<Integer,Class>();
-        menuMap.put(R.id.mi_groups,CurrentGroupsActivity.class);
-        menuMap.put(R.id.mi_chores,PendingChoresActivity.class);
-        menuMap.put(R.id.mi_points,PointRedemptionActivity.class);
-        menuMap.put(R.id.mi_about,AboutActivity.class);
+        try {
+            //Populates the menu map with menu button ids and their associated activity class
+            menuMap = new HashMap<Integer, Class>();
+            menuMap.put(R.id.mi_groups, CurrentGroupsActivity.class);
+            menuMap.put(R.id.mi_chores, PendingChoresActivity.class);
+            menuMap.put(R.id.mi_points, PointRedemptionActivity.class);
+            menuMap.put(R.id.mi_about, AboutActivity.class);
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
     /**
      * Overloaded method for default closeCurrent = true
@@ -34,7 +39,12 @@ public class TransitionManager
      */
     static public void ActivityTransition(Activity currentActivity,  Class transitionActivity)
     {
-        ActivityTransition(currentActivity, transitionActivity, true);
+        try {
+            ActivityTransition(currentActivity, transitionActivity, true);
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     /**
@@ -45,10 +55,17 @@ public class TransitionManager
      */
     static public void ActivityTransition(Activity currentActivity, Class transitionActivity, boolean closeCurrent)
     {
-        previousActivity = currentActivity.getClass();
-        Intent intent = new Intent(currentActivity,transitionActivity);
-        currentActivity.startActivity(intent);
-        if(closeCurrent){currentActivity.finish();}
+        try {
+            previousActivity = currentActivity.getClass();
+            Intent intent = new Intent(currentActivity, transitionActivity);
+            currentActivity.startActivity(intent);
+            if (closeCurrent) {
+                currentActivity.finish();
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     /**
@@ -58,9 +75,16 @@ public class TransitionManager
      */
     static public void PreviousActivity(Activity currentActivity, boolean closeCurrent)
     {
-        Intent intent = new Intent(currentActivity,previousActivity);
-        currentActivity.startActivity(intent);
-        if(closeCurrent){currentActivity.finish();}
+        try {
+            Intent intent = new Intent(currentActivity, previousActivity);
+            currentActivity.startActivity(intent);
+            if (closeCurrent) {
+                currentActivity.finish();
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     /**
@@ -70,23 +94,24 @@ public class TransitionManager
      */
     static public void MenuTransition(Activity currentActivity, int menuBtnId)
     {
-        //Logout menu item
-        if(menuBtnId == R.id.mi_logout)
-        {
-            UserManager.LogoutUser(currentActivity);
-        }
-
-        //Activity transition menu items
-        else
-        {
-            if (menuMap == null)
-            {
-                populateMenuMap();
+        try {
+            //Logout menu item
+            if (menuBtnId == R.id.mi_logout) {
+                UserManager.LogoutUser(currentActivity);
             }
 
-            ActivityTransition(currentActivity, menuMap.get(menuBtnId));
-        }
+            //Activity transition menu items
+            else {
+                if (menuMap == null) {
+                    populateMenuMap();
+                }
 
+                ActivityTransition(currentActivity, menuMap.get(menuBtnId));
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
 
     }
 

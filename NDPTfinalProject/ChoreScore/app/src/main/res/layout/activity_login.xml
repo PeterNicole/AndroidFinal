@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <fragment style="@style/FragmentStyle"
-        android:layout_weight="5"
+        android:layout_weight="8"
         android:id="@+id/login_fields_fragment"
         android:name="com.example.ndpt.chorescore.LoginFormFragment"/>
 

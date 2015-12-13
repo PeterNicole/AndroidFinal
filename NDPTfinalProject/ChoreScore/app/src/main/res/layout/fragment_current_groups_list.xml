@@ -5,15 +5,12 @@
     tools:context="com.example.ndpt.chorescore.CurrentGroupsListFragment"
     android:orientation="vertical">
 
-    <TextView style="@style/TextViewStyle"
-        android:text="@string/current_groups"
-        android:id="@+id/tvCurrentGroupsLabel"/>
-
     <ListView
         android:id="@+id/lv_current_groups"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:choiceMode="singleChoice">
+        android:choiceMode="singleChoice"
+        android:layout_marginTop="20dp">
     </ListView>
 
 </LinearLayout>

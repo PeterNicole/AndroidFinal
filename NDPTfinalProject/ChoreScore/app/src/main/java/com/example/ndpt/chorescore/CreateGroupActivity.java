@@ -29,16 +29,27 @@ public class CreateGroupActivity extends Activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_group);
-        controlCreation();
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_create_group);
+            controlCreation();
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_groups, menu);
-        return true;
+        try {
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.menu_groups, menu);
+            return true;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -46,11 +57,17 @@ public class CreateGroupActivity extends Activity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        try {
+            int id = item.getItemId();
 
-        TransitionManager.MenuTransition(this, id);
+            TransitionManager.MenuTransition(this, id);
 
-        return super.onOptionsItemSelected(item);
+            return super.onOptionsItemSelected(item);
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -59,48 +76,42 @@ public class CreateGroupActivity extends Activity
     }
 
     private void controlCreation(){
-        btnReset = (Button)findViewById(R.id.btnReset);
-        btnSubmit = (Button)findViewById(R.id.btnSubmit);
-        final Activity activity = this;
-        Button[] buttons = {btnSubmit,btnReset};
-        for (Button b : buttons)
-        {
-            final int id = b.getId();
-            b.setOnClickListener((new View.OnClickListener()
-            {
+        try {
+            btnReset = (Button) findViewById(R.id.btnReset);
+            btnSubmit = (Button) findViewById(R.id.btnSubmit);
+            final Activity activity = this;
+            Button[] buttons = {btnSubmit, btnReset};
+            for (Button b : buttons) {
+                final int id = b.getId();
+                b.setOnClickListener((new View.OnClickListener() {
 
-                @Override
-                public void onClick(View v)
-                {
-                    //Get text from the signup personal fragment
-                    EditText groupNameEv = (EditText)activity.findViewById(R.id.etCreateGroupName);
+                    @Override
+                    public void onClick(View v) {
+                        //Get text from the signup personal fragment
+                        EditText groupNameEv = (EditText) activity.findViewById(R.id.etCreateGroupName);
 
-                    //Initialize strings for user creation
-                    String groupName = groupNameEv.getText().toString();
+                        //Initialize strings for user creation
+                        String groupName = groupNameEv.getText().toString();
 
-                    if (id == R.id.btnSubmit)
-                    {
-                        //Check if user is logged in, if not redirect to login page
-                        UserManager.CheckCachedUser(activity);
-                        if(groupName.length() < GROUP_NAME_LENGTH )
-                        {
-                            groupNameEv.setError(getString(R.string.error_group_name_length) + GROUP_NAME_LENGTH + getString(R.string.error_characters_long));
+                        if (id == R.id.btnSubmit) {
+                            //Check if user is logged in, if not redirect to login page
+                            UserManager.CheckCachedUser(activity);
+                            if (groupName.length() < GROUP_NAME_LENGTH) {
+                                groupNameEv.setError(getString(R.string.error_group_name_length) + GROUP_NAME_LENGTH + getString(R.string.error_characters_long));
+                            } else {
+                                GroupManager.CreateGroup(groupName, ParseUser.getCurrentUser().getObjectId(), activity);
+                            }
+
+                        } else if (id == R.id.btnReset) {
+                            //clear
+                            groupNameEv.getText().clear();
                         }
-
-                        else
-                        {
-                            GroupManager.CreateGroup(groupName, ParseUser.getCurrentUser().getObjectId(),activity);
-                        }
-
                     }
-
-                    else if (id == R.id.btnReset)
-                    {
-                        //clear
-                        groupNameEv.getText().clear();
-                    }
-                }
-            }));
+                }));
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 }

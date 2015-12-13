@@ -13,30 +13,40 @@ import android.os.Bundle;
 public class SplashScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash);
+        try {
+            // TODO Auto-generated method stub
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.splash);
 
-        Thread timerThread = new Thread(){
-            public void run(){
-                try{
-                    sleep(6000);
-                }catch(InterruptedException e){
-                    e.printStackTrace();
-                }finally{
-                    Intent intent = new Intent(SplashScreen.this,MainActivity.class);
-                    startActivity(intent);
+            Thread timerThread = new Thread() {
+                public void run() {
+                    try {
+                        sleep(6000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } finally {
+                        Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                        startActivity(intent);
+                    }
                 }
-            }
-        };
-        timerThread.start();
+            };
+            timerThread.start();
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     @Override
     protected void onPause() {
-        // TODO Auto-generated method stub
-        super.onPause();
-        finish();
+        try {
+            // TODO Auto-generated method stub
+            super.onPause();
+            finish();
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
 }

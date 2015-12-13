@@ -40,12 +40,18 @@ public class LoginButtonsFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static LoginButtonsFragment newInstance(String param1, String param2) {
-        LoginButtonsFragment fragment = new LoginButtonsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        try {
+            LoginButtonsFragment fragment = new LoginButtonsFragment();
+            Bundle args = new Bundle();
+            args.putString(ARG_PARAM1, param1);
+            args.putString(ARG_PARAM2, param2);
+            fragment.setArguments(args);
+            return fragment;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return null;
+        }
     }
 
     public LoginButtonsFragment() {
@@ -53,38 +59,44 @@ public class LoginButtonsFragment extends Fragment {
     }
 
     private void controlCreation(View v){
-        final Activity activity = getActivity();
-        btnLoginLogin = (Button)v.findViewById(R.id.btnLoginLogin);
-        Button[] buttons = {btnLoginLogin};
-        for (Button b : buttons) {
-            final int id = b.getId();
-            b.setOnClickListener((new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    if (id == R.id.btnLoginLogin)
-                    {
-                        EditText userEt = (EditText)activity.findViewById(R.id.etLoginUsername);
-                        EditText passEt = (EditText)activity.findViewById(R.id.etLoginPassword);
-                        String user = userEt.getText().toString();
-                        String pass = passEt.getText().toString();
+        try {
+            final Activity activity = getActivity();
+            btnLoginLogin = (Button) v.findViewById(R.id.btnLoginLogin);
+            Button[] buttons = {btnLoginLogin};
+            for (Button b : buttons) {
+                final int id = b.getId();
+                b.setOnClickListener((new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (id == R.id.btnLoginLogin) {
+                            EditText userEt = (EditText) activity.findViewById(R.id.etLoginUsername);
+                            EditText passEt = (EditText) activity.findViewById(R.id.etLoginPassword);
+                            String user = userEt.getText().toString();
+                            String pass = passEt.getText().toString();
 
-                        if(user != null && pass != null)
-                        {
-                            UserManager.LoginUser(user,pass,activity);
+                            if (user != null && pass != null) {
+                                UserManager.LoginUser(user, pass, activity);
+                            }
                         }
                     }
-                }
-            }));
+                }));
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        try {
+            super.onCreate(savedInstanceState);
+            if (getArguments() != null) {
+                mParam1 = getArguments().getString(ARG_PARAM1);
+                mParam2 = getArguments().getString(ARG_PARAM2);
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
@@ -92,16 +104,26 @@ public class LoginButtonsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        View v = inflater.inflate(R.layout.fragment_login_buttons, container, false);
-        controlCreation(v);
-        return v;
+        try {
+            View v = inflater.inflate(R.layout.fragment_login_buttons, container, false);
+            controlCreation(v);
+            return v;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return null;
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        try {
+            if (mListener != null) {
+                mListener.onFragmentInteraction(uri);
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
@@ -118,8 +140,13 @@ public class LoginButtonsFragment extends Fragment {
 
     @Override
     public void onDetach() {
-        super.onDetach();
-        mListener = null;
+        try {
+            super.onDetach();
+            mListener = null;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     /**

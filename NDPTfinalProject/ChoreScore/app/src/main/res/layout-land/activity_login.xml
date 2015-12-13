@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.ndpt.chorescore.LoginActivity"
+    android:orientation="vertical">
+
+    <fragment style="@style/FragmentStyle"
+        android:layout_weight="4"
+        android:id="@+id/login_fields_fragment"
+        android:name="com.example.ndpt.chorescore.LoginFormFragment"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="-50dp"/>
+
+    <fragment style="@style/FragmentStyle"
+        android:layout_weight="1"
+        android:id="@+id/login_buttons_fragment"
+        android:name="com.example.ndpt.chorescore.LoginButtonsFragment"/>
+
+    <fragment style="@style/FragmentStyle"
+        android:layout_weight="1"
+        android:id="@+id/login_go_back_button_fragment"
+        android:name="com.example.ndpt.chorescore.GoBackButtonFragment"/>
+</LinearLayout>

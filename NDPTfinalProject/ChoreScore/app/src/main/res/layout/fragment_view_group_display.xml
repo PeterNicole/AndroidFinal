@@ -4,43 +4,38 @@
     tools:context="com.example.ndpt.chorescore.ViewGroupDisplayFragment"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <TextView style="@style/TextViewStyle"
+        android:id="@+id/tv_view_group_name_label"
+        android:text="@string/group_name"
+        android:layout_width="200dp"
+        android:textSize="20sp"/>
 
-        <TextView style="@style/TextViewStyle"
-            android:id="@+id/tv_view_group_name_label"
-            android:text="@string/group_name"/>
+    <TextView style="@style/TextViewStyle"
+        android:id="@+id/tv_view_group_name_display"
+        android:layout_marginLeft="10dp"
+        />
 
-        <TextView style="@style/TextViewStyle"
-            android:id="@+id/tv_view_group_name_display"
-            />
+    <TextView style="@style/TextViewStyle"
+        android:id="@+id/tv_view_group_admin_label"
+        android:text="@string/admin_label"
+        android:layout_width="200dp"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView style="@style/TextViewStyle"
-            android:id="@+id/tv_view_group_admin_label"
-            android:text="@string/admin_label"/>
-
-        <TextView style="@style/TextViewStyle"
-            android:id="@+id/tv_view_group_admin_display"
-            />
-
-    </LinearLayout>
+    <TextView style="@style/TextViewStyle"
+        android:id="@+id/tv_view_group_admin_display"
+        android:layout_marginLeft="10dp"
+        />
 
     <TextView style="@style/TextViewStyle"
         android:id="@+id/tv_view_group_count_label"
-        android:text="@string/members_label"/>
+        android:text="@string/members_label"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
 
     <ListView
         android:id="@+id/lv_group_members"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
 
 </LinearLayout>

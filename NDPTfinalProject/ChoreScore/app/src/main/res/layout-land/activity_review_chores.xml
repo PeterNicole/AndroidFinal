@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment style="@style/FragmentStyle"
+        android:name="com.example.ndpt.chorescore.ReviewChoresListviewFragment"
+        android:layout_weight="5"
+        android:id="@+id/review_chores_listview"
+        tools:layout="@layout/fragment_review_chores_listview" />
+
+    <fragment style="@style/FragmentStyle"
+        android:layout_weight="1"
+        android:name="com.example.ndpt.chorescore.GoBackButtonFragment"
+        android:id="@+id/join_group_go_back_fragment"
+        tools:layout="@layout/fragment_go_back_button" />
+
+</LinearLayout>

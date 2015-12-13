@@ -10,7 +10,7 @@
     <fragment style="@style/FragmentStyle"
         android:id="@+id/create_group_form_fragment"
         android:layout_weight="5"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="90dp"
         android:name="com.example.ndpt.chorescore.CreateGroupFormFragment" />
 
     <fragment style="@style/FragmentStyle"

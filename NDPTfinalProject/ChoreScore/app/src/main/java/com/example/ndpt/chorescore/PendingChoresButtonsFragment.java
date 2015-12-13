@@ -42,12 +42,18 @@ public class PendingChoresButtonsFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static PendingChoresButtonsFragment newInstance(String param1, String param2) {
-        PendingChoresButtonsFragment fragment = new PendingChoresButtonsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        try {
+            PendingChoresButtonsFragment fragment = new PendingChoresButtonsFragment();
+            Bundle args = new Bundle();
+            args.putString(ARG_PARAM1, param1);
+            args.putString(ARG_PARAM2, param2);
+            fragment.setArguments(args);
+            return fragment;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return null;
+        }
     }
 
     public PendingChoresButtonsFragment() {
@@ -60,63 +66,79 @@ public class PendingChoresButtonsFragment extends Fragment {
      */
     private void controlCreation(View v)
     {
-        //Get buttons from fragments view
-        btnAddToList = (Button)v.findViewById(R.id.btnPendingChoresAdd);
-        btnReviewChores = (Button)v.findViewById(R.id.btnPendingChoresReview);
-        btnGroups = (Button)v.findViewById(R.id.btnPendingChoresGroups);
+        try {
+            //Get buttons from fragments view
+            btnAddToList = (Button) v.findViewById(R.id.btnPendingChoresAdd);
+            btnReviewChores = (Button) v.findViewById(R.id.btnPendingChoresReview);
+            btnGroups = (Button) v.findViewById(R.id.btnPendingChoresGroups);
 
-        final Activity activity = getActivity();
-        Button[] buttons = { btnAddToList, btnReviewChores, btnGroups};
-        for (Button b : buttons) {
-            final int id = b.getId();
+            final Activity activity = getActivity();
+            Button[] buttons = {btnAddToList, btnReviewChores, btnGroups};
+            for (Button b : buttons) {
+                final int id = b.getId();
 
-            //Set button click listeners for navigation
-            b.setOnClickListener((new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    if (id == R.id.btnPendingChoresAdd)
-                    {
-                        TransitionManager.ActivityTransition(activity, SelectChoresActivity.class);
+                //Set button click listeners for navigation
+                b.setOnClickListener((new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (id == R.id.btnPendingChoresAdd) {
+                            TransitionManager.ActivityTransition(activity, SelectChoresActivity.class);
+                        }
+
+                        if (id == R.id.btnPendingChoresReview) {
+                            TransitionManager.ActivityTransition(activity, ReviewChoresActivity.class);
+                        }
+
+                        if (id == R.id.btnPendingChoresGroups) {
+                            TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
+                        }
                     }
-
-                    if (id == R.id.btnPendingChoresReview)
-                    {
-                        TransitionManager.ActivityTransition(activity, ReviewChoresActivity.class);
-                    }
-
-                    if(id == R.id.btnPendingChoresGroups)
-                    {
-                        TransitionManager.ActivityTransition(activity, CurrentGroupsActivity.class);
-                    }
-                }
-            }));
+                }));
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        try {
+            super.onCreate(savedInstanceState);
+            if (getArguments() != null) {
+                mParam1 = getArguments().getString(ARG_PARAM1);
+                mParam2 = getArguments().getString(ARG_PARAM2);
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_pending_chores_buttons, container, false);
-        controlCreation(v);
-        return v;
+        try {
+            // Inflate the layout for this fragment
+            View v = inflater.inflate(R.layout.fragment_pending_chores_buttons, container, false);
+            controlCreation(v);
+            return v;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return null;
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        try {
+            if (mListener != null) {
+                mListener.onFragmentInteraction(uri);
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
@@ -133,8 +155,13 @@ public class PendingChoresButtonsFragment extends Fragment {
 
     @Override
     public void onDetach() {
-        super.onDetach();
-        mListener = null;
+        try {
+            super.onDetach();
+            mListener = null;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     /**

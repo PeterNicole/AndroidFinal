@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ndpt.chorescore.SelectChoresCreateFormFragment"
+    android:orientation="vertical">
+
+    <!-- Description -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chore_description"
+            android:textSize="20sp"
+            />
+
+        <EditText
+            android:id="@+id/etAddChoreDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <!-- Points Label -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/chore_points"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/tvChorePointSeekBar"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            />
+
+    </LinearLayout>
+
+    <!-- Points Seek Bar -->
+    <SeekBar
+        android:id="@+id/sbChorePointSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="20" />
+
+    <!-- Due Date Label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chore_due_date"
+        android:id="@+id/tvDueDate"
+        android:textSize="20sp"/>
+
+    <!-- Due Date Picker -->
+    <DatePicker
+        android:id="@+id/dpChoreDatePicker"
+        android:calendarViewShown="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></DatePicker>
+
+
+</LinearLayout>

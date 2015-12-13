@@ -17,20 +17,28 @@ public class LoginActivity extends Activity
     LoginFormFragment.OnFragmentInteractionListener,
     GoBackButtonFragment.OnFragmentInteractionListener{
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_login);
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // No menu
         //getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
+        try {
+            return true;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -38,11 +46,17 @@ public class LoginActivity extends Activity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        try {
+            int id = item.getItemId();
 
-        TransitionManager.MenuTransition(this, id);
+            TransitionManager.MenuTransition(this, id);
 
-        return super.onOptionsItemSelected(item);
+            return super.onOptionsItemSelected(item);
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return false;
+        }
     }
 
     @Override

@@ -39,12 +39,18 @@ public class SelectChoresButtonsFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static SelectChoresButtonsFragment newInstance(String param1, String param2) {
-        SelectChoresButtonsFragment fragment = new SelectChoresButtonsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        try {
+            SelectChoresButtonsFragment fragment = new SelectChoresButtonsFragment();
+            Bundle args = new Bundle();
+            args.putString(ARG_PARAM1, param1);
+            args.putString(ARG_PARAM2, param2);
+            fragment.setArguments(args);
+            return fragment;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return null;
+        }
     }
 
     public SelectChoresButtonsFragment() {
@@ -52,48 +58,69 @@ public class SelectChoresButtonsFragment extends Fragment {
     }
 
     private void controlCreation(View v) {
-        btnSelectChoresAdd = (Button)v.findViewById(R.id.btnSelectChoresAdd);
+        try {
+            btnSelectChoresAdd = (Button) v.findViewById(R.id.btnSelectChoresAdd);
 
-        final Activity activity = getActivity();
-        Button[] buttons = { btnSelectChoresAdd};
-        for (Button b : buttons) {
-            final int id = b.getId();
-            b.setOnClickListener((new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (id == R.id.btnSelectChoresAdd) {
-                        // add checked chores to pending chores list for default group
-                        // after successful add, navigate back to pending chores
-                        TransitionManager.ActivityTransition(activity, PendingChoresActivity.class);
+            final Activity activity = getActivity();
+            Button[] buttons = {btnSelectChoresAdd};
+            for (Button b : buttons) {
+                final int id = b.getId();
+                b.setOnClickListener((new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (id == R.id.btnSelectChoresAdd) {
+                            // add checked chores to pending chores list for default group
+                            // after successful add, navigate back to pending chores
+                            TransitionManager.ActivityTransition(activity, PendingChoresActivity.class);
+                        }
+
                     }
-
-                }
-            }));
+                }));
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        try {
+            super.onCreate(savedInstanceState);
+            if (getArguments() != null) {
+                mParam1 = getArguments().getString(ARG_PARAM1);
+                mParam2 = getArguments().getString(ARG_PARAM2);
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_select_chores_buttons, container, false);
-        controlCreation(v);
-        return v;
+        try {
+            // Inflate the layout for this fragment
+            View v = inflater.inflate(R.layout.fragment_select_chores_buttons, container, false);
+            controlCreation(v);
+            return v;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+            return null;
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        try {
+            if (mListener != null) {
+                mListener.onFragmentInteraction(uri);
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
@@ -110,8 +137,13 @@ public class SelectChoresButtonsFragment extends Fragment {
 
     @Override
     public void onDetach() {
-        super.onDetach();
-        mListener = null;
+        try {
+            super.onDetach();
+            mListener = null;
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     /**

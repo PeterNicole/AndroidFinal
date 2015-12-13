@@ -58,44 +58,39 @@ public class GroupManager
      */
     public static void CreateGroup(final String name, final String adminId, final Activity activity)
     {
-        //Check for group with same name
-        ArrayList<Group> sameNameGroups = RetrieveAll(name, activity);
+        try {
+            //Check for group with same name
+            ArrayList<Group> sameNameGroups = RetrieveAll(name, activity);
 
-        //Name is unique
-        if(sameNameGroups.size() == 0)
-        {
-            //Initialize the parse object
-            final ParseObject group = new ParseObject("Group");
-            group.put("admin", adminId);
-            group.put("name", name);
+            //Name is unique
+            if (sameNameGroups.size() == 0) {
+                //Initialize the parse object
+                final ParseObject group = new ParseObject("Group");
+                group.put("admin", adminId);
+                group.put("name", name);
 
-            //Save the parse object
-            group.saveInBackground(new SaveCallback()
-            {
-                @Override
-                public void done(ParseException e)
-                {
-                    if(e == null)
-                    {
-                        //Add admin to the group as a member
-                        JoinGroup(adminId,group.getObjectId(),activity);
+                //Save the parse object
+                group.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            //Add admin to the group as a member
+                            JoinGroup(adminId, group.getObjectId(), activity);
+                        } else {
+                            //Display parse error
+                            Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
+                            toast.show();
+                        }
                     }
-
-                    else
-                    {
-                        //Display parse error
-                        Toast toast = Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG);
-                        toast.show();
-                    }
-                }
-            });
+                });
+            } else {
+                //Fail to create group, name taken
+                Toast toast = Toast.makeText(activity, activity.getString(R.string.error_group_name_taken), Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
-
-        else
-        {
-            //Fail to create group, name taken
-            Toast toast = Toast.makeText(activity,activity.getString(R.string.error_group_name_taken),Toast.LENGTH_LONG);
-            toast.show();
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
@@ -107,38 +102,43 @@ public class GroupManager
      */
     public static void UpdateGroupAdmin(String groupId, final String userId, final Activity activity)
     {
-        //Query the parse database for the group object
-        ParseQuery<ParseObject> groupQuery = ParseQuery.getQuery("Group");
-        groupQuery.whereEqualTo("objectId", groupId);
+        try {
+            //Query the parse database for the group object
+            ParseQuery<ParseObject> groupQuery = ParseQuery.getQuery("Group");
+            groupQuery.whereEqualTo("objectId", groupId);
 
-        //Retrieve the group object from the query result
-        groupQuery.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> objects, ParseException e) {
-                if (e == null) {
-                    ParseObject groupObject = objects.get(0);
+            //Retrieve the group object from the query result
+            groupQuery.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> objects, ParseException e) {
+                    if (e == null) {
+                        ParseObject groupObject = objects.get(0);
 
-                    //Update the groups admin
-                    groupObject.put("admin", userId);
+                        //Update the groups admin
+                        groupObject.put("admin", userId);
 
-                    //Save object with updated information
-                    groupObject.saveInBackground(new SaveCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if (e != null) {
-                                //Display parse error message
-                                Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
-                                toast.show();
+                        //Save object with updated information
+                        groupObject.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e != null) {
+                                    //Display parse error message
+                                    Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
+                                    toast.show();
+                                }
                             }
-                        }
-                    });
-                } else {
-                    //Display parse error message
-                    Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
-                    toast.show();
+                        });
+                    } else {
+                        //Display parse error message
+                        Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
+                        toast.show();
+                    }
                 }
-            }
-        });
+            });
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     /**
@@ -164,33 +164,31 @@ public class GroupManager
 
     public static void DeleteUserGroup(String groupId, String userId, final Activity activity)
     {
-        //Query the data base for the userGroup object
-        ParseQuery<ParseObject> userGroupQuery = ParseQuery.getQuery("UserGroup");
-        userGroupQuery.whereEqualTo("userId", userId);
-        userGroupQuery.whereEqualTo("groupId", groupId);
+        try {
+            //Query the data base for the userGroup object
+            ParseQuery<ParseObject> userGroupQuery = ParseQuery.getQuery("UserGroup");
+            userGroupQuery.whereEqualTo("userId", userId);
+            userGroupQuery.whereEqualTo("groupId", groupId);
 
-        //Execute the querty
-        userGroupQuery.findInBackground(new FindCallback<ParseObject>()
-        {
-            @Override
-            public void done(List<ParseObject> objects, ParseException e)
-            {
-                if(e == null)
-                {
-                    //Delete the object
-                    ParseObject userGroupObject = objects.get(0);
-                    userGroupObject.deleteEventually();
+            //Execute the querty
+            userGroupQuery.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> objects, ParseException e) {
+                    if (e == null) {
+                        //Delete the object
+                        ParseObject userGroupObject = objects.get(0);
+                        userGroupObject.deleteEventually();
+                    } else {
+                        //Display parse error message
+                        Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
+                        toast.show();
+                    }
                 }
-
-                else
-                {
-                    //Display parse error message
-                    Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG);
-                    toast.show();
-                }
-
-            }
-        });
+            });
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     /**
@@ -244,7 +242,7 @@ public class GroupManager
         {
             //Query the parse database
             ParseQuery<ParseObject> groupQuery = ParseQuery.getQuery("UserGroup");
-            groupQuery.whereContains("userId", userId );
+            groupQuery.whereContains("userId", userId);
             List<ParseObject> result = groupQuery.find();
 
             //Add each group to the array list
@@ -390,35 +388,38 @@ public class GroupManager
      */
     public static void JoinGroup( String userId,String groupId, Activity activity)
     {
-        ArrayList<String> currentUserGroups = RetrieveUserGroupIds(userId, activity);
+        try {
+            ArrayList<String> currentUserGroups = RetrieveUserGroupIds(userId, activity);
 
-        //Check if the user is already a part of this group
-        if(currentUserGroups.contains(groupId))
-        {
-            //User already part of this group
-            Toast toast = Toast.makeText(activity,activity.getString(R.string.error_already_in_group),Toast.LENGTH_LONG);
-            toast.show();
+            //Check if the user is already a part of this group
+            if (currentUserGroups.contains(groupId)) {
+                //User already part of this group
+                Toast toast = Toast.makeText(activity, activity.getString(R.string.error_already_in_group), Toast.LENGTH_LONG);
+                toast.show();
+            }
+
+            //Add the group
+            else {
+                //Initialize the parse object for UserGroup
+                ParseObject userGroup = new ParseObject("UserGroup");
+                userGroup.put("userId", userId);
+                userGroup.put("groupId", groupId);
+                userGroup.put("points", 0);
+                userGroup.put("cumulativePoints", 0);
+
+                //Save the parse object
+                userGroup.saveInBackground();
+
+                //Set the joined group to the users default group
+                SetUserDefaultGroup(groupId, activity);
+
+                //Display success message
+                Toast toast = Toast.makeText(activity, activity.getString(R.string.success_group_joined), Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
-
-        //Add the group
-        else
-        {
-            //Initialize the parse object for UserGroup
-            ParseObject userGroup = new ParseObject("UserGroup");
-            userGroup.put("userId",userId);
-            userGroup.put("groupId",groupId);
-            userGroup.put("points", 0);
-            userGroup.put("cumulativePoints", 0);
-
-            //Save the parse object
-            userGroup.saveInBackground();
-
-            //Set the joined group to the users default group
-            SetUserDefaultGroup(groupId, activity);
-
-            //Display success message
-            Toast toast = Toast.makeText(activity,activity.getString(R.string.success_group_joined),Toast.LENGTH_LONG);
-            toast.show();
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
@@ -429,15 +430,19 @@ public class GroupManager
      */
     public static void SetUserDefaultGroup( String groupId, Activity activity)
     {
-        //Get the current user, redirect if noone logged in
-        ParseUser currentUser = UserManager.CheckCachedUser(activity);
+        try {
+            //Get the current user, redirect if noone logged in
+            ParseUser currentUser = UserManager.CheckCachedUser(activity);
 
-        if(currentUser != null)
-        {
-            //Set the current users group id
-            currentUser.put("defaultGroupId", groupId);
+            if (currentUser != null) {
+                //Set the current users group id
+                currentUser.put("defaultGroupId", groupId);
 
-            currentUser.saveInBackground();
+                currentUser.saveInBackground();
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 

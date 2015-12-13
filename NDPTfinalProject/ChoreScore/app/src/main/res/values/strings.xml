@@ -24,6 +24,7 @@
     <string name="review_chores">Review Completed Chores</string>
     <string name="current_groups_btn">Current Groups</string>
     <string name="leave_group_btn">Leave Group</string>
+    <string name="manual_btn">User Manual</string>
 
     <!-- TextViews -->
     <string name="first_name">First Name:</string>
@@ -37,10 +38,10 @@
     <string name="about_content_1">The ChoreScore app provides a way for you and your house mates
         to organize what chores need to be done.  </string>
     <string name="about_content_2">ChoreScore provides a points-based platform
-        that makes completing chores fun!</string>
-    <string name="select_group_name">Select a Group Name</string>
+        that makes completing chores fun! \n\nThe best part is, your group gets to decide what redeeming points earns them!</string>
+    <string name="select_group_name">Select a Group Name:</string>
     <string name="current_groups">Current Groups:</string>
-    <string name="members_label">Members</string>
+    <string name="members_label">Members:</string>
     <string name="admin_label">Admin:</string>
     <string name="number_of_users">Number of Users:</string>
     <string name="number_of_chores">Chores Completed:</string>
@@ -52,7 +53,11 @@
     <string name="redemption_amount">Amount to Redeem:</string>
     <string name="redeem">Redeem Now!</string>
     <string name="chore_description">Description:</string>
-    <string name="chore_points">Points</string>
+    <string name="chore_points">Points:</string>
+    <string name="points">Points</string>
+    <string name="chore_name">Description</string>
+    <string name="due_date">Due Date</string>
+    <string name="review_username">Completed By</string>
     <string name="chore_total_points">Total Points:</string>
     <string name="chore_current_points">Current Points:</string>
     <string name="chore_due_date">Due Date:</string>

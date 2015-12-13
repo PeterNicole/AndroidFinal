@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <fragment style="@style/FragmentStyle"
-        android:layout_weight="6"
+        android:layout_weight="7"
         android:name="com.example.ndpt.chorescore.ViewGroupDisplayFragment"
         android:id="@+id/view_group_display_fragment"
         tools:layout="@layout/fragment_view_group_display" />
