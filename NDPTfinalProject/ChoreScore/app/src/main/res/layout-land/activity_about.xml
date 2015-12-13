@@ -7,7 +7,6 @@
     tools:context="com.example.ndpt.chorescore.AboutActivity"
     android:orientation="horizontal">
 
-
     <fragment style="@style/FragmentStyleLandscape"
         android:layout_weight="1"
         android:id="@+id/about_content_two_fragment"
@@ -25,6 +24,11 @@
             android:id="@+id/about_content_one_fragment"
             android:name="com.example.ndpt.chorescore.AboutOneFragment"
             tools:layout="@layout/fragment_about_one" />
+
+        <Button
+            android:style="@style/ButtonStyle"
+            android:text="@string/manual_btn"
+            android:id="@+id/about_manual_btn"/>
 
         <fragment style="@style/FragmentStyle"
             android:layout_weight="1"
